@@ -58,12 +58,13 @@ public class MainController {
     @GetMapping("/user")
     public String user(Model model) {
 //        model.addAttribute("user", new LoginInput());
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-            return "user";
-        } else {
-            return "login";
-        }
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+//            return "user";
+//        } else {
+//            return "login";
+//        }
+         return "user";
     }
     @GetMapping("/admin")
     public String admin(Model model) {
@@ -74,6 +75,7 @@ public class MainController {
         } else {
             return "login";
         }
+//         return "admin";
     }
 
     @PostMapping("/verification")
@@ -104,6 +106,7 @@ public class MainController {
         } else {
             return "redirect:/login";
         }
+//         return "dashboard";
     }
     
     private static Collection<? extends GrantedAuthority> getAuthorities(List<String> roles){
