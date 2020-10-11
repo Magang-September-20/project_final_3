@@ -39,7 +39,12 @@ public class MainController {
     public String index() {
         return "index";
     }
-
+    
+      @GetMapping("/register")
+    public String register(){
+        return "register";
+    }
+    
     @GetMapping("/login")
     public String login(Model model) {
 //        model.addAttribute("user", new LoginInput());
