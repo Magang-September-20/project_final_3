@@ -36,18 +36,24 @@ public class MainController {
     @Autowired
     LoginService service;
 
+
+    @GetMapping(value={"","/index"})
+    public String index() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+            return "redirect:/dashboard";
+        } else {
+            return "index";
+        }
+    }
+    
+    @GetMapping("/403")
+    public String eror() {
+        return "403";
+    }
     @RequestMapping(value = "/{[path:[^\\.]*}")
     public String redirect() {
         return "forward:/404.html";
-    }
-
-    @GetMapping("")
-    public String index() {
-        return "index";
-    }
-    @GetMapping("/404")
-    public String eror() {
-        return "404";
     }
 
     @GetMapping("/register")
@@ -68,14 +74,12 @@ public class MainController {
 
     @GetMapping("/user")
     public String user(Model model) {
-//        model.addAttribute("user", new LoginInput());
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-//            return "user";
-//        } else {
-//            return "login";
-//        }
-        return "user";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+            return "user";
+        } else {
+            return "login";
+        }
     }
 
     @GetMapping("/admin")
@@ -109,7 +113,6 @@ public class MainController {
 
     @GetMapping("/dashboard")
     public String dashboard() {
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
@@ -118,7 +121,6 @@ public class MainController {
         } else {
             return "redirect:/login";
         }
-//         return "dashboard";
     }
 
     private static Collection<? extends GrantedAuthority> getAuthorities(List<String> roles) {

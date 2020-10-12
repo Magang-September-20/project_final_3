@@ -24,6 +24,6 @@ public class WebApplicationConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/404.html").setViewName("404");
+        registry.addViewController("/403.html").setViewName("403");
     }
-
 }

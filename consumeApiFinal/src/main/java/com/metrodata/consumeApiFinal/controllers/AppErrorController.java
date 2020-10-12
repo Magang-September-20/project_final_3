@@ -25,7 +25,7 @@ public class AppErrorController implements ErrorController{
 
     @RequestMapping(value = "/accessDenied", method = { RequestMethod.GET, RequestMethod.POST })
     public String accessDenied() {
-        return "accessDenied";
+        return "403";
     }
 
     @RequestMapping(value = PATH)
