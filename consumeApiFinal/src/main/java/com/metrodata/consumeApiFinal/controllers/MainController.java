@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
@@ -35,16 +36,25 @@ public class MainController {
     @Autowired
     LoginService service;
 
+    @RequestMapping(value = "/{[path:[^\\.]*}")
+    public String redirect() {
+        return "forward:/404.html";
+    }
+
     @GetMapping("")
     public String index() {
         return "index";
     }
-    
-      @GetMapping("/register")
-    public String register(){
+    @GetMapping("/404")
+    public String eror() {
+        return "404";
+    }
+
+    @GetMapping("/register")
+    public String register() {
         return "register";
     }
-    
+
     @GetMapping("/login")
     public String login(Model model) {
 //        model.addAttribute("user", new LoginInput());
@@ -55,6 +65,7 @@ public class MainController {
             return "login";
         }
     }
+
     @GetMapping("/user")
     public String user(Model model) {
 //        model.addAttribute("user", new LoginInput());
@@ -64,8 +75,9 @@ public class MainController {
 //        } else {
 //            return "login";
 //        }
-         return "user";
+        return "user";
     }
+
     @GetMapping("/admin")
     public String admin(Model model) {
 //        model.addAttribute("user", new LoginInput());
@@ -94,9 +106,9 @@ public class MainController {
 
         }
     }
-    
+
     @GetMapping("/dashboard")
-    public String dashboard(){
+    public String dashboard() {
 //        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(auth.getName());
@@ -108,8 +120,8 @@ public class MainController {
         }
 //         return "dashboard";
     }
-    
-    private static Collection<? extends GrantedAuthority> getAuthorities(List<String> roles){
+
+    private static Collection<? extends GrantedAuthority> getAuthorities(List<String> roles) {
         final List<SimpleGrantedAuthority> authorities = new LinkedList<>();
         for (String role : roles) {
             authorities.add(new SimpleGrantedAuthority(role));
