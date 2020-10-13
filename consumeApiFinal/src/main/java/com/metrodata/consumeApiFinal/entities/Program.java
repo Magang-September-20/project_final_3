@@ -13,6 +13,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -20,13 +22,13 @@ import javax.persistence.Table;
 
 /**
  *
- * @author user
+ * @author pannavr
  */
 @Entity
-@Table(name = "role")
+@Table(name = "tb_m_program")
 @NamedQueries({
-    @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")})
-public class Role implements Serializable {
+    @NamedQuery(name = "Program.findAll", query = "SELECT p FROM Program p")})
+public class Program implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -36,17 +38,20 @@ public class Role implements Serializable {
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role", fetch = FetchType.LAZY)
-    private List<AccountRole> accountRoleList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "program", fetch = FetchType.LAZY)
+    private List<ProgramApply> programApplyList;
+    @JoinColumn(name = "hr", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private User hr;
 
-    public Role() {
+    public Program() {
     }
 
-    public Role(Integer id) {
+    public Program(Integer id) {
         this.id = id;
     }
 
-    public Role(Integer id, String name) {
+    public Program(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -67,12 +72,20 @@ public class Role implements Serializable {
         this.name = name;
     }
 
-    public List<AccountRole> getAccountRoleList() {
-        return accountRoleList;
+    public List<ProgramApply> getProgramApplyList() {
+        return programApplyList;
     }
 
-    public void setAccountRoleList(List<AccountRole> accountRoleList) {
-        this.accountRoleList = accountRoleList;
+    public void setProgramApplyList(List<ProgramApply> programApplyList) {
+        this.programApplyList = programApplyList;
+    }
+
+    public User getHr() {
+        return hr;
+    }
+
+    public void setHr(User hr) {
+        this.hr = hr;
     }
 
     @Override
@@ -85,10 +98,10 @@ public class Role implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Role)) {
+        if (!(object instanceof Program)) {
             return false;
         }
-        Role other = (Role) object;
+        Program other = (Program) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -97,7 +110,7 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "com.metrodata.consumeApiFinal.entities.Role[ id=" + id + " ]";
+        return "com.metrodata.consumeApiFinal.entities.Program[ id=" + id + " ]";
     }
     
 }

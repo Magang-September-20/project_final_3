@@ -6,28 +6,29 @@
 package com.metrodata.consumeApiFinal.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  *
- * @author user
+ * @author pannavr
  */
 @Entity
-@Table(name = "account_role")
+@Table(name = "tb_m_university")
 @NamedQueries({
-    @NamedQuery(name = "AccountRole.findAll", query = "SELECT a FROM AccountRole a")})
-public class AccountRole implements Serializable {
+    @NamedQuery(name = "University.findAll", query = "SELECT u FROM University u")})
+public class University implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -35,18 +36,22 @@ public class AccountRole implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @JoinColumn(name = "account", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Account account;
-    @JoinColumn(name = "role", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Role role;
+    @Basic(optional = false)
+    @Column(name = "name")
+    private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "university", fetch = FetchType.LAZY)
+    private List<Education> educationList;
 
-    public AccountRole() {
+    public University() {
     }
 
-    public AccountRole(Integer id) {
+    public University(Integer id) {
         this.id = id;
+    }
+
+    public University(Integer id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Integer getId() {
@@ -57,20 +62,20 @@ public class AccountRole implements Serializable {
         this.id = id;
     }
 
-    public Account getAccount() {
-        return account;
+    public String getName() {
+        return name;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Role getRole() {
-        return role;
+    public List<Education> getEducationList() {
+        return educationList;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setEducationList(List<Education> educationList) {
+        this.educationList = educationList;
     }
 
     @Override
@@ -83,10 +88,10 @@ public class AccountRole implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof AccountRole)) {
+        if (!(object instanceof University)) {
             return false;
         }
-        AccountRole other = (AccountRole) object;
+        University other = (University) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -95,7 +100,7 @@ public class AccountRole implements Serializable {
 
     @Override
     public String toString() {
-        return "com.metrodata.consumeApiFinal.entities.AccountRole[ id=" + id + " ]";
+        return "com.metrodata.consumeApiFinal.entities.University[ id=" + id + " ]";
     }
     
 }

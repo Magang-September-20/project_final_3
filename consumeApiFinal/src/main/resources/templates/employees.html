@@ -286,9 +286,30 @@ and open the template in the editor.
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-                        <!--conten di sini-->
-                        
 
+        
+                        
+                         <table  class="table table-bordered" id="PersonTabel" width="90%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th> Id</th>
+                    <th> Name</th>
+                    <th> Email</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each = "as : ${employees}">
+                    <td th:text = "${as.id}"></td>
+                    <td th:text = "${as.name}"></td>
+                    <td th:text = "${as.email}"></td>
+                    <td th:text = "${as.roles}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+                        
             </div>
             <!-- End of Content Wrapper -->
 

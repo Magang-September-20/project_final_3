@@ -6,9 +6,7 @@
 package com.metrodata.consumeApiFinal.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,48 +14,39 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
  *
- * @author user
+ * @author pannavr
  */
 @Entity
-@Table(name = "account")
+@Table(name = "tb_tr_result")
 @NamedQueries({
-    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")})
-public class Account implements Serializable {
+    @NamedQuery(name = "Result.findAll", query = "SELECT r FROM Result r")})
+public class Result implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "username")
-    private String username;
-    @Basic(optional = false)
-    @Column(name = "password")
-    private String password;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.LAZY)
-    private List<AccountRole> accountRoleList;
+    @Column(name = "grade")
+    private Integer grade;
+    @Column(name = "note")
+    private String note;
+    @Column(name = "is_passed")
+    private Boolean isPassed;
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false, fetch = FetchType.LAZY)
-    private User user;
+    private ScheduleTest scheduleTest;
 
-    public Account() {
+    public Result() {
     }
 
-    public Account(Integer id) {
+    public Result(Integer id) {
         this.id = id;
-    }
-
-    public Account(Integer id, String username, String password) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
     }
 
     public Integer getId() {
@@ -68,36 +57,36 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public Integer getGrade() {
+        return grade;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setGrade(Integer grade) {
+        this.grade = grade;
     }
 
-    public String getPassword() {
-        return password;
+    public String getNote() {
+        return note;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setNote(String note) {
+        this.note = note;
     }
 
-    public List<AccountRole> getAccountRoleList() {
-        return accountRoleList;
+    public Boolean getIsPassed() {
+        return isPassed;
     }
 
-    public void setAccountRoleList(List<AccountRole> accountRoleList) {
-        this.accountRoleList = accountRoleList;
+    public void setIsPassed(Boolean isPassed) {
+        this.isPassed = isPassed;
     }
 
-    public User getUser() {
-        return user;
+    public ScheduleTest getScheduleTest() {
+        return scheduleTest;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setScheduleTest(ScheduleTest scheduleTest) {
+        this.scheduleTest = scheduleTest;
     }
 
     @Override
@@ -110,10 +99,10 @@ public class Account implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Account)) {
+        if (!(object instanceof Result)) {
             return false;
         }
-        Account other = (Account) object;
+        Result other = (Result) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -122,7 +111,7 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "com.metrodata.consumeApiFinal.entities.Account[ id=" + id + " ]";
+        return "com.metrodata.consumeApiFinal.entities.Result[ id=" + id + " ]";
     }
     
 }

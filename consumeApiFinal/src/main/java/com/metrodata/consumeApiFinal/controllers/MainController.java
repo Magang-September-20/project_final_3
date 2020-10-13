@@ -8,6 +8,8 @@ package com.metrodata.consumeApiFinal.controllers;
 import com.metrodata.consumeApiFinal.entities.LoginInput;
 import com.metrodata.consumeApiFinal.entities.rest.LoginOutput;
 import com.metrodata.consumeApiFinal.services.LoginService;
+import com.metrodata.consumeApiFinal.services.ProgramService;
+import com.metrodata.consumeApiFinal.services.UserService;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,6 +37,12 @@ public class MainController {
 
     @Autowired
     LoginService service;
+    
+    @Autowired
+    UserService userService;
+    @Autowired
+    ProgramService pr;
+
 
 
     @GetMapping(value={"","/index"})
@@ -129,5 +137,17 @@ public class MainController {
             authorities.add(new SimpleGrantedAuthority(role));
         }
         return authorities;
+    }
+    
+    @GetMapping("employees")
+    public String employees(Model model){
+        model.addAttribute("employees", userService.getAll());
+    return "employees";
+    }
+    
+    @GetMapping("program")
+    public String progam(Model model){
+        model.addAttribute("programs", pr.getAll());
+    return "program";
     }
 }

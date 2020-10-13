@@ -286,8 +286,27 @@ and open the template in the editor.
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-                        <!--conten di sini-->
-                        
+
+          <div class="card-body">
+                        <div class="table-responsive">
+                         <table  class="table table-bordered" id="PersonTabel" width="90%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th> Id</th>
+                    <th> Name</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each = "as : ${programs}">
+                    <td th:text = "${as.id}"></td>
+                    <td th:text = "${as.name}"></td>
+                    
+                </tr>
+            </tbody>
+        </table>
+                            </div>
+              </div>
 
             </div>
             <!-- End of Content Wrapper -->
