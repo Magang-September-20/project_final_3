@@ -7,26 +7,19 @@ package com.metrodata.consumeApiFinal.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
  *
- * @author pannavr
+ * @author sweje
  */
 @Entity
 @Table(name = "tb_m_user")
@@ -36,7 +29,6 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
@@ -53,18 +45,6 @@ public class User implements Serializable {
     @Column(name = "birth_date")
     @Temporal(TemporalType.DATE)
     private Date birthDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "candidate", fetch = FetchType.LAZY)
-    private List<ProgramApply> programApplyList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hr", fetch = FetchType.LAZY)
-    private List<ProgramApply> programApplyList1;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-    private Education education;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pic", fetch = FetchType.LAZY)
-    private List<ScheduleTest> scheduleTestList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-    private File file;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hr", fetch = FetchType.LAZY)
-    private List<Program> programList;
 
     public User() {
     }
@@ -119,54 +99,6 @@ public class User implements Serializable {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public List<ProgramApply> getProgramApplyList() {
-        return programApplyList;
-    }
-
-    public void setProgramApplyList(List<ProgramApply> programApplyList) {
-        this.programApplyList = programApplyList;
-    }
-
-    public List<ProgramApply> getProgramApplyList1() {
-        return programApplyList1;
-    }
-
-    public void setProgramApplyList1(List<ProgramApply> programApplyList1) {
-        this.programApplyList1 = programApplyList1;
-    }
-
-    public Education getEducation() {
-        return education;
-    }
-
-    public void setEducation(Education education) {
-        this.education = education;
-    }
-
-    public List<ScheduleTest> getScheduleTestList() {
-        return scheduleTestList;
-    }
-
-    public void setScheduleTestList(List<ScheduleTest> scheduleTestList) {
-        this.scheduleTestList = scheduleTestList;
-    }
-
-    public File getFile() {
-        return file;
-    }
-
-    public void setFile(File file) {
-        this.file = file;
-    }
-
-    public List<Program> getProgramList() {
-        return programList;
-    }
-
-    public void setProgramList(List<Program> programList) {
-        this.programList = programList;
     }
 
     @Override

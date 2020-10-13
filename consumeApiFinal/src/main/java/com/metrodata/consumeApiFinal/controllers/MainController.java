@@ -6,9 +6,11 @@
 package com.metrodata.consumeApiFinal.controllers;
 
 import com.metrodata.consumeApiFinal.entities.LoginInput;
+import com.metrodata.consumeApiFinal.entities.dao.RegisterInput;
 import com.metrodata.consumeApiFinal.entities.rest.LoginOutput;
 import com.metrodata.consumeApiFinal.services.LoginService;
 import com.metrodata.consumeApiFinal.services.ProgramService;
+import com.metrodata.consumeApiFinal.services.RegisterService;
 import com.metrodata.consumeApiFinal.services.UserService;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -37,15 +39,15 @@ public class MainController {
 
     @Autowired
     LoginService service;
-    
+    @Autowired
+    RegisterService registerService;
+
     @Autowired
     UserService userService;
     @Autowired
     ProgramService pr;
 
-
-
-    @GetMapping(value={"","/index"})
+    @GetMapping(value = {"", "/index"})
     public String index() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
@@ -54,11 +56,12 @@ public class MainController {
             return "index";
         }
     }
-    
+
     @GetMapping("/403")
     public String eror() {
         return "403";
     }
+
     @RequestMapping(value = "/{[path:[^\\.]*}")
     public String redirect() {
         return "forward:/404.html";
@@ -115,8 +118,25 @@ public class MainController {
             return "redirect:/dashboard";
         } else {
             return "redirect:/login";
-
         }
+    }
+
+    @PostMapping("/registerverif")
+    public String registerVerification(RegisterInput input) {
+        System.out.println(input);
+        registerService.register(input);
+//        LoginOutput output = service.loginNew(input);
+//        System.out.println(output);
+
+//        if (output.getStatus().equalsIgnoreCase("success")) {
+//            User user = new User(output.getUser().getName(), "", getAuthorities(output.getUser().getRoles()));
+//            PreAuthenticatedAuthenticationToken authenticationToken = new PreAuthenticatedAuthenticationToken(user, "", user.getAuthorities());
+//            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+//            return "redirect:/dashboard";
+//        } else {
+//            return "redirect:/login";
+//        }
+        return "redirect:/login";
     }
 
     @GetMapping("/dashboard")
@@ -138,16 +158,16 @@ public class MainController {
         }
         return authorities;
     }
-    
+
     @GetMapping("employees")
-    public String employees(Model model){
+    public String employees(Model model) {
         model.addAttribute("employees", userService.getAll());
-    return "employees";
+        return "employees";
     }
-    
+
     @GetMapping("program")
-    public String progam(Model model){
+    public String progam(Model model) {
         model.addAttribute("programs", pr.getAll());
-    return "program";
+        return "program";
     }
 }
