@@ -138,7 +138,7 @@ public class MainController {
         System.out.println(output);
 
         if (output.getStatus().equalsIgnoreCase("success")) {
-            User user = new User(output.getUser().getName(), "", getAuthorities(output.getUser().getRoles()));
+            User user = new User(output.getUser().getEmail(), "", getAuthorities(output.getUser().getRoles()));
             PreAuthenticatedAuthenticationToken authenticationToken = new PreAuthenticatedAuthenticationToken(user, "", user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             return "redirect:/dashboard";
