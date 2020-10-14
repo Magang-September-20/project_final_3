@@ -111,7 +111,7 @@ public class Result implements Serializable {
 
     @Override
     public String toString() {
-        return "com.metrodata.consumeApiFinal.entities.Result[ id=" + id + " ]";
+        return id + " ]";
     }
     
 }

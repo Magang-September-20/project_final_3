@@ -22,8 +22,12 @@ import org.springframework.web.client.RestTemplate;
 public class UserService {
      private static final RestTemplate RT =  new RestTemplate();
      
-     public List<UserOutput> getAll(){
-     ResponseEntity<UserOutput[]> response = RT.getForEntity("http://localhost:8088/getAll", UserOutput[].class);
+     public List<UserOutput> getEmployee(){
+     ResponseEntity<UserOutput[]> response = RT.getForEntity("http://localhost:8088/getEmployees", UserOutput[].class);
+     return Arrays.asList(response.getBody());
+}
+     public List<UserOutput> getUser(){
+     ResponseEntity<UserOutput[]> response = RT.getForEntity("http://localhost:8088/getUser", UserOutput[].class);
      return Arrays.asList(response.getBody());
 }
 }

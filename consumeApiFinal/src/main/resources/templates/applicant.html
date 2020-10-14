@@ -83,11 +83,11 @@ and open the template in the editor.
                     <th> Name</th>
                     <th> Email</th>
                     <th>Role</th>
-           
+                   
                 </tr>
             </thead>
             <tbody>
-                <tr th:each = "as : ${employees}">
+                <tr th:each = "as : ${applicants}">
                     <td th:text = "${as.id}"></td>
                     <td th:text = "${as.name}"></td>
                     <td th:text = "${as.email}"></td>

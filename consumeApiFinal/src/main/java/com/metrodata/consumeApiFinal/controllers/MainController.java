@@ -30,7 +30,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.metrodata.consumeApiFinal.services.RegisterService;
 import com.metrodata.consumeApiFinal.services.ScheduleService;
+import com.metrodata.consumeApiFinal.services.TestService;
 import com.metrodata.consumeApiFinal.services.UserService;
+import java.text.ParseException;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -53,8 +55,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  * @author user
  */
-
-
 @Controller
 public class MainController {
 
@@ -69,6 +69,9 @@ public class MainController {
     ProgramService pr;
     @Autowired
     ScheduleService ss;
+
+    @Autowired
+    TestService test;
 
     @GetMapping(value = {"", "/index"})
     public String index() {
@@ -184,19 +187,85 @@ public class MainController {
 
     @GetMapping("employees")
     public String employees(Model model) {
-        model.addAttribute("employees", userService.getAll());
-        return "employees";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        System.out.println(auth.getAuthorities());
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+            model.addAttribute("employees", userService.getEmployee());
+            return "employees";
+        } else {
+            return "redirect:/login";
+        }
+
     }
 
     @GetMapping("program")
     public String progam(Model model) {
-        model.addAttribute("programs", pr.getAll());
-        return "program";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        System.out.println(auth.getAuthorities());
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+            model.addAttribute("programs", pr.getAll());
+            return "program";
+        } else {
+            return "redirect:/login";
+        }
+
     }
 
     @GetMapping("/schedule")
     public String schedule(Model model) {
-        model.addAttribute("schedules", ss.getAll());
-        return "schedule";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        System.out.println(auth.getAuthorities());
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+            model.addAttribute("schedules", ss.getAll());
+            return "schedule";
+        } else {
+            return "redirect:/login";
+        }
+
+    }
+
+    @GetMapping("showAllSchedule")
+    public String showSchedule(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        System.out.println(auth.getAuthorities());
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+            model.addAttribute("schedules", ss.getAll());
+            return "showAllSchedule";
+        } else {
+            return "redirect:/login";
+        }
+
+    }
+
+    @GetMapping("applicant")
+    public String applican(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        System.out.println(auth.getAuthorities());
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+            model.addAttribute("applicants", userService.getUser());
+            return "applicant";
+        } else {
+            return "redirect:/login";
+        }
+
+    }
+
+    @GetMapping("examp")
+    public String examp(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        System.out.println(auth.getAuthorities());
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+            model.addAttribute("examp", test.getAll());
+            return "examp";
+        } else {
+            return "redirect:/login";
+        }
+
     }
 }

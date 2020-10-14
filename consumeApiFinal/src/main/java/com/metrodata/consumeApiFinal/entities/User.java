@@ -123,7 +123,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "com.metrodata.consumeApiFinal.entities.User[ id=" + id + " ]";
+        return  id + "";
     }
     
 }

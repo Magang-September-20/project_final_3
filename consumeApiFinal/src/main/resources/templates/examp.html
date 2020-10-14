@@ -61,12 +61,11 @@ and open the template in the editor.
         <div id="wrapper">
 
             <!-- Sidebar -->
-           
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+           
                   <div th:replace="fragments/sideBarAdmin :: sideBarAdmin"></div>
-
-
-                        </ul>
+                  
+                      </ul>
 
                     </nav>
                     <!-- End of Topbar -->
@@ -74,34 +73,31 @@ and open the template in the editor.
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
 
-        
-                        
+                   
                          <table  class="table table-bordered" id="PersonTabel" width="90%" cellspacing="0">
             <thead>
                 <tr>
                     <th> Id</th>
                     <th> Name</th>
-                    <th> Email</th>
-                    <th>Role</th>
-           
+               
+                    
                 </tr>
             </thead>
             <tbody>
-                <tr th:each = "as : ${employees}">
+                <tr th:each = "as : ${examp}">
                     <td th:text = "${as.id}"></td>
                     <td th:text = "${as.name}"></td>
-                    <td th:text = "${as.email}"></td>
-                    <td th:text = "${as.roles}"></td>
+                 
+                    
                 </tr>
             </tbody>
         </table>
+                                          </div>
 
-                        
             </div>
             <!-- End of Content Wrapper -->
 
-        </div>
-        <!-- End of Page Wrapper -->
+                <!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">

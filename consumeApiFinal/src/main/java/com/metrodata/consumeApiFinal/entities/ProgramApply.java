@@ -135,7 +135,7 @@ public class ProgramApply implements Serializable {
 
     @Override
     public String toString() {
-        return "com.metrodata.consumeApiFinal.entities.ProgramApply[ id=" + id + " ]";
+        return  id + "";
     }
     
 }

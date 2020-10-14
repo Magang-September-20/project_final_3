@@ -61,12 +61,11 @@ and open the template in the editor.
         <div id="wrapper">
 
             <!-- Sidebar -->
-           
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+           
                   <div th:replace="fragments/sideBarAdmin :: sideBarAdmin"></div>
-
-
-                        </ul>
+                  
+                      </ul>
 
                     </nav>
                     <!-- End of Topbar -->
@@ -74,34 +73,40 @@ and open the template in the editor.
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
 
-        
-                        
-                         <table  class="table table-bordered" id="PersonTabel" width="90%" cellspacing="0">
-            <thead>
-                <tr>
-                    <th> Id</th>
-                    <th> Name</th>
-                    <th> Email</th>
-                    <th>Role</th>
-           
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each = "as : ${employees}">
-                    <td th:text = "${as.id}"></td>
-                    <td th:text = "${as.name}"></td>
-                    <td th:text = "${as.email}"></td>
-                    <td th:text = "${as.roles}"></td>
-                </tr>
-            </tbody>
-        </table>
+                   
+                         <table  class="table table-bordered" id="PersonTabel" width="25%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th> Date</th>
+                                    <th> Start_time</th>
+                                    <th> End_time</th>
+                                    <th> Location</th>
+                                    <th> Test</th>
+                                    <th> Apply</th>
+                                    <th> PIC</th>
+                                    <!--<th> PIC</th>-->
 
-                        
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each = "as : ${schedules}">
+                                    <td th:text = "${as.date}"></td>
+                                    <td th:text = "${as.startTime}"></td>
+                                    <td th:text = "${as.endTime}"></td>
+                                    <td th:text = "${as.location}"></td>
+                                    <td th:text = "${as.test.name}"></td>
+                                    <td th:text = "${as.apply.program.name}"></td>
+                                    <td th:text = "${as.pic.fullName}"></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                                          </div>
+
             </div>
             <!-- End of Content Wrapper -->
 
-        </div>
-        <!-- End of Page Wrapper -->
+                <!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
