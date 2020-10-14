@@ -14,6 +14,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -24,7 +27,8 @@ import org.springframework.web.client.RestTemplate;
  */
 @Service
 public class RegisterService {
-
+    @Autowired
+    EmailNotificationService email;
     @Autowired
     UserRepository ur;
     private static final RestTemplate RT = new RestTemplate();
@@ -38,10 +42,17 @@ public class RegisterService {
 
         int idTemp = (int) RT.postForObject("http://localhost:8088/register", registerApi, Map.class).get("id");
         System.out.println(idTemp + "ini id");
+        
         DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date dutyDay = (java.util.Date) simpleDateFormat.parse(input.getDate());
+        
         User user = new User(idTemp, input.getName(), input.getEmail(), input.getGender(), dutyDay);
         ur.save(user);
+        try {
+            email.sendEmail(input);
+        } catch (MessagingException ex) {
+            Logger.getLogger(RegisterService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
