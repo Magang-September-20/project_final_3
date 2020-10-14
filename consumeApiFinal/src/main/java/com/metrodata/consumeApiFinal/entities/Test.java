@@ -109,7 +109,7 @@ public class Test implements Serializable {
 
     @Override
     public String toString() {
-        return "com.metrodata.consumeApiFinal.entities.Test[ id=" + id + " ]";
+        return "Test[ id=" + id + " ]";
     }
     
 }

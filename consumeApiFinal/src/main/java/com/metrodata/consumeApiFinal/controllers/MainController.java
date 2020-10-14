@@ -10,7 +10,26 @@ import com.metrodata.consumeApiFinal.entities.dao.RegisterInput;
 import com.metrodata.consumeApiFinal.entities.rest.LoginOutput;
 import com.metrodata.consumeApiFinal.services.LoginService;
 import com.metrodata.consumeApiFinal.services.ProgramService;
+import com.metrodata.consumeApiFinal.services.UserService;
+import java.text.ParseException;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import org.apache.tomcat.websocket.AuthenticatorFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import com.metrodata.consumeApiFinal.services.RegisterService;
+import com.metrodata.consumeApiFinal.services.ScheduleService;
 import com.metrodata.consumeApiFinal.services.UserService;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -34,6 +53,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  * @author user
  */
+
+
 @Controller
 public class MainController {
 
@@ -46,6 +67,8 @@ public class MainController {
     UserService userService;
     @Autowired
     ProgramService pr;
+    @Autowired
+    ScheduleService ss;
 
     @GetMapping(value = {"", "/index"})
     public String index() {
@@ -122,7 +145,7 @@ public class MainController {
     }
 
     @PostMapping("/registerverif")
-    public String registerVerification(RegisterInput input) {
+    public String registerVerification(RegisterInput input) throws ParseException {
         System.out.println(input);
         registerService.register(input);
 //        LoginOutput output = service.loginNew(input);
@@ -169,5 +192,11 @@ public class MainController {
     public String progam(Model model) {
         model.addAttribute("programs", pr.getAll());
         return "program";
+    }
+
+    @GetMapping("/schedule")
+    public String schedule(Model model) {
+        model.addAttribute("schedules", ss.getAll());
+        return "schedule";
     }
 }

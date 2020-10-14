@@ -176,7 +176,8 @@ public class ScheduleTest implements Serializable {
 
     @Override
     public String toString() {
-        return "com.metrodata.consumeApiFinal.entities.ScheduleTest[ id=" + id + " ]";
+        return "ScheduleTest{" + "id=" + id + ", date=" + date + ", startTime=" + startTime + ", endTime=" + endTime + ", location=" + location + ", apply=" + apply + ", pic=" + pic + ", test=" + test + ", result=" + result + '}';
     }
+
     
 }
