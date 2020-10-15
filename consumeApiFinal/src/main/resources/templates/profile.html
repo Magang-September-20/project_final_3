@@ -182,26 +182,26 @@
                         <table  class="table table-bordered" id="PersonTabel" width="25%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th> Date</th>
-                                    <th> Start_time</th>
-                                    <th> End_time</th>
-                                    <th> Location</th>
-                                    <th> Test</th>
-                                    <th> Apply</th>
-                                    <th> PIC</th>
+                                    <th> ID</th>
+                                    <th> Full Name</th>
+                                    <th> Email</th>
+                                    <th> Gender</th>
+                                    <th> BirthDate</th>
+                                    
+                                    
+                                
                                     <!--<th> PIC</th>-->
 
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each = "as : ${schedules}">
-                                    <td th:text = "${as.date}"></td>
-                                    <td th:text = "${as.startTime}"></td>
-                                    <td th:text = "${as.endTime}"></td>
-                                    <td th:text = "${as.location}"></td>
-                                    <td th:text = "${as.test.name}"></td>
-                                    <td th:text = "${as.apply.program.name}"></td>
-                                    <td th:text = "${as.pic.fullName}"></td>
+                                <tr th:each = "as : ${profile}">
+                                    <td th:text = "${as.id}"></td>
+                                    <td th:text = "${as.fullName}"></td>
+                                    <td th:text = "${as.email}"></td>
+                                    <td th:text = "${as.gender}"></td>
+                                    <td th:text = "${as.birthDate}"></td>
+                                   
 
                                 </tr>
                             </tbody>

@@ -223,7 +223,7 @@ public class MainController {
 //        System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-            model.addAttribute("schedules", ss.getEmail(auth.getName()));
+            model.addAttribute("profile", userService.getProfil(auth.getName()));
            
             return "profile";
         } else {

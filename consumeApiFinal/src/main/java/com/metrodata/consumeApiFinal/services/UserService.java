@@ -41,4 +41,8 @@ public class UserService {
     public User getById(int id){
         return ur.findById(id).get();
     }
+    
+    public User getProfil(String email){
+        return ur.getProfil(email);
+    }
 }
