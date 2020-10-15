@@ -23,6 +23,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -43,14 +44,17 @@ public class ScheduleTest implements Serializable {
     @Basic(optional = false)
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     @Basic(optional = false)
     @Column(name = "start_time")
     @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
     private Date startTime;
     @Basic(optional = false)
     @Column(name = "end_time")
     @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
     private Date endTime;
     @Basic(optional = false)
     @Column(name = "location")
@@ -179,7 +183,4 @@ public class ScheduleTest implements Serializable {
         return "ScheduleTest{" + "id=" + id + ", date=" + date + ", startTime=" + startTime + ", endTime=" + endTime + ", location=" + location + ", apply=" + apply + ", pic=" + pic + ", test=" + test + ", result=" + result + '}';
     }
 
-  
-
-    
 }

@@ -6,8 +6,11 @@
 package com.metrodata.consumeApiFinal.controllers;
 
 import com.metrodata.consumeApiFinal.entities.LoginInput;
+import com.metrodata.consumeApiFinal.entities.ScheduleTest;
 import com.metrodata.consumeApiFinal.entities.dao.RegisterInput;
+import com.metrodata.consumeApiFinal.entities.dao.ScheduleTestInput;
 import com.metrodata.consumeApiFinal.entities.rest.LoginOutput;
+import com.metrodata.consumeApiFinal.repositories.ScheduleTestRepository;
 import com.metrodata.consumeApiFinal.services.LoginService;
 import com.metrodata.consumeApiFinal.services.ProgramService;
 import com.metrodata.consumeApiFinal.services.UserService;
@@ -30,15 +33,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.metrodata.consumeApiFinal.services.RegisterService;
 import com.metrodata.consumeApiFinal.services.ScheduleService;
+import com.metrodata.consumeApiFinal.services.ScheduleTestService;
 import com.metrodata.consumeApiFinal.services.TestService;
 import com.metrodata.consumeApiFinal.services.UserService;
 import java.text.ParseException;
 import java.util.Collection;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import org.apache.tomcat.websocket.AuthenticatorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -47,8 +53,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -72,6 +80,9 @@ public class MainController {
 
     @Autowired
     TestService test;
+
+    @Autowired
+    ScheduleTestService scheduleTestService;
 
     @GetMapping(value = {"", "/index"})
     public String index() {
@@ -228,12 +239,15 @@ public class MainController {
     }
 
     @GetMapping("showAllSchedule")
-    public String showSchedule(Model model) {
+    public String showSchedule(Model model, @Validated ScheduleTest scheduleTest) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("schedules", ss.getAll());
+//            model.addAttribute("scheduleTest", new ScheduleTest());
+//            model.addAttribute("pics", userService.getEmployee());
+//            model.addAttribute("employees", userService.getEmployee());
             return "showAllSchedule";
         } else {
             return "redirect:/login";
@@ -267,5 +281,30 @@ public class MainController {
             return "redirect:/login";
         }
 
+//        @PostMapping("/save")
+//        public String save(Model model) {
+//        scheduleTestService.save(scheduleTest);
+//            return "redirect:/";
+//        }
+    }
+
+
+    @PostMapping("/saveSchedule")
+    public String save(ScheduleTest scheduleTest) throws ParseException {
+     
+//        model.addAttribute("scheduleTest", new ScheduleTest());
+//        scheduleTestService.save(scheduleTest);
+//        System.out.println(scheduleTest.getDate());
+//        System.out.println(scheduleTest.getStartTime());
+//        System.out.println(scheduleTest.getPic());
+//        System.out.println(scheduleTest.getEndTime());
+//        System.out.println(scheduleTest.getApply());
+//        System.out.println(scheduleTest);
+        System.out.println(scheduleTest.getDate());
+        System.out.println(scheduleTest.getStartTime());
+        System.out.println(scheduleTest.getPic());
+        System.out.println(scheduleTest.getApply());
+        scheduleTestService.save(scheduleTest);
+        return "redirect:/showAllSchedule";
     }
 }
