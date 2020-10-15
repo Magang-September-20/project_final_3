@@ -10,27 +10,8 @@ import com.metrodata.consumeApiFinal.entities.ScheduleTest;
 import com.metrodata.consumeApiFinal.entities.dao.RegisterInput;
 import com.metrodata.consumeApiFinal.entities.dao.ScheduleTestInput;
 import com.metrodata.consumeApiFinal.entities.rest.LoginOutput;
-import com.metrodata.consumeApiFinal.repositories.ScheduleTestRepository;
 import com.metrodata.consumeApiFinal.services.LoginService;
 import com.metrodata.consumeApiFinal.services.ProgramService;
-import com.metrodata.consumeApiFinal.services.UserService;
-import java.text.ParseException;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-import org.apache.tomcat.websocket.AuthenticatorFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import com.metrodata.consumeApiFinal.services.RegisterService;
 import com.metrodata.consumeApiFinal.services.ScheduleService;
 import com.metrodata.consumeApiFinal.services.ScheduleTestService;
@@ -38,13 +19,9 @@ import com.metrodata.consumeApiFinal.services.TestService;
 import com.metrodata.consumeApiFinal.services.UserService;
 import java.text.ParseException;
 import java.util.Collection;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import org.apache.tomcat.websocket.AuthenticatorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -56,7 +33,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -113,6 +89,7 @@ public class MainController {
 //        model.addAttribute("user", new LoginInput());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+          
             return "redirect:/dashboard";
         } else {
             return "login";
@@ -216,7 +193,7 @@ public class MainController {
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("programs", pr.getAll());
-            return "program";
+            return "program"; 
         } else {
             return "redirect:/login";
         }
@@ -225,18 +202,30 @@ public class MainController {
     @GetMapping("/schedule")
     public String schedule(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(auth.getName());
+//        System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
 //        ScheduleTest scheduleTest = new ScheduleTest();
 //        scheduleTest = ss.getByEmail(auth.getName());
-        try {
-            System.out.println(ss.getByEmail(auth.getName()));
-        } catch (Exception e) {
-        }
-
+  
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
 //            model.addAttribute("schedules", ss.getByEmail(auth.getName()));
+            model.addAttribute("schedules", ss.getEmail(auth.getName()));
+           
             return "schedule";
+        } else {
+            return "redirect:/login";
+        }
+
+    }
+    @GetMapping("/profile")
+    public String profil(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        System.out.println(auth.getName());
+        System.out.println(auth.getAuthorities());
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+            model.addAttribute("schedules", ss.getEmail(auth.getName()));
+           
+            return "profile";
         } else {
             return "redirect:/login";
         }
@@ -287,7 +276,6 @@ public class MainController {
         }
     }
 
-
     @PostMapping("/saveSchedule")
     public String save(ScheduleTestInput input) throws ParseException {
         System.out.println(input.getDate());
@@ -298,6 +286,21 @@ public class MainController {
         System.out.println(input.getApply());
         System.out.println(input.getPic());
         scheduleTestService.save(input);
+//    public String save(ScheduleTest scheduleTest) throws ParseException {
+//
+////        model.addAttribute("scheduleTest", new ScheduleTest());
+////        scheduleTestService.save(scheduleTest);
+////        System.out.println(scheduleTest.getDate());
+////        System.out.println(scheduleTest.getStartTime());
+////        System.out.println(scheduleTest.getPic());
+////        System.out.println(scheduleTest.getEndTime());
+////        System.out.println(scheduleTest.getApply());
+////        System.out.println(scheduleTest);
+//        System.out.println(scheduleTest.getDate());
+//        System.out.println(scheduleTest.getStartTime());
+//        System.out.println(scheduleTest.getPic());
+//        System.out.println(scheduleTest.getApply());
+//        scheduleTestService.save(scheduleTest);
         return "redirect:/showAllSchedule";
     }
 }
