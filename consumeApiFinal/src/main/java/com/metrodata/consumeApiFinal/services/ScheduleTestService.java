@@ -36,8 +36,10 @@ public class ScheduleTestService {
     UserService us;
     @Autowired
     TestService ts;
+    @Autowired
+    ResultService rs;
 
-    public ScheduleTest save(ScheduleTestInput scheduleTestInput) throws ParseException {
+    public void save(ScheduleTestInput scheduleTestInput) throws ParseException {
 
         ProgramApply programApply = new ProgramApply(scheduleTestInput.getApply());
         User pic = us.getById(scheduleTestInput.getPic());
@@ -53,12 +55,20 @@ public class ScheduleTestService {
         java.util.Date timeStart = (java.util.Date) df.parse(scheduleTestInput.getStartTime());
         java.util.Date timeEnd = (java.util.Date) df.parse(scheduleTestInput.getEndTime());
         ScheduleTest test1 = new ScheduleTest(Integer.SIZE, dutyDay, timeStart, timeEnd, scheduleTestInput.getLocation(), programApply, pic, test);
-//        Result result = new Result();
-//        result.setGrade(50);
-//        result.setIsPassed(false);
-//        result.setNote("mboh tae");
-//        result.setScheduleTest(test1);
-//        test1.setResult(result);
-        return scheduleTestRepository.save(test1);
+        
+//        scheduleTestRepository.save(test1);
+        
+        Result result = new Result();
+        result.setId(scheduleTestRepository.getMaxId());
+        result.setGrade(50);
+        result.setIsPassed(false);
+        result.setNote("mboh tae");
+        
+        result.setScheduleTest(test1);
+        test1.setResult(result);
+        
+//        rs.saveResult(result);
+        scheduleTestRepository.save(test1);
+
     }
 }

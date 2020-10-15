@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author pannavr
+ * @author sweje
  */
 @Entity
 @Table(name = "tb_tr_result")
@@ -49,26 +49,6 @@ public class Result implements Serializable {
         this.id = id;
     }
 
-    public Result(Integer id, Integer grade, String note, Boolean isPassed) {
-        this.id = id;
-        this.grade = grade;
-        this.note = note;
-        this.isPassed = isPassed;
-    }
-
-    public Result(ScheduleTest scheduleTest) {
-        this.scheduleTest = scheduleTest;
-    }
-
-    public Result(Integer id, Integer grade, String note, Boolean isPassed, ScheduleTest scheduleTest) {
-        this.id = id;
-        this.grade = grade;
-        this.note = note;
-        this.isPassed = isPassed;
-        this.scheduleTest = scheduleTest;
-    }
-    
-    
     public Integer getId() {
         return id;
     }
@@ -131,7 +111,7 @@ public class Result implements Serializable {
 
     @Override
     public String toString() {
-        return id + " ]";
+        return "com.metrodata.consumeApiFinal.entities.Result[ id=" + id + " ]";
     }
     
 }

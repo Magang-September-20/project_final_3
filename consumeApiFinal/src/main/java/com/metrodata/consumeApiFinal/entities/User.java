@@ -7,12 +7,16 @@ package com.metrodata.consumeApiFinal.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,6 +30,15 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")})
 public class User implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "candidate", fetch = FetchType.LAZY)
+    private List<ProgramApply> programApplyList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hr", fetch = FetchType.LAZY)
+    private List<ProgramApply> programApplyList1;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pic", fetch = FetchType.LAZY)
+    private List<ScheduleTest> scheduleTestList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hr", fetch = FetchType.LAZY)
+    private List<Program> programList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -124,6 +137,38 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return  id + "";
+    }
+
+    public List<ProgramApply> getProgramApplyList() {
+        return programApplyList;
+    }
+
+    public void setProgramApplyList(List<ProgramApply> programApplyList) {
+        this.programApplyList = programApplyList;
+    }
+
+    public List<ProgramApply> getProgramApplyList1() {
+        return programApplyList1;
+    }
+
+    public void setProgramApplyList1(List<ProgramApply> programApplyList1) {
+        this.programApplyList1 = programApplyList1;
+    }
+
+    public List<ScheduleTest> getScheduleTestList() {
+        return scheduleTestList;
+    }
+
+    public void setScheduleTestList(List<ScheduleTest> scheduleTestList) {
+        this.scheduleTestList = scheduleTestList;
+    }
+
+    public List<Program> getProgramList() {
+        return programList;
+    }
+
+    public void setProgramList(List<Program> programList) {
+        this.programList = programList;
     }
     
 }

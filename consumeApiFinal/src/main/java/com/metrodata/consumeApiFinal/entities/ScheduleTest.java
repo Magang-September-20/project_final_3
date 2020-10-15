@@ -23,11 +23,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
- * @author pannavr
+ * @author sweje
  */
 @Entity
 @Table(name = "tb_tr_schedule_test")
@@ -44,17 +43,14 @@ public class ScheduleTest implements Serializable {
     @Basic(optional = false)
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     @Basic(optional = false)
     @Column(name = "start_time")
     @Temporal(TemporalType.TIME)
-    @DateTimeFormat(pattern = "HH:mm")
     private Date startTime;
     @Basic(optional = false)
     @Column(name = "end_time")
     @Temporal(TemporalType.TIME)
-    @DateTimeFormat(pattern = "HH:mm")
     private Date endTime;
     @Basic(optional = false)
     @Column(name = "location")
@@ -86,18 +82,6 @@ public class ScheduleTest implements Serializable {
         this.location = location;
     }
 
-    public ScheduleTest(Integer id, Date date, Date startTime, Date endTime, String location, ProgramApply apply, User pic, Test test, Result result) {
-        this.id = id;
-        this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.location = location;
-        this.apply = apply;
-        this.pic = pic;
-        this.test = test;
-        this.result = result;
-    }
-
     public ScheduleTest(Integer id, Date date, Date startTime, Date endTime, String location, ProgramApply apply, User pic, Test test) {
         this.id = id;
         this.date = date;
@@ -108,7 +92,6 @@ public class ScheduleTest implements Serializable {
         this.pic = pic;
         this.test = test;
     }
-    
     
 
     public Integer getId() {
@@ -205,7 +188,7 @@ public class ScheduleTest implements Serializable {
 
     @Override
     public String toString() {
-        return "ScheduleTest{" + "id=" + id + ", date=" + date + ", startTime=" + startTime + ", endTime=" + endTime + ", location=" + location + ", apply=" + apply + ", pic=" + pic + ", test=" + test + ", result=" + result + '}';
+        return "com.metrodata.consumeApiFinal.entities.ScheduleTest[ id=" + id + " ]";
     }
-
+    
 }
