@@ -128,7 +128,17 @@ public class MainController {
             User user = new User(output.getUser().getEmail(), "", getAuthorities(output.getUser().getRoles()));
             PreAuthenticatedAuthenticationToken authenticationToken = new PreAuthenticatedAuthenticationToken(user, "", user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-            return "redirect:/dashboard";
+            
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            System.out.println(auth.getName());
+            System.out.println(auth.getAuthorities());
+            if (!auth.getName().equalsIgnoreCase("[ROLE_ADMIN]")) {
+                return "redirect:/user";
+            }
+            else{
+                return "redirect:/admin";
+            }
+//            return "redirect:/dashboard";
         } else {
             return "redirect:/login";
         }
@@ -138,17 +148,6 @@ public class MainController {
     public String registerVerification(RegisterInput input) throws ParseException {
         System.out.println(input);
         registerService.register(input);
-//        LoginOutput output = service.loginNew(input);
-//        System.out.println(output);
-
-//        if (output.getStatus().equalsIgnoreCase("success")) {
-//            User user = new User(output.getUser().getName(), "", getAuthorities(output.getUser().getRoles()));
-//            PreAuthenticatedAuthenticationToken authenticationToken = new PreAuthenticatedAuthenticationToken(user, "", user.getAuthorities());
-//            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-//            return "redirect:/dashboard";
-//        } else {
-//            return "redirect:/login";
-//        }
         return "redirect:/login";
     }
 
