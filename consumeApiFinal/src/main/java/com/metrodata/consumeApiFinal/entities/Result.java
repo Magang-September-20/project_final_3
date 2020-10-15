@@ -49,6 +49,26 @@ public class Result implements Serializable {
         this.id = id;
     }
 
+    public Result(Integer id, Integer grade, String note, Boolean isPassed) {
+        this.id = id;
+        this.grade = grade;
+        this.note = note;
+        this.isPassed = isPassed;
+    }
+
+    public Result(ScheduleTest scheduleTest) {
+        this.scheduleTest = scheduleTest;
+    }
+
+    public Result(Integer id, Integer grade, String note, Boolean isPassed, ScheduleTest scheduleTest) {
+        this.id = id;
+        this.grade = grade;
+        this.note = note;
+        this.isPassed = isPassed;
+        this.scheduleTest = scheduleTest;
+    }
+    
+    
     public Integer getId() {
         return id;
     }

@@ -21,8 +21,10 @@ public class ScheduleService {
     ScheduleRepository scheduleRepository;
     
     public List<ScheduleTest>getAll(){
-        
         return scheduleRepository.findAll();
     }
     
+    public ScheduleTest getByEmail(String email){
+        return scheduleRepository.getByEmail(email);
+    }
 }

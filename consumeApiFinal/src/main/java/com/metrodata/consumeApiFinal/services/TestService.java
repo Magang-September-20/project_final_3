@@ -17,10 +17,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TestService {
+
     @Autowired
     TestRepository testRepository;
-       public List<Test> getAll(){
-       
-           return testRepository.findAll();
-       }
+
+    public List<Test> getAll() {
+        return testRepository.findAll();
+    }
+    
+    public Test getById(int id){
+        return testRepository.findById(id).get();
+    }
 }

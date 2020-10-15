@@ -86,6 +86,31 @@ public class ScheduleTest implements Serializable {
         this.location = location;
     }
 
+    public ScheduleTest(Integer id, Date date, Date startTime, Date endTime, String location, ProgramApply apply, User pic, Test test, Result result) {
+        this.id = id;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.location = location;
+        this.apply = apply;
+        this.pic = pic;
+        this.test = test;
+        this.result = result;
+    }
+
+    public ScheduleTest(Integer id, Date date, Date startTime, Date endTime, String location, ProgramApply apply, User pic, Test test) {
+        this.id = id;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.location = location;
+        this.apply = apply;
+        this.pic = pic;
+        this.test = test;
+    }
+    
+    
+
     public Integer getId() {
         return id;
     }

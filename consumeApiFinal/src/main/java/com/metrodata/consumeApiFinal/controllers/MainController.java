@@ -70,7 +70,6 @@ public class MainController {
     LoginService service;
     @Autowired
     RegisterService registerService;
-
     @Autowired
     UserService userService;
     @Autowired
@@ -221,7 +220,6 @@ public class MainController {
         } else {
             return "redirect:/login";
         }
-
     }
 
     @GetMapping("/schedule")
@@ -229,8 +227,15 @@ public class MainController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
+//        ScheduleTest scheduleTest = new ScheduleTest();
+//        scheduleTest = ss.getByEmail(auth.getName());
+        try {
+            System.out.println(ss.getByEmail(auth.getName()));
+        } catch (Exception e) {
+        }
+
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-            model.addAttribute("schedules", ss.getAll());
+//            model.addAttribute("schedules", ss.getByEmail(auth.getName()));
             return "schedule";
         } else {
             return "redirect:/login";
@@ -280,31 +285,19 @@ public class MainController {
         } else {
             return "redirect:/login";
         }
-
-//        @PostMapping("/save")
-//        public String save(Model model) {
-//        scheduleTestService.save(scheduleTest);
-//            return "redirect:/";
-//        }
     }
 
 
     @PostMapping("/saveSchedule")
-    public String save(ScheduleTest scheduleTest) throws ParseException {
-     
-//        model.addAttribute("scheduleTest", new ScheduleTest());
-//        scheduleTestService.save(scheduleTest);
-//        System.out.println(scheduleTest.getDate());
-//        System.out.println(scheduleTest.getStartTime());
-//        System.out.println(scheduleTest.getPic());
-//        System.out.println(scheduleTest.getEndTime());
-//        System.out.println(scheduleTest.getApply());
-//        System.out.println(scheduleTest);
-        System.out.println(scheduleTest.getDate());
-        System.out.println(scheduleTest.getStartTime());
-        System.out.println(scheduleTest.getPic());
-        System.out.println(scheduleTest.getApply());
-        scheduleTestService.save(scheduleTest);
+    public String save(ScheduleTestInput input) throws ParseException {
+        System.out.println(input.getDate());
+        System.out.println(input.getStartTime());
+        System.out.println(input.getEndTime());
+        System.out.println(input.getLocation());
+        System.out.println(input.getTest());
+        System.out.println(input.getApply());
+        System.out.println(input.getPic());
+        scheduleTestService.save(input);
         return "redirect:/showAllSchedule";
     }
 }
