@@ -36,29 +36,32 @@ public class ScheduleTestService {
     UserService us;
     @Autowired
     TestService ts;
+    @Autowired
+    ResultService rs;
 
-    public ScheduleTest save(ScheduleTestInput scheduleTestInput) throws ParseException {
+    public void save(ScheduleTestInput scheduleTestInput) throws ParseException {
+        DateFormat df = new SimpleDateFormat("hh:mm");
+        DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         ProgramApply programApply = new ProgramApply(scheduleTestInput.getApply());
         User pic = us.getById(scheduleTestInput.getPic());
         Test test = ts.getById(scheduleTestInput.getTest());
-//        Result result = new Result(scheduleTestRepository.getMaxId() + 1, Integer.SIZE, "aaa", Boolean.FALSE,new ScheduleTest());
-//        result.setId(scheduleTestRepository.getMaxId()+1);
-//        result.setGrade(null);
-        System.out.println(scheduleTestRepository.getMaxId() + 1);
-
-        DateFormat df = new SimpleDateFormat("hh:mm");
-        DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date dutyDay = (java.util.Date) simpleDateFormat.parse(scheduleTestInput.getDate());
         java.util.Date timeStart = (java.util.Date) df.parse(scheduleTestInput.getStartTime());
         java.util.Date timeEnd = (java.util.Date) df.parse(scheduleTestInput.getEndTime());
         ScheduleTest test1 = new ScheduleTest(Integer.SIZE, dutyDay, timeStart, timeEnd, scheduleTestInput.getLocation(), programApply, pic, test);
-//        Result result = new Result();
-//        result.setGrade(50);
-//        result.setIsPassed(false);
-//        result.setNote("mboh tae");
-//        result.setScheduleTest(test1);
-//        test1.setResult(result);
-        return scheduleTestRepository.save(test1);
+        
+        Result result = new Result();
+        result.setId(scheduleTestRepository.getMaxId());
+        result.setGrade(0);
+        result.setIsPassed(false);
+        result.setNote("belum di isi");
+        
+        result.setScheduleTest(test1);
+        test1.setResult(result);
+        
+//        rs.saveResult(result);
+        scheduleTestRepository.save(test1);
+
     }
 }
