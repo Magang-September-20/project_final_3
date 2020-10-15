@@ -27,7 +27,10 @@ public class ScheduleService {
         
         return scheduleRepository.getAccountByEmail(email);
     }
-    
+    public List<ScheduleTest> getSchedule(String email){
+        
+        return scheduleRepository.getScheduleHr(email);
+    }
 //    public ScheduleTest getByEmail(String email){
 //        return scheduleRepository.getByEmail(email);
 //    }

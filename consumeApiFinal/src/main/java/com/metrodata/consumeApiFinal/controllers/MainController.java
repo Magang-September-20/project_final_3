@@ -89,7 +89,7 @@ public class MainController {
 //        model.addAttribute("user", new LoginInput());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-          
+
             return "redirect:/dashboard";
         } else {
             return "login";
@@ -193,7 +193,7 @@ public class MainController {
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("programs", pr.getAll());
-            return "program"; 
+            return "program";
         } else {
             return "redirect:/login";
         }
@@ -206,17 +206,18 @@ public class MainController {
         System.out.println(auth.getAuthorities());
 //        ScheduleTest scheduleTest = new ScheduleTest();
 //        scheduleTest = ss.getByEmail(auth.getName());
-  
+
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
 //            model.addAttribute("schedules", ss.getByEmail(auth.getName()));
             model.addAttribute("schedules", ss.getEmail(auth.getName()));
-           
+
             return "schedule";
         } else {
             return "redirect:/login";
         }
 
     }
+
     @GetMapping("/profile")
     public String profil(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -224,7 +225,7 @@ public class MainController {
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("profile", userService.getProfil(auth.getName()));
-           
+
             return "profile";
         } else {
             return "redirect:/login";
@@ -271,6 +272,45 @@ public class MainController {
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("examp", test.getAll());
             return "examp";
+        } else {
+            return "redirect:/login";
+        }
+    }
+
+    @GetMapping("hr")
+    public String hr(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        System.out.println(auth.getAuthorities());
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+//            model.addAttribute("examp", test.getAll());
+            return "hr";
+        } else {
+            return "redirect:/login";
+        }
+    }
+
+    @GetMapping("scheduleHr")
+    public String ScheduleHr(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        System.out.println(auth.getAuthorities());
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+            model.addAttribute("scheduleTestHr", ss.getSchedule(auth.getName()));
+            return "scheduleHr";
+        } else {
+            return "redirect:/login";
+        }
+    }
+
+    @GetMapping("profileHr")
+    public String ProfileHr(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        System.out.println(auth.getAuthorities());
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+            model.addAttribute("profile", userService.getProfil(auth.getName()));
+            return "profileHr";
         } else {
             return "redirect:/login";
         }
