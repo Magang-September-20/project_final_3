@@ -160,7 +160,8 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
     -moz-box-shadow: inherit;
 }
 .header .img-logo {
-    margin-top: 22px;
+    margin-top: 10px;
+    width: 60%;
 }
 .header .text-logo{
 	margin-top:30px;
@@ -387,7 +388,7 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
     width: 118px;
     height: 101%;
     transform: skew(-26deg);
-    background: #f3a712;
+    background: #007dc5;
     z-index: -1;
 }
 .right-bar ul li {
@@ -2099,10 +2100,11 @@ p.has-large-font-size {
     border-right: 10px solid transparent;
 }
 .hero-slider .hero-text h1 {
-    color: #2E2751;
+    color: #fff;
     font-size: 50px;
     font-weight: bold;
     line-height: 65px;
+    text-shadow: 5px 3px #2a2250;
     margin-bottom: 20px;
     padding-bottom: 20px;
 }
@@ -2460,7 +2462,7 @@ p.has-large-font-size {
 .single-feature p{
 	font-size: 14px;
 }.bizwheel-btn.theme-2 {
-    background: #f3a712;
+    background: #007dc5;
     color: #fff;
     padding: 15px 32px;
 }
