@@ -337,6 +337,18 @@ public class MainController {
             return "redirect:/login";
         }
     }
+    @GetMapping("programApply")
+    public String ProgramApply(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        System.out.println(auth.getAuthorities());
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+
+            return "programApply";
+        } else {
+            return "redirect:/login";
+        }
+    }
 
     @PostMapping("/saveSchedule")
     public String save(ScheduleTestInput input) throws ParseException {
