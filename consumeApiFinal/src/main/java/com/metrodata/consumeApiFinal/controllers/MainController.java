@@ -6,12 +6,14 @@
 package com.metrodata.consumeApiFinal.controllers;
 
 import com.metrodata.consumeApiFinal.entities.LoginInput;
+import com.metrodata.consumeApiFinal.entities.ProgramApply;
 import com.metrodata.consumeApiFinal.entities.ScheduleTest;
 import com.metrodata.consumeApiFinal.entities.dao.RegisterInput;
 import com.metrodata.consumeApiFinal.entities.dao.ScheduleTestInput;
 import com.metrodata.consumeApiFinal.entities.rest.LoginOutput;
 import com.metrodata.consumeApiFinal.services.EducationService;
 import com.metrodata.consumeApiFinal.services.LoginService;
+import com.metrodata.consumeApiFinal.services.ProgramApplyService;
 import com.metrodata.consumeApiFinal.services.ProgramService;
 import com.metrodata.consumeApiFinal.services.RegisterService;
 import com.metrodata.consumeApiFinal.services.ScheduleService;
@@ -61,6 +63,9 @@ public class MainController {
 
     @Autowired
     ScheduleTestService scheduleTestService;
+
+    @Autowired
+    ProgramApplyService programApplyService;
 
     @GetMapping(value = {"", "/index"})
     public String index() {
@@ -137,18 +142,16 @@ public class MainController {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             System.out.println(auth.getName());
             System.out.println(auth.getAuthorities());
-            
-            if(auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
+
+            if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
                 return "redirect:/admin";
-            }
-            else if(auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_HR"))){
+            } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_HR"))) {
                 return "redirect:/hr";
-            }
-            else{
+            } else {
                 System.out.println(auth.getAuthorities());
                 return "redirect:/user";
             }
-            
+
 //            return "redirect:/dashboard";
         } else {
             return "redirect:/login";
@@ -173,7 +176,7 @@ public class MainController {
         } else {
             return "redirect:/login";
         }
-    }   
+    }
 
     @GetMapping("employees")
     public String employees(Model model) {
@@ -247,6 +250,9 @@ public class MainController {
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("schedules", ss.getAll());
             model.addAttribute("profile", userService.getProfil(auth.getName()));
+            model.addAttribute("hr", userService.getHr());
+            model.addAttribute("user", userService.getUser());
+            model.addAttribute("test", test.getAll());
 //            model.addAttribute("scheduleTest", new ScheduleTest());
 //            model.addAttribute("pics", userService.getEmployee());
 //            model.addAttribute("employees", userService.getEmployee());
@@ -341,14 +347,47 @@ public class MainController {
             return "redirect:/login";
         }
     }
+
     @GetMapping("programApply")
-    public String ProgramApply(Model model) {
+    public String ProgramApply(Model model, @Validated ProgramApply programApply) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+            model.addAttribute("apply", programApplyService.getApply(auth.getName()));
+            model.addAttribute("iduser", programApplyService.getId(auth.getName()));
+            model.addAttribute("applys", new ProgramApply());
+            model.addAttribute("program", pr.getAll());
 
+            System.out.println(programApplyService.getId(auth.getName()));
             return "programApply";
+        } else {
+            return "redirect:/login";
+        }
+    }
+
+    @PostMapping("/saveApply")
+    public String saveApply(Model model, @Validated ProgramApply programApply) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        System.out.println(auth.getAuthorities());
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+//            int as = ((Integer)programApply.getProgram().;
+            System.out.println("PUkii");
+//            int ass = (Integer.parseInt(programApply.getProgram().toString()));
+//            programApply.getCandidate().setId(9);
+            System.out.println(programApply.getProgram());
+            System.out.println(programApply.getHr());
+            System.out.println(programApply.getNote());
+            System.out.println(programApply.getCandidate());
+
+//            System.out.println(ass);
+//            pr.getHR(1);
+            
+            
+//            model.addAttribute("apply", programApplyService.getApply(auth.getName()));
+            programApplyService.save(programApply);
+            return "redirect:/programApply";
         } else {
             return "redirect:/login";
         }
@@ -381,7 +420,7 @@ public class MainController {
 //        scheduleTestService.save(scheduleTest);
         return "redirect:/showAllSchedule";
     }
-    
+
     private static Collection<? extends GrantedAuthority> getAuthorities(List<String> roles) {
         final List<SimpleGrantedAuthority> authorities = new LinkedList<>();
         for (String role : roles) {

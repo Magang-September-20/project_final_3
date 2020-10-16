@@ -65,7 +65,7 @@
                         <i class="fas fa-fw fa-table"></i>
                         <span>Schedule</span></a>
                 </li>
-                    <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" th:href="programApply">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Apply Program</span></a>
@@ -96,12 +96,105 @@
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-                        <!--conten di sini-->
 
+                        <div align="center">Program Apply</div>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#personModal" onclick=""> 
+                            Apply             </button></td>
+                        <!--conten di sini-->
+                        <table  class="table table-bordered" id="PersonTabel" width="25%" cellspacing="0">
+                            <thead>
+                                <tr>
+
+                                    <th> Full Name</th>
+                                    <th> Note</th>
+                                    <th> Program Apply</th>
+
+
+
+                                    <!--<th> PIC</th>-->
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each = "as : ${apply}">
+
+                                    <td th:text = "${as.candidate.fullName}"></td>
+                                    <td th:text = "${as.note}"></td>
+                                    <td th:text = "${as.program.name}"></td>
+
+
+
+
+                                </tr>
+                            </tbody>
+                        </table>
 
                     </div>
                     <!-- End of Content Wrapper -->
 
+                </div>
+
+                <div th:fragment="modal" class="modal fade" id="personModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Add People</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <!--<form id="insertForm" th:action="@{save}" th:object="${person}" method="POST">-->
+                            <form id="insertForm" th:object="${applys}" th:action="@{/saveApply}" method="POST">
+
+                                <div class="modal-body">
+
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Example select</label>
+                                        <select class="form-control" id="exampleFormControlSelect1" th:field="*{program}" >
+                                            <option th:each = "as : ${program}" th:value="${as.id}" th:text="${as.name}"  >  </option>
+
+                                        </select>
+                                    </div>
+                                    <div th:each = "as : ${program}" >
+                                           <input type="hidden" th:value="${as.hr}" th:field="*{hr}">
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <div class="col-10">
+                                            <input placeholder="Note" class="form-control" type="text"  id="note" th:field="*{note}" >
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" >
+
+<!--                                        <div class="col-10" >
+                                            <input th:each = "as : ${iduser}"  class="form-control" type="hidden" th:value="${id}" id="canidate" th:field="*{candidate}"    >
+
+
+                                        </div>-->
+                                    </div>
+<!--                                                                        <div class="form-group row">
+                                    
+                                                                            <div class="col-10">
+                                                                                <input  class="form-control" type="hidden"  id="pic" th:field="*{hr}" th:value="${}">
+                                    
+                                                                            </div>
+                                                                        </div>-->
+
+
+
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary" value="Apply" name="Apply" >Apply</button>>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <!-- End of Page Wrapper -->
 
@@ -125,6 +218,7 @@
                 <!-- Page level custom scripts -->
                 <script src="js/demo/chart-area-demo.js"></script>
                 <script src="js/demo/chart-pie-demo.js"></script>
+
                 <!-- <div th:replace="fragments/header :: header"></div>
                   <div th:replace="fragments/footer :: footer"></div>-->
                 </body>

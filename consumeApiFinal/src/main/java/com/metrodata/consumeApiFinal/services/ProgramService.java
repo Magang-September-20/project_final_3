@@ -24,4 +24,8 @@ public class ProgramService {
     
         return programRepository.findAll();
     }
+    public Integer getHR(int id){
+    
+    return programRepository.getHR(id);
+    }
 }

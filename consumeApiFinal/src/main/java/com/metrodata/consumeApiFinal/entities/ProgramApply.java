@@ -96,6 +96,9 @@ public class ProgramApply implements Serializable {
     public void setHr(User hr) {
         this.hr = hr;
     }
+//    public void setHr(int hr) {
+//        this.hr = hr;
+//    }
 
     public Program getProgram() {
         return program;
