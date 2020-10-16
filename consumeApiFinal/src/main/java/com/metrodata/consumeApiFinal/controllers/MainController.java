@@ -318,7 +318,6 @@ public class MainController {
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("profile", userService.getProfil(auth.getName()));
             model.addAttribute("inputExam", ss.getTest(auth.getName()));
-//            model.addAttribute("inputExam", ss.getSchedule(auth.getName()));
             return "inputExam";
         } else {
             return "redirect:/login";
