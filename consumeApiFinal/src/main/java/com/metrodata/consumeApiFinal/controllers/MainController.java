@@ -316,6 +316,7 @@ public class MainController {
         System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+            model.addAttribute("profile", userService.getProfil(auth.getName()));
             model.addAttribute("inputExam", ss.getTest(auth.getName()));
 //            model.addAttribute("inputExam", ss.getSchedule(auth.getName()));
             return "inputExam";
