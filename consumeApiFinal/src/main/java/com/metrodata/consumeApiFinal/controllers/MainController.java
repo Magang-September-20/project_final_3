@@ -137,7 +137,19 @@ public class MainController {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             System.out.println(auth.getName());
             System.out.println(auth.getAuthorities());
-            return "redirect:/dashboard";
+            
+            if(auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
+                return "redirect:/admin";
+            }
+            else if(auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_HR"))){
+                return "redirect:/hr";
+            }
+            else{
+                System.out.println(auth.getAuthorities());
+                return "redirect:/user";
+            }
+            
+//            return "redirect:/dashboard";
         } else {
             return "redirect:/login";
         }
@@ -161,15 +173,7 @@ public class MainController {
         } else {
             return "redirect:/login";
         }
-    }
-
-    private static Collection<? extends GrantedAuthority> getAuthorities(List<String> roles) {
-        final List<SimpleGrantedAuthority> authorities = new LinkedList<>();
-        for (String role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role));
-        }
-        return authorities;
-    }
+    }   
 
     @GetMapping("employees")
     public String employees(Model model) {
@@ -376,5 +380,13 @@ public class MainController {
 //        System.out.println(scheduleTest.getApply());
 //        scheduleTestService.save(scheduleTest);
         return "redirect:/showAllSchedule";
+    }
+    
+    private static Collection<? extends GrantedAuthority> getAuthorities(List<String> roles) {
+        final List<SimpleGrantedAuthority> authorities = new LinkedList<>();
+        for (String role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role));
+        }
+        return authorities;
     }
 }
