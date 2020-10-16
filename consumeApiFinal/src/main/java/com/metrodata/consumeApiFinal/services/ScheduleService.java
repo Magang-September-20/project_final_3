@@ -31,6 +31,10 @@ public class ScheduleService {
         
         return scheduleRepository.getScheduleHr(email);
     }
+    
+       public List<ScheduleTest> getTest(String email){
+    
+    return scheduleRepository.getResult(email);}
 //    public ScheduleTest getByEmail(String email){
 //        return scheduleRepository.getByEmail(email);
 //    }
