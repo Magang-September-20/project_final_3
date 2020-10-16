@@ -10,6 +10,7 @@ import com.metrodata.consumeApiFinal.entities.ScheduleTest;
 import com.metrodata.consumeApiFinal.entities.dao.RegisterInput;
 import com.metrodata.consumeApiFinal.entities.dao.ScheduleTestInput;
 import com.metrodata.consumeApiFinal.entities.rest.LoginOutput;
+import com.metrodata.consumeApiFinal.services.EducationService;
 import com.metrodata.consumeApiFinal.services.LoginService;
 import com.metrodata.consumeApiFinal.services.ProgramService;
 import com.metrodata.consumeApiFinal.services.RegisterService;
@@ -52,6 +53,8 @@ public class MainController {
     ProgramService pr;
     @Autowired
     ScheduleService ss;
+    @Autowired
+    EducationService es;
 
     @Autowired
     TestService test;
@@ -223,6 +226,7 @@ public class MainController {
 //        System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+            model.addAttribute("profile1", es.getEducation(auth.getName()));
             model.addAttribute("profile", userService.getProfil(auth.getName()));
 
             return "profile";
