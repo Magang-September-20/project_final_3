@@ -39,6 +39,8 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
+            <div align="center"><h1>Schedule</h1></div>
+
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#personModal" onclick=""> 
                 Create Schedule
             </button>
@@ -140,7 +142,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-2 col-form-label">Test</label>
-                           <select class="form-control" id="test" th:field="*{test}"  >
+                            <select class="form-control" id="test" th:field="*{test}"  >
                                 <option th:each = "as : ${test}"  th:text="${as.name}"  id="test" th:value="${as.id}"></option>
 
                             </select>
