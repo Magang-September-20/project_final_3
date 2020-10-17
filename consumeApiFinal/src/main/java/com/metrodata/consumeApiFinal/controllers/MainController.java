@@ -6,6 +6,7 @@
 package com.metrodata.consumeApiFinal.controllers;
 
 import com.metrodata.consumeApiFinal.entities.LoginInput;
+import com.metrodata.consumeApiFinal.entities.Program;
 import com.metrodata.consumeApiFinal.entities.ProgramApply;
 import com.metrodata.consumeApiFinal.entities.ScheduleTest;
 import com.metrodata.consumeApiFinal.entities.dao.RegisterInput;
@@ -362,6 +363,8 @@ public class MainController {
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("apply", programApplyService.getApply(auth.getName()));
             model.addAttribute("iduser", programApplyService.getId(auth.getName()));
+//            ProgramApply applyss = new ProgramApply(); 
+//            applyss.set
             model.addAttribute("applys", new ProgramApply());
             model.addAttribute("program", pr.getAll());
 
@@ -380,6 +383,8 @@ public class MainController {
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
 //            int as = ((Integer)programApply.getProgram().;
             System.out.println("PUkii");
+            programApply.setHr(new com.metrodata.consumeApiFinal.entities.User(pr.getHR(programApply.getProgram().getId())));
+            programApply.setCandidate(new com.metrodata.consumeApiFinal.entities.User(programApplyService.getId(auth.getName())));
 //            int ass = (Integer.parseInt(programApply.getProgram().toString()));
 //            programApply.getCandidate().setId(9);
             System.out.println(programApply.getProgram());
