@@ -236,7 +236,7 @@ public class MainController {
 
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
 //            model.addAttribute("schedules", ss.getByEmail(auth.getName()));
-            model.addAttribute("schedules", ss.getEmail(auth.getName()));
+            model.addAttribute("schedules", ss.getEmail(Integer.parseInt(auth.getName())));
 
             return "schedule";
         } else {
