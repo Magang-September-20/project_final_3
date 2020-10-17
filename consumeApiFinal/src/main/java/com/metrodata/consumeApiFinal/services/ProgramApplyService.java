@@ -17,17 +17,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProgramApplyService {
-    @Autowired ProgramApplyRepository programApplyRepository;
-    public List<ProgramApply>getApply(String email){
-    return programApplyRepository.getApply(email);
+
+    @Autowired
+    ProgramApplyRepository programApplyRepository;
+
+    public List<ProgramApply> getApply(int id) {
+        return programApplyRepository.getApply(id);
     }
-    
-    public ProgramApply save(ProgramApply programApply){
-    
+
+    public ProgramApply save(ProgramApply programApply) {
         return programApplyRepository.save(programApply);
-    }
-    public int getId(String email){
-    
-        return programApplyRepository.getid(email);
     }
 }

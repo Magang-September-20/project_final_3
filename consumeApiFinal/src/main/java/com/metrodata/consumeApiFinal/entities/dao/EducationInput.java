@@ -28,7 +28,7 @@ public class EducationInput {
         this.major = major;
         this.university = university;
     }
-
+    
 
     
     

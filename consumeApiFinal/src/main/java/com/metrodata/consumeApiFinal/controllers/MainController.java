@@ -112,7 +112,7 @@ public class MainController {
     public String user(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-            model.addAttribute("profile", userService.getProfil(auth.getName()));
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("major", ms.getAllMajor());
             model.addAttribute("univ", us.getAll());
             model.addAttribute("EducationInput",new EducationInput());
@@ -121,13 +121,24 @@ public class MainController {
             return "login";
         }
     }
+    
+    @GetMapping("/educationForm")
+    public String educationForm(EducationInput input) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        int idTemp = Integer.parseInt(auth.getName());
+        System.out.println(input.getMajor());
+        System.out.println(input.getIpk());
+        System.out.println(input.getStatus());
+        es.save(input,idTemp);
+        return "redirect:/user";
+    }
 
     @GetMapping("/admin")
     public String admin(Model model) {
 //        model.addAttribute("user", new LoginInput());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-            model.addAttribute("profile", userService.getProfil(auth.getName()));
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             return "admin";
         } else {
             return "login";
@@ -178,7 +189,7 @@ public class MainController {
         System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-            model.addAttribute("profile", userService.getProfil(auth.getName()));
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             return "dashboard";
         } else {
             return "redirect:/login";
@@ -191,7 +202,7 @@ public class MainController {
         System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-            model.addAttribute("profile", userService.getProfil(auth.getName()));
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("employees", userService.getEmployee());
             return "employees";
         } else {
@@ -208,7 +219,7 @@ public class MainController {
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("programs", pr.getAll());
             model.addAttribute("profile",userService.getById(Integer.parseInt(auth.getName())));
-//            model.addAttribute("profile", userService.getProfil(auth.getName()));
+//            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             return "program";
         } else {
             return "redirect:/login";
@@ -240,8 +251,8 @@ public class MainController {
 //        System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-            model.addAttribute("profile1", es.getEducation(auth.getName()));
-            model.addAttribute("profile", userService.getProfil(auth.getName()));
+            model.addAttribute("profile1", es.getById(Integer.parseInt(auth.getName())));
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
 
             return "profile";
         } else {
@@ -257,7 +268,7 @@ public class MainController {
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("schedules", ss.getAll());
-            model.addAttribute("profile", userService.getProfil(auth.getName()));
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("hr", userService.getHr());
             model.addAttribute("user", userService.getUser());
             model.addAttribute("test", test.getAll());
@@ -275,7 +286,7 @@ public class MainController {
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("applicants", userService.getUser());
-            model.addAttribute("profile", userService.getProfil(auth.getName()));
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             return "applicant";
         } else {
             return "redirect:/login";
@@ -290,7 +301,7 @@ public class MainController {
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("examp", test.getAll());
-            model.addAttribute("profile", userService.getProfil(auth.getName()));
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             return "examp";
         } else {
             return "redirect:/login";
@@ -303,7 +314,7 @@ public class MainController {
         System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-            model.addAttribute("profile", userService.getProfil(auth.getName()));
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             return "hr";
         } else {
             return "redirect:/login";
@@ -317,7 +328,7 @@ public class MainController {
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("scheduleTestHr", ss.getSchedule(auth.getName()));
-            model.addAttribute("profile", userService.getProfil(auth.getName()));
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             return "scheduleHr";
         } else {
             return "redirect:/login";
@@ -330,7 +341,7 @@ public class MainController {
         System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-            model.addAttribute("profile", userService.getProfil(auth.getName()));
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("inputExam", ss.getTest(auth.getName()));
             return "inputExam";
         } else {
@@ -344,8 +355,8 @@ public class MainController {
         System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-            model.addAttribute("profile", userService.getProfil(auth.getName()));
-            model.addAttribute("profile", userService.getProfil(auth.getName()));
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             return "profileHr";
         } else {
             return "redirect:/login";
@@ -358,14 +369,14 @@ public class MainController {
         System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-            model.addAttribute("apply", programApplyService.getApply(auth.getName()));
-            model.addAttribute("iduser", programApplyService.getId(auth.getName()));
+            model.addAttribute("apply", programApplyService.getApply(Integer.parseInt(auth.getName())));
+            model.addAttribute("iduser", Integer.parseInt(auth.getName()));
 //            ProgramApply applyss = new ProgramApply(); 
 //            applyss.set
             model.addAttribute("applys", new ProgramApply());
             model.addAttribute("program", pr.getAll());
 
-            System.out.println(programApplyService.getId(auth.getName()));
+//            System.out.println(programApplyService.getId(auth.getName()));
             return "programApply";
         } else {
             return "redirect:/login";
@@ -381,17 +392,13 @@ public class MainController {
 //            int as = ((Integer)programApply.getProgram().;
             System.out.println("PUkii");
             programApply.setHr(new com.metrodata.consumeApiFinal.entities.User(pr.getHR(programApply.getProgram().getId())));
-            programApply.setCandidate(new com.metrodata.consumeApiFinal.entities.User(programApplyService.getId(auth.getName())));
-//            int ass = (Integer.parseInt(programApply.getProgram().toString()));
-//            programApply.getCandidate().setId(9);
+            programApply.setCandidate(new com.metrodata.consumeApiFinal.entities.User(Integer.parseInt(auth.getName())));
+
             System.out.println(programApply.getProgram());
             System.out.println(programApply.getHr());
             System.out.println(programApply.getNote());
             System.out.println(programApply.getCandidate());
 
-//            System.out.println(ass);
-//            pr.getHR(1);
-//            model.addAttribute("apply", programApplyService.getApply(auth.getName()));
             programApplyService.save(programApply);
             return "redirect:/programApply";
         } else {
@@ -412,15 +419,6 @@ public class MainController {
         return "redirect:/showAllSchedule";
     }
     
-    @GetMapping("/educationForm")
-    public String educationForm(EducationInput input) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        int idTemp = Integer.parseInt(auth.getName());
-        es.save(input,idTemp);
-        return "redirect:/user";
-    }
-    
-
     private static Collection<? extends GrantedAuthority> getAuthorities(List<String> roles) {
         final List<SimpleGrantedAuthority> authorities = new LinkedList<>();
         for (String role : roles) {

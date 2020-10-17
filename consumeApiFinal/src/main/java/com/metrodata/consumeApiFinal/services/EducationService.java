@@ -34,6 +34,10 @@ public class EducationService {
         return er.getEducation(email);
     }
     
+    public Education getById(int id){
+        return er.findById(id).get();
+    }
+    
     public void save(EducationInput input,int idTemp){
         Major major = ms.findbyid(input.getMajor());
         University univ = us.findbyid(input.getUniversity());
@@ -41,6 +45,12 @@ public class EducationService {
         Education edu = new Education(Integer.SIZE, input.getDegree(), input.getStatus(), input.getIpk(),major,univ);
         User user = userService.getById(idTemp);
         edu.setUser(user);
+        
+        System.out.println(input.getDegree());
+        System.out.println(input.getIpk());
+        System.out.println(input.getStatus());
+        System.out.println(input.getMajor());
+        
         er.save(edu);
     }
 }

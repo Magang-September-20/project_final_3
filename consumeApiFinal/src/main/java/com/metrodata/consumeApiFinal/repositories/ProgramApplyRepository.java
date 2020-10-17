@@ -18,8 +18,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProgramApplyRepository extends JpaRepository<ProgramApply, Integer>{
     
-    @Query(value="SELECT * FROM tb_tr_program_apply join tb_m_user on tb_tr_program_apply.candidate=tb_m_user.id WHERE tb_m_user.email = ?1", nativeQuery=true)
-    public List<ProgramApply> getApply(String email);
+    @Query(value="SELECT * FROM tb_tr_program_apply join tb_m_user on tb_tr_program_apply.candidate=tb_m_user.id WHERE tb_m_user.id = ?1", nativeQuery=true)
+    public List<ProgramApply> getApply(int id);
     
     @Query(value="SELECT * from tb_m_user where email =?1 LIMIT 1", nativeQuery=true)
     public Integer getid(String email);
