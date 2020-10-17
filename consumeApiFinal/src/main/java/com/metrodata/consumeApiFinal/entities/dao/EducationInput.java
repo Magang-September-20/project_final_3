@@ -17,6 +17,10 @@ public class EducationInput {
     int ipk, major, university;
     MultipartFile cv, photo;
 
+    public EducationInput() {
+    }
+    
+    
     public EducationInput(String degree, String status, int ipk, int major, int university) {
         this.degree = degree;
         this.status = status;

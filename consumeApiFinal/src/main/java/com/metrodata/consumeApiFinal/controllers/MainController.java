@@ -115,6 +115,7 @@ public class MainController {
             model.addAttribute("profile", userService.getProfil(auth.getName()));
             model.addAttribute("major", ms.getAllMajor());
             model.addAttribute("univ", us.getAll());
+            model.addAttribute("EducationInput",new EducationInput());
             return "user";
         } else {
             return "login";
