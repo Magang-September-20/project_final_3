@@ -66,6 +66,17 @@ public class Education implements Serializable {
         this.ipk = ipk;
     }
 
+    public Education(Integer id, String degree, String status, float ipk, Major major, University university) {
+        this.id = id;
+        this.degree = degree;
+        this.status = status;
+        this.ipk = ipk;
+        this.major = major;
+        this.university = university;
+    }
+    
+    
+
     public Integer getId() {
         return id;
     }

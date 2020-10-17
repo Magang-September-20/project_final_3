@@ -6,13 +6,12 @@
 package com.metrodata.consumeApiFinal.controllers;
 
 import com.metrodata.consumeApiFinal.entities.LoginInput;
-import com.metrodata.consumeApiFinal.entities.Program;
 import com.metrodata.consumeApiFinal.entities.ProgramApply;
 import com.metrodata.consumeApiFinal.entities.ScheduleTest;
+import com.metrodata.consumeApiFinal.entities.dao.EducationInput;
 import com.metrodata.consumeApiFinal.entities.dao.RegisterInput;
 import com.metrodata.consumeApiFinal.entities.dao.ScheduleTestInput;
 import com.metrodata.consumeApiFinal.entities.rest.LoginOutput;
-import com.metrodata.consumeApiFinal.repositories.UniversityRepository;
 import com.metrodata.consumeApiFinal.services.EducationService;
 import com.metrodata.consumeApiFinal.services.LoginService;
 import com.metrodata.consumeApiFinal.services.MajorService;
@@ -142,7 +141,7 @@ public class MainController {
         System.out.println(output);
 
         if (output.getStatus().equalsIgnoreCase("success")) {
-            User user = new User(output.getUser().getEmail(), "", getAuthorities(output.getUser().getRoles()));
+            User user = new User(output.getUser().getId()+"", "", getAuthorities(output.getUser().getRoles()));
             PreAuthenticatedAuthenticationToken authenticationToken = new PreAuthenticatedAuthenticationToken(user, "", user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
@@ -207,7 +206,8 @@ public class MainController {
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("programs", pr.getAll());
-            model.addAttribute("profile", userService.getProfil(auth.getName()));
+            model.addAttribute("profile",userService.getById(Integer.parseInt(auth.getName())));
+//            model.addAttribute("profile", userService.getProfil(auth.getName()));
             return "program";
         } else {
             return "redirect:/login";
@@ -260,9 +260,6 @@ public class MainController {
             model.addAttribute("hr", userService.getHr());
             model.addAttribute("user", userService.getUser());
             model.addAttribute("test", test.getAll());
-//            model.addAttribute("scheduleTest", new ScheduleTest());
-//            model.addAttribute("pics", userService.getEmployee());
-//            model.addAttribute("employees", userService.getEmployee());
             return "showAllSchedule";
         } else {
             return "redirect:/login";
@@ -306,7 +303,6 @@ public class MainController {
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("profile", userService.getProfil(auth.getName()));
-//            model.addAttribute("examp", test.getAll());
             return "hr";
         } else {
             return "redirect:/login";
@@ -412,23 +408,17 @@ public class MainController {
         System.out.println(input.getApply());
         System.out.println(input.getPic());
         scheduleTestService.save(input);
-//    public String save(ScheduleTest scheduleTest) throws ParseException {
-//
-////        model.addAttribute("scheduleTest", new ScheduleTest());
-////        scheduleTestService.save(scheduleTest);
-////        System.out.println(scheduleTest.getDate());
-////        System.out.println(scheduleTest.getStartTime());
-////        System.out.println(scheduleTest.getPic());
-////        System.out.println(scheduleTest.getEndTime());
-////        System.out.println(scheduleTest.getApply());
-////        System.out.println(scheduleTest);
-//        System.out.println(scheduleTest.getDate());
-//        System.out.println(scheduleTest.getStartTime());
-//        System.out.println(scheduleTest.getPic());
-//        System.out.println(scheduleTest.getApply());
-//        scheduleTestService.save(scheduleTest);
         return "redirect:/showAllSchedule";
     }
+    
+    @GetMapping("/educationForm")
+    public String educationForm(EducationInput input) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        int idTemp = Integer.parseInt(auth.getName());
+        es.save(input,idTemp);
+        return "redirect:/user";
+    }
+    
 
     private static Collection<? extends GrantedAuthority> getAuthorities(List<String> roles) {
         final List<SimpleGrantedAuthority> authorities = new LinkedList<>();

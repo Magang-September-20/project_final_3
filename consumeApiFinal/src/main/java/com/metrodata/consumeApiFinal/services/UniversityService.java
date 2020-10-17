@@ -22,4 +22,8 @@ public class UniversityService {
     public List<University> getAll(){
         return ur.findAll();
     }
+    
+    public University findbyid(int id){
+        return ur.findById(id).get();
+    }
 }

@@ -113,13 +113,13 @@
                 </div>
                 <!--<form id="insertForm" th:action="@{save}" th:object="${person}" method="POST">-->
                 <form id="insertForm" th:action="@{/saveSchedule}"  th:object="${scheduleTest}" method="POST">
-
+ 
                     <div class="modal-body">
 
                         <div class="form-group row">
                             <label for="example-date-input" class="col-2 col-form-label">Date</label>
                             <div class="col-10">
-                                <input class="form-control" type="date"  th:field="*{date}" th:value="*{date}"id="date" >
+                                <input class="form-control" type="date"  th:field="*{date}" th:value="*{date}" id="date" >
                             </div>
                         </div>
                         <div class="form-group row">

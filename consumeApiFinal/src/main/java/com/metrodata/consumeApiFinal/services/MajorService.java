@@ -23,4 +23,8 @@ public class MajorService {
     public List<Major> getAllMajor(){
         return mr.findAll();
     }
+    
+    public Major findbyid(int id){
+        return mr.findById(id).get();
+    }
 }

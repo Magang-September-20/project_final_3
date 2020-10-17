@@ -30,7 +30,7 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.html">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-laugh-wink"></i>
                     </div>
@@ -42,7 +42,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="dashboard.html">
+                    <a class="nav-link" href="#">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -100,10 +100,10 @@
                         <h2>Education</h2>
                         <!--conten di sini-->
                         <div class="container">
-                            <form id="eduForm" method="POST">
+                            <form id="eduForm" method="POST" th:object="${EducationInput}" th:action="@{/educationForm}">
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Degree</label>
-                                    <select class="form-control" id="degree">
+                                    <select class="form-control" th:field="*{degree}">
                                         <option value="S3">S1</option>
                                         <option value="S2">S2</option>
                                         <option value="S1">S1</option>
@@ -112,40 +112,39 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Status</label>
-                                    <select class="form-control" id="status">
+                                    <select class="form-control" id="status" th:field="*{status}">
                                         <option value="Lulus">Lulus</option>
                                         <option value="Belum Lulus">Belum Lulus</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">IPK</label>
-                                    <input type="number" step="0.01" class="form-control" id="ipk" placeholder="Input IPK">
+                                    <input type="number" step="0.01" th:field="*{ipk}" class="form-control" id="ipk" placeholder="Input IPK">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Major</label>
-                                    <select class="form-control" id="major" >
+                                    <select class="form-control" th:field="*{major}" id="major" >
                                         <option th:each = "as : ${major}" th:value="${as.id}" th:text="${as.name}"></option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">University</label>
-                                    <select class="form-control" id="university">
+                                    <select class="form-control" th:field="*{university}" id="university">
                                         <option th:each = "as : ${univ}" th:value="${as.id}" th:text="${as.name}"></option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="uploadcv">Upload CV</label>
-                                    <input type="file" class="form-control-file" id="cv">
+                                    <input type="file" class="form-control-file" id="cv" th:field="*{cv}">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlFile1">Upload Photo</label>
-                                    <input type="file" class="form-control-file" id="photo">
+                                    <input type="file" class="form-control-file" id="photo" th:field="*{photo}">
                                 </div>
-                                <input type="submit" class="btn btn-primary" value="Submit" name="Create" >
+                                <input type="submit" class="btn btn-primary mt-3" value="Submit" name="Create">
                             </form>
                         </div>
                     </div>
-
                     <!-- End of Content Wrapper -->
 
                 </div>
