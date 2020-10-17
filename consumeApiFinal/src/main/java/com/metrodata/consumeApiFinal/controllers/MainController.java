@@ -383,8 +383,6 @@ public class MainController {
 
 //            System.out.println(ass);
 //            pr.getHR(1);
-            
-            
 //            model.addAttribute("apply", programApplyService.getApply(auth.getName()));
             programApplyService.save(programApply);
             return "redirect:/programApply";
