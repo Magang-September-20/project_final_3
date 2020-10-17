@@ -11,14 +11,17 @@ import com.metrodata.consumeApiFinal.entities.ScheduleTest;
 import com.metrodata.consumeApiFinal.entities.dao.RegisterInput;
 import com.metrodata.consumeApiFinal.entities.dao.ScheduleTestInput;
 import com.metrodata.consumeApiFinal.entities.rest.LoginOutput;
+import com.metrodata.consumeApiFinal.repositories.UniversityRepository;
 import com.metrodata.consumeApiFinal.services.EducationService;
 import com.metrodata.consumeApiFinal.services.LoginService;
+import com.metrodata.consumeApiFinal.services.MajorService;
 import com.metrodata.consumeApiFinal.services.ProgramApplyService;
 import com.metrodata.consumeApiFinal.services.ProgramService;
 import com.metrodata.consumeApiFinal.services.RegisterService;
 import com.metrodata.consumeApiFinal.services.ScheduleService;
 import com.metrodata.consumeApiFinal.services.ScheduleTestService;
 import com.metrodata.consumeApiFinal.services.TestService;
+import com.metrodata.consumeApiFinal.services.UniversityService;
 import com.metrodata.consumeApiFinal.services.UserService;
 import java.text.ParseException;
 import java.util.Collection;
@@ -57,7 +60,8 @@ public class MainController {
     ScheduleService ss;
     @Autowired
     EducationService es;
-
+    @Autowired MajorService ms;
+    @Autowired UniversityService us;
     @Autowired
     TestService test;
 
@@ -109,6 +113,8 @@ public class MainController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("profile", userService.getProfil(auth.getName()));
+            model.addAttribute("major", ms.getAllMajor());
+            model.addAttribute("univ", us.getAll());
             return "user";
         } else {
             return "login";
