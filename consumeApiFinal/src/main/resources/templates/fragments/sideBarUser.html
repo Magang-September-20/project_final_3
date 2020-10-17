@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <div th:fragment="sideBarUser" id="sideBarUser">
-     <!-- Sidebar -->
+<div th:fragment="SideBarUser" id="SideBarUser">
+<!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
@@ -14,7 +7,7 @@ and open the template in the editor.
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-laugh-wink"></i>
                     </div>
-                    <div class="sidebar-brand-text mx-3">User</div>
+                    <div class="sidebar-brand-text mx-3">USER</div>
                 </a>
 
                 <!-- Divider -->
@@ -35,28 +28,27 @@ and open the template in the editor.
                     Interface
                 </div>
 
-
                 <li class="nav-item">
                     <a class="nav-link" th:href="profile">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Profile</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="schedule">
+                    <a class="nav-link" th:href="@{/schedule}">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Schedule</span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="programApply">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Apply Program</span></a>
+                </li>
+
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
 
-
-                <!-- Nav Item - Tables -->
-
-
-                <!-- Divider -->
-                <!--<hr class="sidebar-divider d-none d-md-block">-->
 
                 <!-- Sidebar Toggler (Sidebar) -->
                 <div class="text-center d-none d-md-inline">
@@ -65,6 +57,4 @@ and open the template in the editor.
 
             </ul>
             <!-- End of Sidebar -->
-    </div>
-
-</html>
+</div>
