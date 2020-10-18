@@ -26,12 +26,12 @@ public class ScheduleService {
     public List<ScheduleTest> getEmail(int email){
         return scheduleRepository.getAccountByEmail(email);
     }
-    public List<ScheduleTest> getSchedule(String email){
+    public List<ScheduleTest> getSchedule(int email){
         
         return scheduleRepository.getScheduleHr(email);
     }
     
-       public List<ScheduleTest> getTest(String email){
+       public List<ScheduleTest> getTest(int email){
     
     return scheduleRepository.getResult(email);}
 //    public ScheduleTest getByEmail(String email){

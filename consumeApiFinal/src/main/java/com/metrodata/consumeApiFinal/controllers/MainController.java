@@ -280,7 +280,8 @@ public class MainController {
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("schedules", ss.getAll());
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
-            model.addAttribute("hr", userService.getHr());
+//            model.addAttribute("hr", userService.getHr());
+            model.addAttribute("hr", userService.getEmployee());
             model.addAttribute("user", userService.getUser());
             model.addAttribute("test", test.getAll());
             return "showAllSchedule";
@@ -338,7 +339,7 @@ public class MainController {
         System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-            model.addAttribute("scheduleTestHr", ss.getSchedule(auth.getName()));
+            model.addAttribute("scheduleTestHr", ss.getSchedule(Integer.parseInt(auth.getName())));
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             return "scheduleHr";
         } else {
@@ -353,7 +354,7 @@ public class MainController {
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
-            model.addAttribute("inputExam", ss.getTest(auth.getName()));
+            model.addAttribute("inputExam", ss.getTest(Integer.parseInt(auth.getName())));
             return "inputExam";
         } else {
             return "redirect:/login";
