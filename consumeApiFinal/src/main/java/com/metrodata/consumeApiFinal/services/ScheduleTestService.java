@@ -67,4 +67,14 @@ public class ScheduleTestService {
     public ScheduleTest getById(int id){
         return scheduleTestRepository.findById(id).get();
     }
+    
+           public List<ScheduleTest>ShowPsikotes(){
+        return scheduleTestRepository.ShowPsikotes();  
+    }
+       public List<ScheduleTest>ShowTechnical(){
+        return scheduleTestRepository.ShowTechnical();  
+    }
+       public List<ScheduleTest>ShowInterview(){
+        return scheduleTestRepository.ShowInterview();  
+    }
 }

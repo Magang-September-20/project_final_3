@@ -33,6 +33,7 @@ public class ProgramApplyService {
        public List<ProgramApply>showSchedule(){
         return programApplyRepository.Showschedule();  
     }
+
     public Integer countApply(){
     return programApplyRepository.countApply();}
     
