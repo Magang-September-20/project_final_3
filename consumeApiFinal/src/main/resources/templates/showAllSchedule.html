@@ -41,32 +41,32 @@
         <div class="container-fluid">
             <div align="center"><h1>Schedule</h1></div>
 
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#personModal" onclick=""> 
-                Create Schedule
-            </button>
+            
 
 
             <table  class="table table-bordered" id="PersonTabel" width="25%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th> Date</th>
-                        <th> Start_time</th>
-                        <th> End_time</th>
-                        <th> Location</th>
-                        <th> Test</th>
-                        <th> Apply</th>
+                        <th> Id</th>
+                        <th> Name</th>
+                        <th> Noet</th>
+                        <th> Program </th>
                         <th> PIC</th>
+                        <th> Create Schedule</th>
+
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each = "as : ${schedules}">
-                        <td th:text = "${as.date}"></td>
-                        <td th:text = "${as.startTime}"></td>
-                        <td th:text = "${as.endTime}"></td>
-                        <td><a th:href="${as.location}" >Link</a></td>
-                        <td th:text = "${as.test.name}"></td>
-                        <td th:text = "${as.apply.program.name}"></td>
-                        <td th:text = "${as.pic.fullName}"></td>
+
+                        <td th:text = "${as.id}"></td>
+                        <td th:text = "${as.candidate.fullName}"></td>
+                        <td th:text = "${as.note}"></td>
+                        <td th:text = "${as.program.name}"></td>
+                        <td th:text = "${as.program.hr.fullName}"></td>
+                        <td>     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#personModal" onclick=""> 
+                                Create
+                            </button></td>
 
                     </tr>
                 </tbody>
@@ -82,7 +82,7 @@
 
 
     <!-- Logout Modal-->
-   
+
     <!-- Modal -->
     <div th:fragment="modal" class="modal fade" id="personModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -95,7 +95,7 @@
                 </div>
                 <!--<form id="insertForm" th:action="@{save}" th:object="${person}" method="POST">-->
                 <form id="insertForm" th:action="@{/saveSchedule}"  th:object="${scheduleTest}" method="POST">
- 
+
                     <div class="modal-body">
 
                         <div class="form-group row">
@@ -122,27 +122,27 @@
                                 <input class="form-control" type="text"  th:field="*{location}" th:value="*{location}" id="location" >
                             </div>
                         </div>
-                        <div class="form-group row">
+<!--                        <div class="form-group row">
                             <label for="example-text-input" class="col-2 col-form-label">Test</label>
                             <select class="form-control" id="test" th:field="*{test}"  >
                                 <option th:each = "as : ${test}"  th:text="${as.name}"  id="test" th:value="${as.id}"></option>
 
                             </select>
-                        </div>
-                        <div class="form-group row">
+                        </div>-->
+<!--                        <div class="form-group row">
                             <label for="example-text-input" class="col-2 col-form-label">Apply</label>
                             <select class="form-control" id="apply"  th:field="*{apply}">
                                 <option th:each = "as : ${user}"  th:text="${as.name}"  id="apply" th:value="${as.id}"></option>
 
                             </select>
-                        </div>
-                        <div class="form-group row">
+                        </div>-->
+<!--                        <div class="form-group row">
                             <label for="example-text-input" class="col-2 col-form-label">PIC</label>
                             <select class="form-control" id="test"  th:field="*{pic}">
                                 <option th:each = "as : ${hr}" th:text="${as.name}"  id="pic" th:value="${as.id}" ></option>
 
                             </select>
-                        </div>
+                        </div>-->
 
 
                     </div>

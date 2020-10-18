@@ -26,4 +26,7 @@ public interface ProgramApplyRepository extends JpaRepository<ProgramApply, Inte
 
        @Query(value="SELECT COUNT(id) from tb_tr_program_apply", nativeQuery=true)
        public Integer countApply();
+       
+        @Query(value = "select * FROM tb_tr_program_apply LEFT join tb_tr_schedule_test on tb_tr_program_apply.id = tb_tr_schedule_test.apply where tb_tr_schedule_test.id is NULL", nativeQuery = true)
+    public List<ProgramApply> Showschedule();
 }

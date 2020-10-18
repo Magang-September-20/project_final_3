@@ -282,12 +282,12 @@ public class MainController {
         System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-            model.addAttribute("schedules", ss.getAll());
-            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
-//            model.addAttribute("hr", userService.getHr());
-            model.addAttribute("hr", userService.getEmployee());
-            model.addAttribute("user", userService.getUser());
-            model.addAttribute("test", test.getAll());
+            model.addAttribute("schedules", programApplyService.showSchedule());
+//            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
+////            model.addAttribute("hr", userService.getHr());
+//            model.addAttribute("hr", userService.getEmployee());
+//            model.addAttribute("user", userService.getUser());
+//            model.addAttribute("test", test.getAll());
             return "showAllSchedule";
         } else {
             return "redirect:/login";

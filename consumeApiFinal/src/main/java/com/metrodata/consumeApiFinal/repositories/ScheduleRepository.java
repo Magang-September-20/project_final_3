@@ -30,4 +30,6 @@ public interface ScheduleRepository extends JpaRepository<ScheduleTest, Integer>
     
     @Query(value = "select a.*, b.*, c.id, c.grade, c.note, c.is_passed from tb_tr_schedule_test as a join tb_tr_result as c on a.id = c.id JOIN tb_m_user as b  WHERE b.id = ?1", nativeQuery = true)
     public List<ScheduleTest> getResult(int email);
+    
+   
 }

@@ -6,6 +6,7 @@
 package com.metrodata.consumeApiFinal.services;
 
 import com.metrodata.consumeApiFinal.entities.ProgramApply;
+import com.metrodata.consumeApiFinal.entities.ScheduleTest;
 import com.metrodata.consumeApiFinal.repositories.ProgramApplyRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class ProgramApplyService {
     public ProgramApply save(ProgramApply programApply) {
         return programApplyRepository.save(programApply);
     }
+    
+       public List<ProgramApply>showSchedule(){
+        return programApplyRepository.Showschedule();  
+    }
     public Integer countApply(){
     return programApplyRepository.countApply();}
+    
 }
