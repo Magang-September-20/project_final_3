@@ -62,8 +62,10 @@ public class MainController {
     ScheduleService ss;
     @Autowired
     EducationService es;
-    @Autowired MajorService ms;
-    @Autowired UniversityService us;
+    @Autowired
+    MajorService ms;
+    @Autowired
+    UniversityService us;
     @Autowired
     TestService test;
     @Autowired
@@ -121,13 +123,13 @@ public class MainController {
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("major", ms.getAllMajor());
             model.addAttribute("univ", us.getAll());
-            model.addAttribute("EducationInput",new EducationInput());
+            model.addAttribute("EducationInput", new EducationInput());
             return "user";
         } else {
             return "login";
         }
     }
-    
+
     @GetMapping("/educationForm")
     public String educationForm(EducationInput input) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -135,7 +137,7 @@ public class MainController {
         System.out.println(input.getMajor());
         System.out.println(input.getIpk());
         System.out.println(input.getStatus());
-        es.save(input,idTemp);
+        es.save(input, idTemp);
         return "redirect:/user";
     }
 
@@ -144,12 +146,13 @@ public class MainController {
 //        model.addAttribute("user", new LoginInput());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-//            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
+            System.out.println(userService.countUser() + "jumlah user");
             model.addAttribute("countUser", userService.countUser());
             model.addAttribute("countApply", programApplyService.countApply());
             model.addAttribute("examDone", resultRepository.examDone());
             model.addAttribute("countCV", fileService.countCV());
-            
+
             return "admin";
         } else {
             return "login";
@@ -164,7 +167,7 @@ public class MainController {
         System.out.println(output);
 
         if (output.getStatus().equalsIgnoreCase("success")) {
-            User user = new User(output.getUser().getId()+"", "", getAuthorities(output.getUser().getRoles()));
+            User user = new User(output.getUser().getId() + "", "", getAuthorities(output.getUser().getRoles()));
             PreAuthenticatedAuthenticationToken authenticationToken = new PreAuthenticatedAuthenticationToken(user, "", user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
@@ -229,7 +232,7 @@ public class MainController {
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("programs", pr.getAll());
-            model.addAttribute("profile",userService.getById(Integer.parseInt(auth.getName())));
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
 //            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             return "program";
         } else {
@@ -247,6 +250,7 @@ public class MainController {
 
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
 //            model.addAttribute("schedules", ss.getByEmail(auth.getName()));
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("schedules", ss.getEmail(Integer.parseInt(auth.getName())));
 
             return "schedule";
@@ -383,6 +387,7 @@ public class MainController {
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("apply", programApplyService.getApply(Integer.parseInt(auth.getName())));
             model.addAttribute("iduser", Integer.parseInt(auth.getName()));
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
 //            ProgramApply applyss = new ProgramApply(); 
 //            applyss.set
             model.addAttribute("applys", new ProgramApply());
@@ -430,7 +435,7 @@ public class MainController {
         scheduleTestService.save(input);
         return "redirect:/showAllSchedule";
     }
-    
+
     private static Collection<? extends GrantedAuthority> getAuthorities(List<String> roles) {
         final List<SimpleGrantedAuthority> authorities = new LinkedList<>();
         for (String role : roles) {

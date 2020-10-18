@@ -21,7 +21,7 @@ import org.springframework.stereotype.Repository;
 //    public ScheduleTest getByEmail(String email);
 public interface ScheduleRepository extends JpaRepository<ScheduleTest, Integer> {
 
-    @Query(value = "SELECT * from tb_tr_schedule_test  as a join tb_tr_program_apply as b ON a.id = b.id join tb_m_user as c on b.candidate = c.id WHERE c.id = ?1", nativeQuery = true)
+    @Query(value = "SELECT * from tb_tr_schedule_test  as a join tb_tr_program_apply as b  WHERE b.candidate = ?1", nativeQuery = true)
     public List<ScheduleTest> getAccountByEmail(int email);
    
     @Query(value = "select * from tb_tr_schedule_test as a join tb_m_user as b on a.pic = b.id WHERE b.id = ?1", nativeQuery = true)
