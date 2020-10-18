@@ -317,6 +317,61 @@ public class MainController {
 //        scheduleTestService.save(input);
         return "redirect:/showAllSchedule";
     }
+    @GetMapping("showPsikotes")
+    public String showPsikotes(Model model, @Validated ScheduleTest scheduleTest) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        System.out.println(auth.getAuthorities());
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+            model.addAttribute("psikotes", scheduleTestService.ShowPsikotes());
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
+//            System.out.println(programApplyService.ShowPsikotes().de);
+////            model.addAttribute("hr", userService.getHr());
+//            model.addAttribute("hr", userService.getEmployee());
+//            model.addAttribute("user", userService.getUser());
+//            model.addAttribute("test", test.getAll());
+            return "showPsikotes";
+        } else {
+            return "redirect:/login";
+        }
+
+    }
+    @GetMapping("showTechnical")
+    public String showTechnical(Model model, @Validated ScheduleTest scheduleTest) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        System.out.println(auth.getAuthorities());
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+              model.addAttribute("technical", scheduleTestService.ShowTechnical());
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
+////            model.addAttribute("hr", userService.getHr());
+//            model.addAttribute("hr", userService.getEmployee());
+//            model.addAttribute("user", userService.getUser());
+//            model.addAttribute("test", test.getAll());
+            return "showTechnical";
+        } else {
+            return "redirect:/login";
+        }
+
+    }
+    @GetMapping("showInterview")
+    public String showInterview(Model model, @Validated ScheduleTest scheduleTest) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        System.out.println(auth.getAuthorities());
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+             model.addAttribute("interview", scheduleTestService.ShowInterview());
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
+////            model.addAttribute("hr", userService.getHr());
+//            model.addAttribute("hr", userService.getEmployee());
+//            model.addAttribute("user", userService.getUser());
+//            model.addAttribute("test", test.getAll());
+            return "showInterview";
+        } else {
+            return "redirect:/login";
+        }
+
+    }
 
     @GetMapping("applicant")
     public String applican(Model model) {

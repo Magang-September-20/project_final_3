@@ -16,17 +16,19 @@ import org.springframework.stereotype.Repository;
  * @author pannavr
  */
 @Repository
-public interface ProgramApplyRepository extends JpaRepository<ProgramApply, Integer>{
-    
-    @Query(value="SELECT * FROM tb_tr_program_apply join tb_m_user on tb_tr_program_apply.candidate=tb_m_user.id WHERE tb_m_user.id = ?1", nativeQuery=true)
+public interface ProgramApplyRepository extends JpaRepository<ProgramApply, Integer> {
+
+    @Query(value = "SELECT * FROM tb_tr_program_apply join tb_m_user on tb_tr_program_apply.candidate=tb_m_user.id WHERE tb_m_user.id = ?1", nativeQuery = true)
     public List<ProgramApply> getApply(int id);
-    
-    @Query(value="SELECT * from tb_m_user where email =?1 LIMIT 1", nativeQuery=true)
+
+    @Query(value = "SELECT * from tb_m_user where email =?1 LIMIT 1", nativeQuery = true)
     public Integer getid(String email);
 
-       @Query(value="SELECT COUNT(id) from tb_tr_program_apply", nativeQuery=true)
-       public Integer countApply();
-       
-        @Query(value = "select * FROM tb_tr_program_apply LEFT join tb_tr_schedule_test on tb_tr_program_apply.id = tb_tr_schedule_test.apply where tb_tr_schedule_test.id is NULL", nativeQuery = true)
+    @Query(value = "SELECT COUNT(id) from tb_tr_program_apply", nativeQuery = true)
+    public Integer countApply();
+
+    @Query(value = "select * FROM tb_tr_program_apply LEFT join tb_tr_schedule_test on tb_tr_program_apply.id = tb_tr_schedule_test.apply where tb_tr_schedule_test.id is NULL", nativeQuery = true)
     public List<ProgramApply> Showschedule();
+   
+ 
 }
