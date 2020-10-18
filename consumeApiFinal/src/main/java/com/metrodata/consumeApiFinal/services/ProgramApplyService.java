@@ -28,4 +28,6 @@ public class ProgramApplyService {
     public ProgramApply save(ProgramApply programApply) {
         return programApplyRepository.save(programApply);
     }
+    public Integer countApply(){
+    return programApplyRepository.countApply();}
 }

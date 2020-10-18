@@ -41,6 +41,10 @@ public class UserService {
         ResponseEntity<UserOutput[]> response = RT.getForEntity("http://localhost:8088/getHr", UserOutput[].class);
         return Arrays.asList(response.getBody());
     }
+    public int countUser() {
+        ResponseEntity<Integer> response = RT.getForEntity("http://localhost:8088/countUser", Integer.class);
+        return response.getBody();
+    }
     
     public User getById(int id){
         return ur.findById(id).get();

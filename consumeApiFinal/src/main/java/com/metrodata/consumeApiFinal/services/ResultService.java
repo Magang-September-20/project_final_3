@@ -20,4 +20,8 @@ public class ResultService {
     public Result saveResult(Result result){
         return resultRepository.save(result);
     }
+    
+    public int examDone(){
+    return resultRepository.examDone();
+    }
 }

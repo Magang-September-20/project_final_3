@@ -12,7 +12,9 @@ import com.metrodata.consumeApiFinal.entities.dao.EducationInput;
 import com.metrodata.consumeApiFinal.entities.dao.RegisterInput;
 import com.metrodata.consumeApiFinal.entities.dao.ScheduleTestInput;
 import com.metrodata.consumeApiFinal.entities.rest.LoginOutput;
+import com.metrodata.consumeApiFinal.repositories.ResultRepository;
 import com.metrodata.consumeApiFinal.services.EducationService;
+import com.metrodata.consumeApiFinal.services.FileService;
 import com.metrodata.consumeApiFinal.services.LoginService;
 import com.metrodata.consumeApiFinal.services.MajorService;
 import com.metrodata.consumeApiFinal.services.ProgramApplyService;
@@ -64,6 +66,10 @@ public class MainController {
     @Autowired UniversityService us;
     @Autowired
     TestService test;
+    @Autowired
+    ResultRepository resultRepository;
+    @Autowired
+    FileService fileService;
 
     @Autowired
     ScheduleTestService scheduleTestService;
@@ -138,7 +144,12 @@ public class MainController {
 //        model.addAttribute("user", new LoginInput());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
+//            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
+            model.addAttribute("countUser", userService.countUser());
+            model.addAttribute("countApply", programApplyService.countApply());
+            model.addAttribute("examDone", resultRepository.examDone());
+            model.addAttribute("countCV", fileService.countCV());
+            
             return "admin";
         } else {
             return "login";

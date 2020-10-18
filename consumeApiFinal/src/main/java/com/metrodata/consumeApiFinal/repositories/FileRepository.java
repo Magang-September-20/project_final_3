@@ -5,19 +5,18 @@
  */
 package com.metrodata.consumeApiFinal.repositories;
 
-import com.metrodata.consumeApiFinal.entities.Result;
+import com.metrodata.consumeApiFinal.entities.File;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author sweje
+ * @author pannavr
  */
 @Repository
-public interface ResultRepository extends JpaRepository<Result, Integer>{
+public interface FileRepository extends JpaRepository<File, Integer> {
     
-    @Query (value ="SELECT COUNT(id) FROM tb_tr_result where tb_tr_result.grade >= 0", nativeQuery=true)
-    public int examDone();
-    
+    @Query(value = "select count(cv) from tb_m_file", nativeQuery=true)
+    public int countCV();
 }

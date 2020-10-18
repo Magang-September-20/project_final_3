@@ -24,4 +24,6 @@ public interface ProgramApplyRepository extends JpaRepository<ProgramApply, Inte
     @Query(value="SELECT * from tb_m_user where email =?1 LIMIT 1", nativeQuery=true)
     public Integer getid(String email);
 
+       @Query(value="SELECT COUNT(id) from tb_tr_program_apply", nativeQuery=true)
+       public Integer countApply();
 }
