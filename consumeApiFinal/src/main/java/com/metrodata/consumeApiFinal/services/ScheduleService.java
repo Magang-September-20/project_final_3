@@ -23,9 +23,7 @@ public class ScheduleService {
     public List<ScheduleTest>getAll(){
         return scheduleRepository.findAll();
     }
-    public List<ScheduleTest>showSchedule(){
-        return scheduleRepository.Showschedule();  
-    }
+ 
     public List<ScheduleTest> getEmail(int email){
         return scheduleRepository.getAccountByEmail(email);
     }

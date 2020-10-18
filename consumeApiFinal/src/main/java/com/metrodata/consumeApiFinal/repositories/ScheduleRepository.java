@@ -21,15 +21,16 @@ import org.springframework.stereotype.Repository;
 //    public ScheduleTest getByEmail(String email);
 public interface ScheduleRepository extends JpaRepository<ScheduleTest, Integer> {
 
-    @Query(value = "SELECT * from tb_tr_schedule_test  as a join tb_tr_program_apply as b  WHERE b.candidate = ?1", nativeQuery = true)
+    @Query(value = "select a.*, b.*, c.id, c.grade, c.note, c.is_passed from tb_tr_schedule_test as a join tb_tr_result as c on a.id = c.id JOIN tb_tr_program_apply as b on a.id = b.id  WHERE b.candidate = ?1", nativeQuery = true)
     public List<ScheduleTest> getAccountByEmail(int email);
    
     @Query(value = "select * from tb_tr_schedule_test as a join tb_m_user as b on a.pic = b.id WHERE b.id = ?1", nativeQuery = true)
     public List<ScheduleTest> getScheduleHr(int email);
     
     
-    @Query(value = "select a.*, b.*, c.id, c.grade, c.note, c.is_passed from tb_tr_schedule_test as a join tb_tr_result as c on a.id = c.id JOIN tb_m_user as b  WHERE b.id = ?1", nativeQuery = true)
+    @Query(value = "select a.*, b.*, c.id, c.grade, c.note, c.is_passed from tb_tr_schedule_test as a join tb_tr_result as c on a.id = c.id JOIN tb_m_user as b on a.pic = b.id WHERE b.id = ?1", nativeQuery = true)
     public List<ScheduleTest> getResult(int email);
     
-   
+    @Query(value = "select * FROM tb_tr_program_apply LEFT join tb_tr_schedule_test on tb_tr_program_apply.id = tb_tr_schedule_test.apply where tb_tr_schedule_test.id is NULL", nativeQuery = true)
+    public List<ScheduleTest> Showschedule();
 }
