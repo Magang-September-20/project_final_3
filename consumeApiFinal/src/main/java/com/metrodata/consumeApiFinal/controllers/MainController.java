@@ -27,7 +27,9 @@ import com.metrodata.consumeApiFinal.services.ScheduleTestService;
 import com.metrodata.consumeApiFinal.services.TestService;
 import com.metrodata.consumeApiFinal.services.UniversityService;
 import com.metrodata.consumeApiFinal.services.UserService;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -285,7 +287,8 @@ public class MainController {
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("schedules", programApplyService.showSchedule());
-//            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
+            model.addAttribute("scheduleInput", new ScheduleTest());
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
 ////            model.addAttribute("hr", userService.getHr());
 //            model.addAttribute("hr", userService.getEmployee());
 //            model.addAttribute("user", userService.getUser());
@@ -294,7 +297,25 @@ public class MainController {
         } else {
             return "redirect:/login";
         }
-
+    }
+    
+    @PostMapping("/saveSchedule")
+    public String save(@Validated ScheduleTest input) throws ParseException {
+        DateFormat df = new SimpleDateFormat("hh:mm");
+        DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
+//        java.util.Date dutyDay = (java.util.Date) simpleDateFormat.parse(input.getDate().toString());
+//        java.util.Date timeStart = (java.util.Date) df.parse(input.getStartTime().toString());
+//        java.util.Date timeEnd = (java.util.Date) df.parse(input.getEndTime().toString());
+        System.out.println(input.getDate());
+        System.out.println(input.getStartTime());
+        System.out.println(input.getEndTime());
+        System.out.println(input.getLocation());
+        System.out.println(input.getTest());
+        System.out.println(input.getApply());
+        System.out.println(input.getPic());
+//        scheduleTestService.save(input);
+        return "redirect:/showAllSchedule";
     }
 
     @GetMapping("applicant")
@@ -382,6 +403,13 @@ public class MainController {
             ScheduleTest schedule = scheduleTestService.getById(result.getId());
             
             result.setScheduleTest(schedule);
+            int passingGrade = schedule.getTest().getPassingGrade();
+            if(result.getGrade()>=passingGrade){
+                result.setIsPassed(Boolean.TRUE);
+            }else{
+                result.setIsPassed(Boolean.FALSE);
+            }
+            
             resultService.saveResult(result);
             return "redirect:/inputExam";
         } else {
@@ -445,19 +473,6 @@ public class MainController {
         } else {
             return "redirect:/login";
         }
-    }
-
-    @PostMapping("/saveSchedule")
-    public String save(ScheduleTestInput input) throws ParseException {
-        System.out.println(input.getDate());
-        System.out.println(input.getStartTime());
-        System.out.println(input.getEndTime());
-        System.out.println(input.getLocation());
-        System.out.println(input.getTest());
-        System.out.println(input.getApply());
-        System.out.println(input.getPic());
-        scheduleTestService.save(input);
-        return "redirect:/showAllSchedule";
     }
 
     private static Collection<? extends GrantedAuthority> getAuthorities(List<String> roles) {

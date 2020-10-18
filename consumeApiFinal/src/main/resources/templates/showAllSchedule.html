@@ -49,7 +49,7 @@
                     <tr>
                         <th> Id</th>
                         <th> Name</th>
-                        <th> Noet</th>
+                        <th> Note</th>
                         <th> Program </th>
                         <th> PIC</th>
                         <th> Create Schedule</th>
@@ -64,7 +64,9 @@
                         <td th:text = "${as.note}"></td>
                         <td th:text = "${as.program.name}"></td>
                         <td th:text = "${as.program.hr.fullName}"></td>
-                        <td>     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#personModal" onclick=""> 
+                        <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#personModal" 
+                                    th:programname='${as.program.name}' th:pic='${as.program.hr.fullName}' th:candidate='${as.candidate.id}' 
+                                    th:onclick="createSchedule(this.getAttribute('programname'),this.getAttribute('pic'),this.getAttribute('candidate'))"> 
                                 Create
                             </button></td>
 
@@ -94,14 +96,17 @@
                     </button>
                 </div>
                 <!--<form id="insertForm" th:action="@{save}" th:object="${person}" method="POST">-->
-                <form id="insertForm" th:action="@{/saveSchedule}"  th:object="${scheduleTest}" method="POST">
+                <form id="insertForm" th:action="@{/saveSchedule}"  th:object="${scheduleInput}" method="POST">
 
                     <div class="modal-body">
-
+                        <input class="form-control" type="number" style="display:none;" th:field="*{id}" id="id" value="" >
+                        <input class="form-control" type="text" style="display:none;" th:field="*{test}" id="test" value="">
+                        <input class="form-control" type="text" style="display:none;" th:field="*{apply}" id="apply" value="" >
+                        <input class="form-control" type="text" style="display:none;" th:field="*{pic}" id="pic" value="">
                         <div class="form-group row">
                             <label for="example-date-input" class="col-2 col-form-label">Date</label>
                             <div class="col-10">
-                                <input class="form-control" type="date"  th:field="*{date}" th:value="*{date}" id="date" >
+                                <input class="form-control" type="date" th:field="*{date}" th:value="*{date}" id="date" >
                             </div>
                         </div>
                         <div class="form-group row">
@@ -173,6 +178,14 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+    <script>
+        function createSchedule(programName,pic,candidate){
+            console.log(programName,pic,candidate);
+            $('#test').val(programName);
+            $('#pic').val(pic);
+            $('#apply').val(candidate);
+        }
+    </script>
     <!-- <div th:replace="fragments/header :: header"></div>
       <div th:replace="fragments/footer :: footer"></div>-->
 </body>
