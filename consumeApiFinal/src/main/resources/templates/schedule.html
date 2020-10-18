@@ -70,7 +70,8 @@
                                 <td th:text = "${as.date}"></td>
                                 <td th:text = "${as.startTime}"></td>
                                 <td th:text = "${as.endTime}"></td>
-                                <td th:text = "${as.location}"></td>
+                                <td><a th:href="${as.location}" >Link</a></td>
+                                <!--<td th:text = "${as.location}"></td>-->
                                 <td th:text = "${as.test.name}"></td>
                                 <td th:text = "${as.apply.program.name}"></td>
                                 <td th:text = "${as.pic.fullName}"></td>
@@ -83,7 +84,7 @@
                 <!-- End of Content Wrapper -->
 
             </div>
-          
+
 
             <!-- Bootstrap core JavaScript-->
             <script src="vendor/jquery/jquery.min.js"></script>
