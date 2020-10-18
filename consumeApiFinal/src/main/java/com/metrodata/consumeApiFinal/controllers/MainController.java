@@ -7,6 +7,7 @@ package com.metrodata.consumeApiFinal.controllers;
 
 import com.metrodata.consumeApiFinal.entities.LoginInput;
 import com.metrodata.consumeApiFinal.entities.ProgramApply;
+import com.metrodata.consumeApiFinal.entities.Result;
 import com.metrodata.consumeApiFinal.entities.ScheduleTest;
 import com.metrodata.consumeApiFinal.entities.dao.EducationInput;
 import com.metrodata.consumeApiFinal.entities.dao.RegisterInput;
@@ -20,6 +21,7 @@ import com.metrodata.consumeApiFinal.services.MajorService;
 import com.metrodata.consumeApiFinal.services.ProgramApplyService;
 import com.metrodata.consumeApiFinal.services.ProgramService;
 import com.metrodata.consumeApiFinal.services.RegisterService;
+import com.metrodata.consumeApiFinal.services.ResultService;
 import com.metrodata.consumeApiFinal.services.ScheduleService;
 import com.metrodata.consumeApiFinal.services.ScheduleTestService;
 import com.metrodata.consumeApiFinal.services.TestService;
@@ -69,7 +71,7 @@ public class MainController {
     @Autowired
     TestService test;
     @Autowired
-    ResultRepository resultRepository;
+    ResultService resultService;
     @Autowired
     FileService fileService;
 
@@ -150,7 +152,7 @@ public class MainController {
             System.out.println(userService.countUser() + "jumlah user");
             model.addAttribute("countUser", userService.countUser());
             model.addAttribute("countApply", programApplyService.countApply());
-            model.addAttribute("examDone", resultRepository.examDone());
+            model.addAttribute("examDone", resultService.examDone());
             model.addAttribute("countCV", fileService.countCV());
 
             return "admin";
@@ -359,11 +361,34 @@ public class MainController {
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("inputExam", ss.getTest(Integer.parseInt(auth.getName())));
+            model.addAttribute("resultGrade", new Result());
+            
             return "inputExam";
         } else {
             return "redirect:/login";
         }
     }
+    
+    @PostMapping("/insertResult")
+    public String insertResult(Model model, @Validated Result result) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        System.out.println(auth.getAuthorities());
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+            System.out.println(result.getId());
+            System.out.println(result.getGrade());
+            System.out.println(result.getNote());
+            
+            ScheduleTest schedule = scheduleTestService.getById(result.getId());
+            
+            result.setScheduleTest(schedule);
+            resultService.saveResult(result);
+            return "redirect:/inputExam";
+        } else {
+            return "redirect:/login";
+        }
+    }
+    
 
     @GetMapping("profileHr")
     public String ProfileHr(Model model) {
@@ -388,8 +413,7 @@ public class MainController {
             model.addAttribute("apply", programApplyService.getApply(Integer.parseInt(auth.getName())));
             model.addAttribute("iduser", Integer.parseInt(auth.getName()));
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
-//            ProgramApply applyss = new ProgramApply(); 
-//            applyss.set
+            
             model.addAttribute("applys", new ProgramApply());
             model.addAttribute("program", pr.getAll());
 
@@ -407,7 +431,7 @@ public class MainController {
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
 //            int as = ((Integer)programApply.getProgram().;
-            System.out.println("PUkii");
+            System.out.println("aaa");
             programApply.setHr(new com.metrodata.consumeApiFinal.entities.User(pr.getHR(programApply.getProgram().getId())));
             programApply.setCandidate(new com.metrodata.consumeApiFinal.entities.User(Integer.parseInt(auth.getName())));
 

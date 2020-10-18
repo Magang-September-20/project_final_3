@@ -17,24 +17,27 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ScheduleService {
+
     @Autowired
     ScheduleRepository scheduleRepository;
-    
-    public List<ScheduleTest>getAll(){
+
+    public List<ScheduleTest> getAll() {
         return scheduleRepository.findAll();
     }
- 
-    public List<ScheduleTest> getEmail(int email){
+
+    public List<ScheduleTest> getEmail(int email) {
         return scheduleRepository.getAccountByEmail(email);
     }
-    public List<ScheduleTest> getSchedule(int email){
-        
+
+    public List<ScheduleTest> getSchedule(int email) {
+
         return scheduleRepository.getScheduleHr(email);
     }
-    
-       public List<ScheduleTest> getTest(int email){
-    
-    return scheduleRepository.getResult(email);}
+
+    public List<ScheduleTest> getTest(int email) {
+
+        return scheduleRepository.getResult(email);
+    }
 //    public ScheduleTest getByEmail(String email){
 //        return scheduleRepository.getByEmail(email);
 //    }

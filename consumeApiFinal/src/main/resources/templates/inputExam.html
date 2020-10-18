@@ -91,27 +91,27 @@
                     </button>
                 </div>
                 <!--<form id="insertForm" th:action="@{save}" th:object="${person}" method="POST">-->
-                <form id="insertForm" >
+                <form id="insertForm" th:action="@{/insertResult}" th:object="${resultGrade}" method="POST" >
 
                     <div class="modal-body">
-                        <!--                        <div class="form-group row">
-                                                    <label for="example-text-input" class="col-2 col-form-label">Name</label>
-                                                    <div class="col-10">
-                                                        <input class="form-control" type="text" id="apply"  >
-                                                    </div>
-                                                </div>-->
-                        <input class="form-control" type="hidden"  id="id" value=""  >
+
+                        
+                        <div class="form-group row">
+                            <label for="example-text-input" style="display:none;" class="col-2 col-form-label">id</label>
+                            <div class="col-10">
+                                <input class="form-control" type="hidden" th:field="*{id}" id="id" value=""  >
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-2 col-form-label">Nilai</label>
                             <div class="col-10">
-                                <input class="form-control" type="number"  id="pic"  >
-
+                                <input class="form-control" type="number" th:field="*{grade}" id="grade"  >
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-2 col-form-label">Note</label>
                             <div class="col-10">
-                                <input class="form-control" type="text"  id="pic"  >
+                                <input class="form-control" type="text" th:field="*{note}" id="note"  >
 
                             </div>
                         </div>
@@ -243,15 +243,17 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-    
+
     <script>
-         function UpdateExam(getId) {
-            $.ajax({
-              $('#id').val() = getId;
-               console.log(getId);
-            });
-        }
-        
+                            function UpdateExam(getId) {
+                                console.log(getId);
+                                $('#id').val(getId);
+//            $.ajax({
+//              $('#id').val() = getId;
+//               console.log(getId);
+//            });
+                            }
+
     </script>
     <!-- <div th:replace="fragments/header :: header"></div>
       <div th:replace="fragments/footer :: footer"></div>-->

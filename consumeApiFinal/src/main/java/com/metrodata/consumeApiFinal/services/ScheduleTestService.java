@@ -62,6 +62,9 @@ public class ScheduleTestService {
         
 //        rs.saveResult(result);
         scheduleTestRepository.save(test1);
-
+    }
+    
+    public ScheduleTest getById(int id){
+        return scheduleTestRepository.findById(id).get();
     }
 }
