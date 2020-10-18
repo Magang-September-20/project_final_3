@@ -28,213 +28,132 @@
 
             <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-                <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.html">
-                    <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-laugh-wink"></i>
-                    </div>
-                    <div class="sidebar-brand-text mx-3">User</div>
-                </a>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider my-0">
-
-                <!-- Nav Item - Dashboard -->
-                <li class="nav-item active">
-                    <a class="nav-link" href="dashboard.html">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Interface
-                </div>
-
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="profile">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Profile</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="schedule">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Schedule</span></a>
-                </li>
-
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="programApply">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Apply Program</span></a>
-                </li>    
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-
-
-                <!-- Nav Item - Tables -->
-
-
-                <!-- Divider -->
-                <!--<hr class="sidebar-divider d-none d-md-block">-->
-
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>
+                <div th:replace="fragments/sideBarUser :: sideBarUser"></div>
 
             </ul>
-            <!-- End of Sidebar -->
+        </nav>
 
-            <!-- Content Wrapper -->
-            <div id="content-wrapper" class="d-flex flex-column">
+        <!-- End of Sidebar -->
 
-                <!-- Main Content -->
-                <div id="content">
-                    <!--topbar-->
-                    <div th:replace="fragments/topBar :: topbar"></div>
-                    <!-- End of Topbar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-                    <!-- Begin Page Content -->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="card border-primary mb-4">
-                                    <div class="card-body text-primary">
-                                       <center> <h1>Profile</h1> </center>
-                                       <img class="card-img-top" src="https://png.pngitem.com/pimgs/s/80-800373_it-benefits-per-users-default-profile-picture-green.png" alt="Card image cap" height="200px" width="10px">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="card border-secondary mb-4">
-                                    <div class="card-body text-secondary">
-                                        <form  th:each = "as : ${profile}">
-                                            <h5 class="card-title">Informasi Akun</h5>
-                                            <div class="form-group row">
-                                                <label  for="staticEmail" class="col-sm-4 col-form-label">Full Name</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.fullName}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label  for="staticEmail" class="col-sm-4 col-form-label">Email</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.email}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label  for="staticEmail" class="col-sm-4 col-form-label">Gender</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.gender}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label  for="staticEmail" class="col-sm-4 col-form-label">Birth Date</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.birthDate}">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6"></div>
-                            <div class="col-sm-6">
-                                <div class="card border-secondary mb-4">
-                                    <div class="card-body text-secondary">
-                                        <form  th:each = "as : ${profile1}">
-                                            <h5 class="card-title">Informasi Pendidikan</h5>
-                                            <div class="form-group row">
-                                                <label  for="staticEmail" class="col-sm-4 col-form-label">Gelar</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.degree}">
-                                                </div>
-                                            </div><!--
-                                            -->                                        <div class="form-group row">
-                                                <label  for="staticEmail" class="col-sm-4 col-form-label">Status</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.status}">
-                                                </div>
-                                            </div><!--
-                                            -->                                        <div class="form-group row">
-                                                <label  for="staticEmail" class="col-sm-4 col-form-label">IPK</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.ipk}">
-                                                </div>
-                                            </div><!--
-                                            -->                                        <div class="form-group row">
-                                                <label  for="staticEmail" class="col-sm-4 col-form-label">Jurusan</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.major.name}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label  for="staticEmail" class="col-sm-4 col-form-label">Universitas</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.university.name}">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
+            <!-- Main Content -->
+            <div id="content">
+                <!--topbar-->
+                <!--<div th:replace="fragments/topBar :: topbar"></div>-->
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="card border-primary mb-4">
+                                <div class="card-body text-primary">
+                                    <center> <h1>Profile</h1> </center>
+                                    <img class="card-img-top" src="https://png.pngitem.com/pimgs/s/80-800373_it-benefits-per-users-default-profile-picture-green.png" alt="Card image cap" height="200px" width="10px">
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- End of Content Wrapper -->
-
-                </div>
-                <!-- End of Page Wrapper -->
-
-                <!-- Scroll to Top Button-->
-                <a class="scroll-to-top rounded" href="#page-top">
-                    <i class="fas fa-angle-up"></i>
-                </a>
-
-                <!-- Logout Modal-->
-                <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
+                        <div class="col-sm-6">
+                            <div class="card border-secondary mb-4">
+                                <div class="card-body text-secondary">
+                                    <form  th:each = "as : ${profile}">
+                                        <h5 class="card-title">Informasi Akun</h5>
+                                        <div class="form-group row">
+                                            <label  for="staticEmail" class="col-sm-4 col-form-label">Full Name</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.fullName}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label  for="staticEmail" class="col-sm-4 col-form-label">Email</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.email}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label  for="staticEmail" class="col-sm-4 col-form-label">Gender</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.gender}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label  for="staticEmail" class="col-sm-4 col-form-label">Birth Date</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.birthDate}">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                <a class="btn btn-primary" href="/logout">Logout</a>
+                        </div>
+                        <div class="col-6"></div>
+                        <div class="col-sm-6">
+                            <div class="card border-secondary mb-4">
+                                <div class="card-body text-secondary">
+                                    <form  th:each = "as : ${profile1}">
+                                        <h5 class="card-title">Informasi Pendidikan</h5>
+                                        <div class="form-group row">
+                                            <label  for="staticEmail" class="col-sm-4 col-form-label">Gelar</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.degree}">
+                                            </div>
+                                        </div><!--
+                                        -->                                        <div class="form-group row">
+                                            <label  for="staticEmail" class="col-sm-4 col-form-label">Status</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.status}">
+                                            </div>
+                                        </div><!--
+                                        -->                                        <div class="form-group row">
+                                            <label  for="staticEmail" class="col-sm-4 col-form-label">IPK</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.ipk}">
+                                            </div>
+                                        </div><!--
+                                        -->                                        <div class="form-group row">
+                                            <label  for="staticEmail" class="col-sm-4 col-form-label">Jurusan</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.major.name}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label  for="staticEmail" class="col-sm-4 col-form-label">Universitas</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value = "${as.university.name}">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Bootstrap core JavaScript-->
-                <script src="vendor/jquery/jquery.min.js"></script>
-                <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                <!-- End of Content Wrapper -->
 
-                <!-- Core plugin JavaScript-->
-                <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+            </div>
 
-                <!-- Custom scripts for all pages-->
-                <script src="js/sb-admin-2.min.js"></script>
 
-                <!-- Page level plugins -->
-                <script src="vendor/chart.js/Chart.min.js"></script>
+            <!-- Bootstrap core JavaScript-->
+            <script src="vendor/jquery/jquery.min.js"></script>
+            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-                <!-- Page level custom scripts -->
-                <script src="js/demo/chart-area-demo.js"></script>
-                <script src="js/demo/chart-pie-demo.js"></script>
-                <!-- <div th:replace="fragments/header :: header"></div>
-                  <div th:replace="fragments/footer :: footer"></div>-->
-                </body>
+            <!-- Core plugin JavaScript-->
+            <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-                </html>
+            <!-- Custom scripts for all pages-->
+            <script src="js/sb-admin-2.min.js"></script>
+
+            <!-- Page level plugins -->
+            <script src="vendor/chart.js/Chart.min.js"></script>
+
+            <!-- Page level custom scripts -->
+            <script src="js/demo/chart-area-demo.js"></script>
+            <script src="js/demo/chart-pie-demo.js"></script>
+            <!-- <div th:replace="fragments/header :: header"></div>
+              <div th:replace="fragments/footer :: footer"></div>-->
+            </body>
+
+            </html>
