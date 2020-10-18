@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2020 at 06:59 PM
+-- Generation Time: Oct 18, 2020 at 07:05 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.15
 
@@ -21,6 +21,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_recruitment`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `scheduleTest` (IN `Param1` VARCHAR(50))  BEGIN
+SELECT date, start_time, end_time, location, tes.name, u.full_name, p.name
+FROM tb_tr_schedule_test st JOIN tb_m_test tes ON (st.test=tes.id) JOIN tb_tr_program_apply apply ON (st.apply = apply.id)
+JOIN tb_m_user u ON (st.pic=u.id) JOIN tb_m_program p ON (apply.program=p.id) JOIN tb_m_user o ON (apply.candidate=o.id)
+WHERE o.email = Param1;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -250,7 +263,12 @@ INSERT INTO `tb_m_user` (`id`, `full_name`, `email`, `gender`, `birth_date`) VAL
 (8, 'Herul Syahwandi S', 'herul.syah@gmail.com', 'Laki-laki', '1999-07-07'),
 (9, 'Bachtiar Nur Yogi P', 'bachtiarnuryogipratama@gmail.com', 'Laki-laki', '1999-07-07'),
 (10, 'Muhamad Irfan Bernadius', 'muhamadi7696@gmail.com', 'Laki-laki', '1999-08-08'),
-(11, 'gulugulu', 'gulu@gulu', 'Laki-laki', '2020-09-15');
+(11, 'gulugulu', 'gulu@gulu', 'Laki-laki', '2020-09-15'),
+(12, 'Jonathan Purnama Halim', 'swejer1st@gmail.com', 'Laki-laki', '2020-10-09'),
+(13, 'Nathannnn', 'asdasdasd@as', 'Perempuan', '2020-08-11'),
+(14, 'jonathan purnama halimmmmm', 'asdasdas@asw', 'Perempuan', '2020-08-06'),
+(15, 'jonathan purnama halimmmmm', 'asdasdas@aswa', 'Perempuan', '2020-08-06'),
+(16, 'Olivvvvvv', 'michelleolivia68@gmail.com', 'Perempuan', '2020-09-16');
 
 -- --------------------------------------------------------
 
@@ -274,25 +292,26 @@ INSERT INTO `tb_tr_program_apply` (`id`, `candidate`, `note`, `hr`, `program`) V
 (1, 8, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 1),
 (2, 9, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 2),
 (3, 10, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 3),
-(4, 11, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 4),
-(5, 12, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 5),
+(4, 4, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 4),
+(5, 5, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 5),
 (6, 13, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 1),
-(7, 14, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 2),
+(7, 12, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 2),
 (8, 15, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 3),
-(9, 16, 'Saya menguasai berbagai bahasa pemrogaman', 2, 4),
-(10, 17, 'Saya menguasai berbagai bahasa pemrogaman', 3, 5),
-(11, 18, 'Saya menguasai berbagai bahasa pemrogaman', 3, 1),
-(12, 19, 'Saya menguasai berbagai bahasa pemrogaman', 3, 2),
-(13, 20, 'Saya menguasai berbagai bahasa pemrogaman', 3, 3),
-(14, 21, 'Saya menguasai berbagai bahasa pemrogaman', 3, 4),
-(15, 22, 'Saya menguasai berbagai bahasa pemrogaman', 3, 5),
-(16, 23, 'Saya seorang yang ambisius ', 4, 1),
-(17, 24, 'Saya seorang yang ambisius ', 4, 2),
-(18, 25, 'Saya seorang yang ambisius ', 4, 3),
-(19, 26, 'Saya seorang yang ambisius ', 4, 4),
-(20, 27, 'Saya seorang yang ambisius ', 4, 5),
-(21, 28, 'Saya seorang yang ambisius ', 4, 1),
-(22, 29, 'Saya seorang yang ambisius ', 4, 2);
+(9, 11, 'Saya menguasai berbagai bahasa pemrogaman', 2, 4),
+(10, 2, 'Saya menguasai berbagai bahasa pemrogaman', 3, 5),
+(11, 3, 'Saya menguasai berbagai bahasa pemrogaman', 3, 1),
+(12, 6, 'Saya menguasai berbagai bahasa pemrogaman', 3, 2),
+(13, 8, 'Saya menguasai berbagai bahasa pemrogaman', 3, 3),
+(14, 12, 'Saya menguasai berbagai bahasa pemrogaman', 3, 4),
+(15, 16, 'Saya menguasai berbagai bahasa pemrogaman', 3, 5),
+(16, 15, 'Saya seorang yang ambisius ', 4, 1),
+(17, 5, 'Saya seorang yang ambisius ', 4, 2),
+(18, 4, 'Saya seorang yang ambisius ', 4, 3),
+(19, 9, 'Saya seorang yang ambisius ', 4, 4),
+(20, 13, 'Saya seorang yang ambisius ', 4, 5),
+(21, 7, 'Saya seorang yang ambisius ', 4, 1),
+(22, 11, 'Saya seorang yang ambisius ', 4, 2),
+(23, 9, 'crottttttttttttttttttttt', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -333,7 +352,9 @@ INSERT INTO `tb_tr_result` (`id`, `grade`, `note`, `is_passed`) VALUES
 (19, 0, '', 0),
 (20, 0, '', 0),
 (21, 0, '', 0),
-(22, 0, '', 0);
+(22, 0, '', 0),
+(30, 0, '0', 0),
+(32, 0, 'belum di isi', 0);
 
 -- --------------------------------------------------------
 
@@ -378,7 +399,10 @@ INSERT INTO `tb_tr_schedule_test` (`id`, `date`, `start_time`, `end_time`, `loca
 (19, '2022-10-20', '10:30:00', '11:00:00', 'https://meet.google.com/vdz-vveg-thq', 3, 19, 6),
 (20, '2022-10-20', '11:00:00', '11:30:00', 'https://meet.google.com/vdz-vveg-thq', 3, 20, 7),
 (21, '2023-10-20', '11:30:00', '12:00:00', 'https://meet.google.com/vdz-vveg-thq', 3, 21, 7),
-(22, '2023-10-20', '13:00:00', '13:30:00', 'https://meet.google.com/vdz-vveg-thq', 3, 22, 7);
+(22, '2023-10-20', '13:00:00', '13:30:00', 'https://meet.google.com/vdz-vveg-thq', 3, 22, 7),
+(30, '2020-10-15', '13:29:00', '14:29:00', 'aa', 1, 1, 2),
+(31, '2020-10-14', '13:43:00', '16:43:00', 'neraka', 1, 2, 2),
+(32, '2020-10-19', '14:55:00', '15:55:00', 'gmeet', 2, 9, 1);
 
 --
 -- Indexes for dumped tables
@@ -473,13 +497,13 @@ ALTER TABLE `tb_m_university`
 -- AUTO_INCREMENT for table `tb_tr_program_apply`
 --
 ALTER TABLE `tb_tr_program_apply`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tb_tr_schedule_test`
 --
 ALTER TABLE `tb_tr_schedule_test`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Constraints for dumped tables
@@ -517,7 +541,7 @@ ALTER TABLE `tb_tr_program_apply`
 -- Constraints for table `tb_tr_result`
 --
 ALTER TABLE `tb_tr_result`
-  ADD CONSTRAINT `fk_schedule_result` FOREIGN KEY (`id`) REFERENCES `tb_tr_schedule_test` (`id`);
+  ADD CONSTRAINT `tb_tr_result_ibfk_1` FOREIGN KEY (`id`) REFERENCES `tb_tr_schedule_test` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tb_tr_schedule_test`
