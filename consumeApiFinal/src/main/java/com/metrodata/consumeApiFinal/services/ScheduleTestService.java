@@ -81,4 +81,7 @@ public class ScheduleTestService {
     public List<ScheduleTest> ShowInterview() {
         return scheduleTestRepository.ShowInterview();
     }
+    public List<ScheduleTest> getAll() {
+        return scheduleTestRepository.findAll();
+    }
 }

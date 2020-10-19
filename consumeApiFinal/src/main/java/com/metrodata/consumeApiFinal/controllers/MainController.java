@@ -280,19 +280,39 @@ public class MainController {
 
     }
 
+    @GetMapping("createSchedule")
+    public String CreateSchedule(Model model, @Validated ScheduleTest scheduleTest) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        System.out.println(auth.getAuthorities());
+        if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+//            model.addAttribute("schedules", programApplyService.showSchedule());
+            model.addAttribute("scheduleInput", new ScheduleTest());
+            model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
+            model.addAttribute("schedules", programApplyService.showSchedule());
+////            model.addAttribute("hr", userService.getHr());
+//            model.addAttribute("hr", userService.getEmployee());
+//            model.addAttribute("user", userService.getUser());
+            model.addAttribute("test", test.getAll());
+            return "createSchedule";
+        } else {
+            return "redirect:/login";
+        }
+    }
     @GetMapping("showAllSchedule")
     public String showSchedule(Model model, @Validated ScheduleTest scheduleTest) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-            model.addAttribute("schedules", programApplyService.showSchedule());
+//            model.addAttribute("schedules", programApplyService.showSchedule());
             model.addAttribute("scheduleInput", new ScheduleTest());
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
+            model.addAttribute("schedules", scheduleTestService.getAll());
 ////            model.addAttribute("hr", userService.getHr());
 //            model.addAttribute("hr", userService.getEmployee());
 //            model.addAttribute("user", userService.getUser());
-//            model.addAttribute("test", test.getAll());
+            model.addAttribute("test", test.getAll());
             return "showAllSchedule";
         } else {
             return "redirect:/login";
