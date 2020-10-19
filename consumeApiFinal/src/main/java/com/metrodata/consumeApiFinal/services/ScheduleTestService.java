@@ -16,6 +16,9 @@ import com.metrodata.consumeApiFinal.repositories.ScheduleTestRepository;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +39,8 @@ public class ScheduleTestService {
     ResultService rs;
     @Autowired
     ProgramApplyService programApplyService;
+    @Autowired
+    EmailNotificationService emailNotificationService;
 
     public void save(ScheduleTestInput scheduleTest) throws ParseException {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -53,23 +58,39 @@ public class ScheduleTestService {
         java.util.Date timeEnd = (java.util.Date) timeFormatter.parse(scheduleTest.getEndTime());
 
         ProgramApply programApply = new ProgramApply(scheduleTest.getApply());
+
+//        System.out.println("isi getapply(): "+scheduleTest.getApply());
+//        System.out.println("ini buat email : "+programApply.getId());
         User pic = us.getById(scheduleTest.getPic());
 //        ProgramApply apply = programApplyService.getById(scheduleTest.getApply());
+
         Test test = ts.getById(scheduleTest.getTest());
 
-        ScheduleTest test1 = new ScheduleTest(scheduleTestRepository.getMaxId()+1, dutyDay, timeStart, timeEnd, scheduleTest.getLocation(), programApply, pic, test);
+        ScheduleTest test1 = new ScheduleTest(scheduleTestRepository.getMaxId() + 1, dutyDay, timeStart, timeEnd, scheduleTest.getLocation(), programApply, pic, test);
+
+        ProgramApply programApplyEmail = programApplyService.getById(programApply.getId());
+        User candidate = us.getById(programApplyEmail.getCandidate().getId());
+
+        System.out.println("pic fullname: " + pic.getFullName());
+        System.out.println("candidate fullname: " + candidate.getFullName());
 
         Result result = new Result();
         result.setId(test1.getId());
         result.setGrade(0);
         result.setIsPassed(false);
         result.setNote("belum di isi");
-//        
+
         result.setScheduleTest(test1);
         test1.setResult(result);
-        
-//        rs.saveResult(result);
-        scheduleTestRepository.save(test1);
+
+//        scheduleTestRepository.save(test1);
+//        ======= kirim email ========
+        try {
+            emailNotificationService.sendSchedule(candidate, pic, test1);
+            emailNotificationService.sendSchedulePic(candidate,pic,test1);
+        } catch (MessagingException ex) {
+            Logger.getLogger(ProgramApplyService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public ScheduleTest getById(int id) {

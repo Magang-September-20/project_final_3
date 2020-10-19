@@ -38,7 +38,7 @@ public class ProgramApplyService {
     }
 
     public void save(ProgramApply programApply) {
-//        ProgramApply newProgramApply = programApplyRepository.save(programApply);
+        ProgramApply newProgramApply = programApplyRepository.save(programApply);
         System.out.println("candidate id = "+programApply.getCandidate().getId());
         System.out.println("hr id = "+programApply.getHr().getId());
         User candidate = userService.getById(programApply.getCandidate().getId());
@@ -48,7 +48,7 @@ public class ProgramApplyService {
 //        System.out.println("candidate fullname = "+programApply.getCandidate().getFullName());
         try {
             enp.sendEmailCandidate(candidate,hr,programApplyGet);
-            enp.sendEmailPic(candidate, hr, programApply);
+//            enp.sendEmailPic(candidate,hr,programApplyGet);
         } catch (MessagingException ex) {
              Logger.getLogger(ProgramApplyService.class.getName()).log(Level.SEVERE, null, ex);
         }
