@@ -15,6 +15,7 @@
         <!-- Custom fonts for this template-->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
 
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -41,11 +42,11 @@
         <div class="container-fluid">
             <div align="center"><h1>Interview</h1></div>
 
-            
 
 
-          
-            <table  class="table table-bordered" id="PersonTabel" width="25%" cellspacing="0">
+
+
+            <table  class="table table-bordered" id="PersonTabel" >
                 <thead>
                     <tr>
                         <th> Name</th>
@@ -125,27 +126,27 @@
                                 <input class="form-control" type="text"  th:field="*{location}" th:value="*{location}" id="location" >
                             </div>
                         </div>
-<!--                        <div class="form-group row">
-                            <label for="example-text-input" class="col-2 col-form-label">Test</label>
-                            <select class="form-control" id="test" th:field="*{test}"  >
-                                <option th:each = "as : ${test}"  th:text="${as.name}"  id="test" th:value="${as.id}"></option>
-
-                            </select>
-                        </div>-->
-<!--                        <div class="form-group row">
-                            <label for="example-text-input" class="col-2 col-form-label">Apply</label>
-                            <select class="form-control" id="apply"  th:field="*{apply}">
-                                <option th:each = "as : ${user}"  th:text="${as.name}"  id="apply" th:value="${as.id}"></option>
-
-                            </select>
-                        </div>-->
-<!--                        <div class="form-group row">
-                            <label for="example-text-input" class="col-2 col-form-label">PIC</label>
-                            <select class="form-control" id="test"  th:field="*{pic}">
-                                <option th:each = "as : ${hr}" th:text="${as.name}"  id="pic" th:value="${as.id}" ></option>
-
-                            </select>
-                        </div>-->
+                        <!--                        <div class="form-group row">
+                                                    <label for="example-text-input" class="col-2 col-form-label">Test</label>
+                                                    <select class="form-control" id="test" th:field="*{test}"  >
+                                                        <option th:each = "as : ${test}"  th:text="${as.name}"  id="test" th:value="${as.id}"></option>
+                        
+                                                    </select>
+                                                </div>-->
+                        <!--                        <div class="form-group row">
+                                                    <label for="example-text-input" class="col-2 col-form-label">Apply</label>
+                                                    <select class="form-control" id="apply"  th:field="*{apply}">
+                                                        <option th:each = "as : ${user}"  th:text="${as.name}"  id="apply" th:value="${as.id}"></option>
+                        
+                                                    </select>
+                                                </div>-->
+                        <!--                        <div class="form-group row">
+                                                    <label for="example-text-input" class="col-2 col-form-label">PIC</label>
+                                                    <select class="form-control" id="test"  th:field="*{pic}">
+                                                        <option th:each = "as : ${hr}" th:text="${as.name}"  id="pic" th:value="${as.id}" ></option>
+                        
+                                                    </select>
+                                                </div>-->
 
 
                     </div>
@@ -162,8 +163,13 @@
     <!--<div th:replace="fragments/modal :: modal"></div>-->
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <script>
+        $(document).ready(function(){
+        $('#PersonTabel').DataTable();
+        } );
+    </script>
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
