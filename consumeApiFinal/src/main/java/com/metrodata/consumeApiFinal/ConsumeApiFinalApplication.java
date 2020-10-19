@@ -8,7 +8,7 @@ public class ConsumeApiFinalApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ConsumeApiFinalApplication.class, args);
-                System.out.println("aaaaaaabaaaaaa");
+                System.out.println("aaaaaaaaa");
 	}
 
 }

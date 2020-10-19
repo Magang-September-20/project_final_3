@@ -17,15 +17,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProgramService {
+
     @Autowired
     ProgramRepository programRepository;
-    
-    public List<Program> getAll(){
-    
+
+    public List<Program> getAll() {
         return programRepository.findAll();
     }
-    public Integer getHR(int id){
-    
-    return programRepository.getHR(id);
+
+    public Integer getHR(int id) {
+        return programRepository.getHR(id);
     }
 }

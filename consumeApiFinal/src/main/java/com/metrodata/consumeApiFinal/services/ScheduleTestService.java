@@ -42,12 +42,12 @@ public class ScheduleTestService {
     ProgramApplyService programApplyService;
 
     public void save(ScheduleTestInput scheduleTest) throws ParseException {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm");
 //        String strDate = dateFormatter.format(scheduleTest.getDate());
 //        String startTime = timeFormatter.format(scheduleTest.getStartTime());
 //        String endTime = timeFormatter.format(scheduleTest.getEndTime());
-        
+
         System.out.println(scheduleTest.getDate());
         System.out.println(scheduleTest.getStartTime());
         System.out.println(scheduleTest.getEndTime());
@@ -55,25 +55,35 @@ public class ScheduleTestService {
         java.util.Date dutyDay = (java.util.Date) dateFormatter.parse(scheduleTest.getDate());
         java.util.Date timeStart = (java.util.Date) timeFormatter.parse(scheduleTest.getStartTime());
         java.util.Date timeEnd = (java.util.Date) timeFormatter.parse(scheduleTest.getEndTime());
-        
-//        ProgramApply programApply = new ProgramApply(scheduleTest.getApply());
+
+        ProgramApply programApply = new ProgramApply(scheduleTest.getApply());
         User pic = us.getById(scheduleTest.getPic());
-        ProgramApply apply = programApplyService.getById(scheduleTest.getApply());
+//        ProgramApply apply = programApplyService.getById(scheduleTest.getApply());
         Test test = ts.getById(scheduleTest.getTest());
-        ScheduleTest test1 = new ScheduleTest(Integer.SIZE, dutyDay, timeStart, timeEnd, scheduleTest.getLocation(), apply, pic, test);
-        
+//        System.out.println("ini apply : "+apply);
+//        System.out.println(test+"ini test");
+//        try {
+//            int idtemp = scheduleTestRepository.getMaxId();
+//            if (idtemp <= 0) {
+//                idtemp = 1;
+//                ScheduleTest test1 = new ScheduleTest(idtemp, dutyDay, timeStart, timeEnd, scheduleTest.getLocation(), programApply, pic, test);
+//            }
+//
+//        } catch (Exception e) {
+//        }
+        ScheduleTest test1 = new ScheduleTest(scheduleTestRepository.getMaxId()+1, dutyDay, timeStart, timeEnd, scheduleTest.getLocation(), programApply, pic, test);
+
         Result result = new Result();
-        result.setId(scheduleTestRepository.getMaxId()+1);
+        result.setId(test1.getId());
         result.setGrade(0);
         result.setIsPassed(false);
         result.setNote("belum di isi");
 //        
         result.setScheduleTest(test1);
         test1.setResult(result);
-//        System.out.println("halooo"+test1);
         
-////        rs.saveResult(result);
-//        scheduleTestRepository.save(test1);
+//        rs.saveResult(result);
+        scheduleTestRepository.save(test1);
     }
 
     public ScheduleTest getById(int id) {
@@ -91,6 +101,7 @@ public class ScheduleTestService {
     public List<ScheduleTest> ShowInterview() {
         return scheduleTestRepository.ShowInterview();
     }
+
     public List<ScheduleTest> getAll() {
         return scheduleTestRepository.findAll();
     }

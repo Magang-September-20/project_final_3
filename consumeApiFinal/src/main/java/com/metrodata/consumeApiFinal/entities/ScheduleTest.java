@@ -49,12 +49,12 @@ public class ScheduleTest implements Serializable {
     @Basic(optional = false)
     @Column(name = "start_time")
     @Temporal(TemporalType.TIME)
-    @DateTimeFormat(pattern = "HH:mm")
+    @DateTimeFormat(pattern = "hh:mm")
     private Date startTime;
     @Basic(optional = false)
     @Column(name = "end_time")
     @Temporal(TemporalType.TIME)
-    @DateTimeFormat(pattern = "HH:mm")
+    @DateTimeFormat(pattern = "hh:mm")
     private Date endTime;
     @Basic(optional = false)
     @Column(name = "location")
