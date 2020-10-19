@@ -298,25 +298,30 @@ public class MainController {
             return "redirect:/login";
         }
     }
-    
+
     @PostMapping("/saveSchedule")
     public String save(@Validated ScheduleTest input) throws ParseException {
-        DateFormat df = new SimpleDateFormat("hh:mm");
-        DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        
+//        DateFormat df = new SimpleDateFormat("hh:mm");
+//        DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+//        SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm");
+//        String strDate = dateFormatter.format(input.getDate());
+//        String startTime = timeFormatter.format(input.getStartTime());
+//        String endTime = timeFormatter.format(input.getEndTime());
 //        java.util.Date dutyDay = (java.util.Date) simpleDateFormat.parse(input.getDate().toString());
 //        java.util.Date timeStart = (java.util.Date) df.parse(input.getStartTime().toString());
 //        java.util.Date timeEnd = (java.util.Date) df.parse(input.getEndTime().toString());
-        System.out.println(input.getDate());
-        System.out.println(input.getStartTime());
-        System.out.println(input.getEndTime());
+//        System.out.println(strDate);
+//        System.out.println(startTime);
+//        System.out.println(endTime);
         System.out.println(input.getLocation());
         System.out.println(input.getTest());
         System.out.println(input.getApply());
         System.out.println(input.getPic());
-//        scheduleTestService.save(input);
+        scheduleTestService.save(input);
         return "redirect:/showAllSchedule";
     }
+
     @GetMapping("showPsikotes")
     public String showPsikotes(Model model, @Validated ScheduleTest scheduleTest) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -336,13 +341,14 @@ public class MainController {
         }
 
     }
+
     @GetMapping("showTechnical")
     public String showTechnical(Model model, @Validated ScheduleTest scheduleTest) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-              model.addAttribute("technical", scheduleTestService.ShowTechnical());
+            model.addAttribute("technical", scheduleTestService.ShowTechnical());
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
 ////            model.addAttribute("hr", userService.getHr());
 //            model.addAttribute("hr", userService.getEmployee());
@@ -354,13 +360,14 @@ public class MainController {
         }
 
     }
+
     @GetMapping("showInterview")
     public String showInterview(Model model, @Validated ScheduleTest scheduleTest) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-             model.addAttribute("interview", scheduleTestService.ShowInterview());
+            model.addAttribute("interview", scheduleTestService.ShowInterview());
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
 ////            model.addAttribute("hr", userService.getHr());
 //            model.addAttribute("hr", userService.getEmployee());
@@ -438,13 +445,13 @@ public class MainController {
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("inputExam", ss.getTest(Integer.parseInt(auth.getName())));
             model.addAttribute("resultGrade", new Result());
-            
+
             return "inputExam";
         } else {
             return "redirect:/login";
         }
     }
-    
+
     @PostMapping("/insertResult")
     public String insertResult(Model model, @Validated Result result) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -454,24 +461,23 @@ public class MainController {
             System.out.println(result.getId());
             System.out.println(result.getGrade());
             System.out.println(result.getNote());
-            
+
             ScheduleTest schedule = scheduleTestService.getById(result.getId());
-            
+
             result.setScheduleTest(schedule);
             int passingGrade = schedule.getTest().getPassingGrade();
-            if(result.getGrade()>=passingGrade){
+            if (result.getGrade() >= passingGrade) {
                 result.setIsPassed(Boolean.TRUE);
-            }else{
+            } else {
                 result.setIsPassed(Boolean.FALSE);
             }
-            
+
             resultService.saveResult(result);
             return "redirect:/inputExam";
         } else {
             return "redirect:/login";
         }
     }
-    
 
     @GetMapping("profileHr")
     public String ProfileHr(Model model) {
@@ -496,7 +502,7 @@ public class MainController {
             model.addAttribute("apply", programApplyService.getApply(Integer.parseInt(auth.getName())));
             model.addAttribute("iduser", Integer.parseInt(auth.getName()));
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
-            
+
             model.addAttribute("applys", new ProgramApply());
             model.addAttribute("program", pr.getAll());
 
