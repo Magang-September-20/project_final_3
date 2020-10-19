@@ -297,6 +297,7 @@ public class MainController {
             return "redirect:/login";
         }
     }
+
     @GetMapping("showAllSchedule")
     public String showSchedule(Model model, @Validated ScheduleTest scheduleTest) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -307,9 +308,7 @@ public class MainController {
             model.addAttribute("scheduleInput", new ScheduleTestInput());
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("schedules", scheduleTestService.getAll());
-////            model.addAttribute("hr", userService.getHr());
-//            model.addAttribute("hr", userService.getEmployee());
-//            model.addAttribute("user", userService.getUser());
+
             model.addAttribute("test", test.getAll());
             return "showAllSchedule";
         } else {
@@ -319,28 +318,12 @@ public class MainController {
 
     @PostMapping("/saveSchedule")
     public String save(@Validated ScheduleTestInput input) throws ParseException {
-//        DateFormat df = new SimpleDateFormat("hh:mm");
-//        DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-//        SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm");
-//        String strDate = dateFormatter.format(input.getDate());
-//        String startTime = timeFormatter.format(input.getStartTime());
-//        String endTime = timeFormatter.format(input.getEndTime());
-//        java.util.Date dutyDay = (java.util.Date) simpleDateFormat.parse(input.getDate().toString());
-//        java.util.Date timeStart = (java.util.Date) df.parse(input.getStartTime().toString());
-//        java.util.Date timeEnd = (java.util.Date) df.parse(input.getEndTime().toString());
-//        System.out.println(strDate);
-//        System.out.println(startTime);
-//        System.out.println(endTime);
-//        System.out.println(input.getDate());
-//        System.out.println(input.getStartTime());
-//        System.out.println(input.getEndTime());
         System.out.println(input.getLocation());
         System.out.println(input.getTest());
         System.out.println(input.getApply());
         System.out.println(input.getPic());
         scheduleTestService.save(input);
-        return "redirect:/createSchedule";
+        return "redirect:/showAllSchedule";
     }
 
     @GetMapping("showPsikotes")
@@ -351,11 +334,10 @@ public class MainController {
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("psikotes", scheduleTestService.ShowPsikotes());
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
-//            System.out.println(programApplyService.ShowPsikotes().de);
-////            model.addAttribute("hr", userService.getHr());
-//            model.addAttribute("hr", userService.getEmployee());
-//            model.addAttribute("user", userService.getUser());
-//            model.addAttribute("test", test.getAll());
+
+            model.addAttribute("schedules", scheduleTestService.getAll());
+            model.addAttribute("scheduleInput", new ScheduleTestInput());
+            model.addAttribute("test", test.getAll());
             return "showPsikotes";
         } else {
             return "redirect:/login";
@@ -371,10 +353,8 @@ public class MainController {
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("technical", scheduleTestService.ShowTechnical());
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
-////            model.addAttribute("hr", userService.getHr());
-//            model.addAttribute("hr", userService.getEmployee());
-//            model.addAttribute("user", userService.getUser());
-//            model.addAttribute("test", test.getAll());
+            model.addAttribute("scheduleInput", new ScheduleTestInput());
+            model.addAttribute("test", test.getAll());
             return "showTechnical";
         } else {
             return "redirect:/login";
@@ -390,10 +370,8 @@ public class MainController {
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("interview", scheduleTestService.ShowInterview());
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
-////            model.addAttribute("hr", userService.getHr());
-//            model.addAttribute("hr", userService.getEmployee());
-//            model.addAttribute("user", userService.getUser());
-//            model.addAttribute("test", test.getAll());
+            model.addAttribute("scheduleInput", new ScheduleTestInput());
+            model.addAttribute("test", test.getAll());
             return "showInterview";
         } else {
             return "redirect:/login";
