@@ -36,7 +36,7 @@ and open the template in the editor.
 <html lang="en">
 
     <head>
-        
+
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -49,6 +49,7 @@ and open the template in the editor.
         <!-- Custom fonts for this template-->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
 
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -62,67 +63,72 @@ and open the template in the editor.
 
             <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-           
-                  <div th:replace="fragments/sideBarAdmin :: sideBarAdmin"></div>
-                  
-                      </ul>
 
-                    </nav>
-                    <!-- End of Topbar -->
+                <div th:replace="fragments/sideBarAdmin :: sideBarAdmin"></div>
 
-                    <!-- Begin Page Content -->
-                    <div class="container-fluid">
-                                <div align="center"><h1>Exam</h1></div>
+            </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <div align="center"><h1>Exam</h1></div>
 
 
-                   
-                         <table  class="table table-bordered" id="PersonTabel" width="90%" cellspacing="0">
-            <thead>
-                <tr>
-                    <th> Id</th>
-                    <th> Name</th>
-               
-                    
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each = "as : ${examp}">
-                    <td th:text = "${as.id}"></td>
-                    <td th:text = "${as.name}"></td>
-                 
-                    
-                </tr>
-            </tbody>
-        </table>
-                                          </div>
 
-            </div>
-            <!-- End of Content Wrapper -->
+            <table  class="table table-bordered" id="PersonTabel" width="90%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th> Id</th>
+                        <th> Name</th>
 
-                <!-- End of Page Wrapper -->
 
-        <!-- Scroll to Top Button-->
-       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each = "as : ${examp}">
+                        <td th:text = "${as.id}"></td>
+                        <td th:text = "${as.name}"></td>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-        <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
+    </div>
+    <!-- End of Content Wrapper -->
 
-        <!-- Page level plugins -->
-        <script src="vendor/chart.js/Chart.min.js"></script>
+    <!-- End of Page Wrapper -->
 
-        <!-- Page level custom scripts -->
-        <script src="js/demo/chart-area-demo.js"></script>
-        <script src="js/demo/chart-pie-demo.js"></script>
-        <!-- <div th:replace="fragments/header :: header"></div>
-          <div th:replace="fragments/footer :: footer"></div>-->
-    </body>
+    <!-- Scroll to Top Button-->
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function(){
+        $('#PersonTabel').DataTable();
+        } );
+    </script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+    <!-- <div th:replace="fragments/header :: header"></div>
+      <div th:replace="fragments/footer :: footer"></div>-->
+</body>
 
 </html>
 
