@@ -42,7 +42,7 @@ public class EmailNotificationProgram {
         Context context = new Context();
         context.setVariable("name", candidate.getFullName());
         context.setVariable("program", pa.getProgram().getName());
-        context.setVariable("email", pa.getCandidate().getEmail());
+        context.setVariable("email", candidate.getEmail());
         String html = templateEngine.process("template-program", context);
 
 //        System.out.println("ini program " + pa.getProgram().getName());
@@ -55,7 +55,7 @@ public class EmailNotificationProgram {
         helper.setText(html, true);
         helper.setSubject("Register Program Success - Metrodata Recruitment");
         helper.setFrom("metrodata.recruitment3@gmail.com");
-//        javaMailSender.send(message);
+        javaMailSender.send(message);
     }
     
 }
