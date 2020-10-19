@@ -47,7 +47,8 @@ public class ProgramApplyService {
 //        System.out.println("candidate full name :) = "+candidate.getFullName());
 //        System.out.println("candidate fullname = "+programApply.getCandidate().getFullName());
         try {
-            enp.sendEmailP(candidate,hr,programApplyGet);
+            enp.sendEmailCandidate(candidate,hr,programApplyGet);
+            enp.sendEmailPic(candidate, hr, programApply);
         } catch (MessagingException ex) {
              Logger.getLogger(ProgramApplyService.class.getName()).log(Level.SEVERE, null, ex);
         }
