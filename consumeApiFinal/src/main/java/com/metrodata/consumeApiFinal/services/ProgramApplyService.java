@@ -5,8 +5,10 @@
  */
 package com.metrodata.consumeApiFinal.services;
 
+import com.metrodata.consumeApiFinal.entities.Program;
 import com.metrodata.consumeApiFinal.entities.ProgramApply;
 import com.metrodata.consumeApiFinal.entities.ScheduleTest;
+import com.metrodata.consumeApiFinal.entities.User;
 import com.metrodata.consumeApiFinal.repositories.ProgramApplyRepository;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,19 +28,30 @@ public class ProgramApplyService {
     ProgramApplyRepository programApplyRepository;
     @Autowired
     EmailNotificationProgram enp;
+    @Autowired
+    UserService userService;
+    @Autowired
+    ProgramService programService;
 
     public List<ProgramApply> getApply(int id) {
         return programApplyRepository.getApply(id);
     }
 
-    public ProgramApply save(ProgramApply programApply) {
-        ProgramApply newProgramApply = programApplyRepository.save(programApply);
+    public void save(ProgramApply programApply) {
+//        ProgramApply newProgramApply = programApplyRepository.save(programApply);
+        System.out.println("candidate id = "+programApply.getCandidate().getId());
+        System.out.println("hr id = "+programApply.getHr().getId());
+        User candidate = userService.getById(programApply.getCandidate().getId());
+        User hr = userService.getById(programApply.getHr().getId());
+        ProgramApply programApplyGet = getById(programApply.getProgram().getId());
+//        System.out.println("candidate full name :) = "+candidate.getFullName());
+//        System.out.println("candidate fullname = "+programApply.getCandidate().getFullName());
         try {
-            enp.sendEmailP(programApply);
+            enp.sendEmailP(candidate,hr,programApplyGet);
         } catch (MessagingException ex) {
              Logger.getLogger(ProgramApplyService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return newProgramApply;
+//        return newProgramApply;
     }
 
     public List<ProgramApply> showSchedule() {

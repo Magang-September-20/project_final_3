@@ -519,14 +519,17 @@ public class MainController {
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
 //            int as = ((Integer)programApply.getProgram().;
-            System.out.println("aaa");
+//            com.metrodata.consumeApiFinal.entities.User hr = userService.getById(pr.getHR(programApply.getProgram().getId()));
+//            com.metrodata.consumeApiFinal.entities.User candidate = userService.getById(programApply.getCandidate().getId());
             programApply.setHr(new com.metrodata.consumeApiFinal.entities.User(pr.getHR(programApply.getProgram().getId())));
             programApply.setCandidate(new com.metrodata.consumeApiFinal.entities.User(Integer.parseInt(auth.getName())));
+//            programApply.setHr(hr);
+//            programApply.setCandidate(candidate);
 
-            System.out.println(programApply.getProgram());
-            System.out.println(programApply.getHr());
-            System.out.println(programApply.getNote());
-            System.out.println(programApply.getCandidate());
+//            System.out.println("ini program "+programApply.getProgram());
+//            System.out.println("ini note "+programApply.getNote());
+//            System.out.println("ini hr "+programApply.getHr());
+//            System.out.println("ini candidate "+programApply.getCandidate());
 
             programApplyService.save(programApply);
             return "redirect:/programApply";

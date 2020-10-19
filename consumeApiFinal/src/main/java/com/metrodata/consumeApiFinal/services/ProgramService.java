@@ -28,4 +28,8 @@ public class ProgramService {
     public Integer getHR(int id) {
         return programRepository.getHR(id);
     }
+    
+    public Program getById(int id){
+        return programRepository.findById(id).get();
+    }
 }

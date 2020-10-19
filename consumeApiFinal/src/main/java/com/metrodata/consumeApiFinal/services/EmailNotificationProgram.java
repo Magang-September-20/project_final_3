@@ -5,7 +5,9 @@
  */
 package com.metrodata.consumeApiFinal.services;
 
+import com.metrodata.consumeApiFinal.entities.Program;
 import com.metrodata.consumeApiFinal.entities.ProgramApply;
+import com.metrodata.consumeApiFinal.entities.User;
 import java.nio.charset.StandardCharsets;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -31,22 +33,50 @@ public class EmailNotificationProgram {
     }
     @Autowired
     private SpringTemplateEngine templateEngine;
+    
 
-    public void sendEmailP(ProgramApply pa) throws MessagingException {
+    public void sendEmailCandidate(User candidate, User hr, ProgramApply pa) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message,
                 MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
         Context context = new Context();
-        context.setVariable("name", pa.getCandidate().getFullName());
+        context.setVariable("name", candidate.getFullName());
         context.setVariable("program", pa.getProgram().getName());
         context.setVariable("email", pa.getCandidate().getEmail());
         String html = templateEngine.process("template-program", context);
-        
+
+        System.out.println("ini program " + pa.getProgram().getName());
+        System.out.println("ini note " + pa.getNote());
+
         System.out.println(pa.getCandidate().getEmail());
-        helper.setTo("michelleolivia68@gmail.com");
+        System.out.println(pa.getCandidate().getFullName());
+        System.out.println(pa.getHr().getFullName());
+        helper.setTo("jonathanpurnama13@gmail.com"); //ini di isi pa.getCandidate().getEmail()
         helper.setText(html, true);
         helper.setSubject("Register Program Success - Metrodata Recruitment");
         helper.setFrom("metrodata.recruitment3@gmail.com");
-        javaMailSender.send(message);
+//        javaMailSender.send(message);
+    }
+    public void sendEmailPic(User candidate, User hr, ProgramApply pa) throws MessagingException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message,
+                MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+        Context context = new Context();
+        context.setVariable("name", candidate.getFullName());
+        context.setVariable("program", pa.getProgram().getName());
+        context.setVariable("email", pa.getCandidate().getEmail());
+        String html = templateEngine.process("template-program", context);
+
+        System.out.println("ini program " + pa.getProgram().getName());
+        System.out.println("ini note " + pa.getNote());
+
+        System.out.println(pa.getCandidate().getEmail());
+        System.out.println(pa.getCandidate().getFullName());
+        System.out.println(pa.getHr().getFullName());
+        helper.setTo("jonathanpurnama13@gmail.com"); //ini di isi pa.getHr().getEmail()
+        helper.setText(html, true);
+        helper.setSubject("Register Program Success - Metrodata Recruitment");
+        helper.setFrom("metrodata.recruitment3@gmail.com");
+//        javaMailSender.send(message);
     }
 }

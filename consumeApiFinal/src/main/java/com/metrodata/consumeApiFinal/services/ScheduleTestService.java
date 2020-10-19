@@ -12,14 +12,10 @@ import com.metrodata.consumeApiFinal.entities.Test;
 import com.metrodata.consumeApiFinal.entities.User;
 import com.metrodata.consumeApiFinal.entities.dao.ScheduleTestInput;
 //import com.metrodata.consumeApiFinal.entities.dao.ScheduleInput;?
-import com.metrodata.consumeApiFinal.repositories.ScheduleRepository;
 import com.metrodata.consumeApiFinal.repositories.ScheduleTestRepository;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
