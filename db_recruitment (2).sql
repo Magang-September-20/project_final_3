@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2020 at 07:05 PM
+-- Generation Time: Oct 19, 2020 at 05:36 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.15
 
@@ -70,20 +70,7 @@ INSERT INTO `tb_m_education` (`id`, `degree`, `status`, `ipk`, `major`, `univers
 (13, 'S2', 'Lulus', 3.00, 2, 13),
 (14, 'D3', 'Belum Lulus', 3.00, 6, 14),
 (15, 'D3', 'Belum Lulus', 3.00, 6, 1),
-(16, 'D3', 'Lulus', 3.00, 1, 2),
-(17, 'S1', 'Lulus', 3.00, 2, 3),
-(18, 'S2', 'Lulus', 3.00, 1, 4),
-(19, 'S1', 'Belum Lulus', 4.00, 2, 5),
-(20, 'S1', 'Lulus', 4.00, 1, 1),
-(21, 'S1', 'Belum Lulus', 4.00, 2, 2),
-(22, 'S2', 'Belum Lulus', 4.00, 6, 3),
-(23, 'S3', 'Belum Lulus', 3.00, 6, 4),
-(24, 'D3', 'Lulus', 3.00, 1, 5),
-(25, 'S1', 'Belum Lulus', 3.00, 2, 6),
-(26, 'S2', 'Belum Lulus', 3.00, 1, 7),
-(27, 'S2', 'Belum Lulus', 3.00, 2, 8),
-(28, 'S3', 'Lulus', 3.00, 1, 9),
-(29, 'D3', 'Lulus', 3.00, 6, 10);
+(16, 'D3', 'Lulus', 3.00, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -117,20 +104,7 @@ INSERT INTO `tb_m_file` (`id`, `cv`, `photo`) VALUES
 (13, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz'),
 (14, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz'),
 (15, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz'),
-(16, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz'),
-(17, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz'),
-(18, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz'),
-(19, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz'),
-(20, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz'),
-(21, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz'),
-(22, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz'),
-(23, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz'),
-(24, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz'),
-(25, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz'),
-(26, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz'),
-(27, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz'),
-(28, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz'),
-(29, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz');
+(16, 'https://tinyurl.com/y5q4o7pd', 'https://tinyurl.com/y2ydfnxz');
 
 -- --------------------------------------------------------
 
@@ -289,29 +263,9 @@ CREATE TABLE `tb_tr_program_apply` (
 --
 
 INSERT INTO `tb_tr_program_apply` (`id`, `candidate`, `note`, `hr`, `program`) VALUES
-(1, 8, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 1),
-(2, 9, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 2),
-(3, 10, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 3),
-(4, 4, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 4),
-(5, 5, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 5),
-(6, 13, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 1),
-(7, 12, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 2),
-(8, 15, 'Saya seorang yang bisa bekerja didalam kelompok', 2, 3),
-(9, 11, 'Saya menguasai berbagai bahasa pemrogaman', 2, 4),
-(10, 2, 'Saya menguasai berbagai bahasa pemrogaman', 3, 5),
-(11, 3, 'Saya menguasai berbagai bahasa pemrogaman', 3, 1),
-(12, 6, 'Saya menguasai berbagai bahasa pemrogaman', 3, 2),
-(13, 8, 'Saya menguasai berbagai bahasa pemrogaman', 3, 3),
-(14, 12, 'Saya menguasai berbagai bahasa pemrogaman', 3, 4),
-(15, 16, 'Saya menguasai berbagai bahasa pemrogaman', 3, 5),
-(16, 15, 'Saya seorang yang ambisius ', 4, 1),
-(17, 5, 'Saya seorang yang ambisius ', 4, 2),
-(18, 4, 'Saya seorang yang ambisius ', 4, 3),
-(19, 9, 'Saya seorang yang ambisius ', 4, 4),
-(20, 13, 'Saya seorang yang ambisius ', 4, 5),
-(21, 7, 'Saya seorang yang ambisius ', 4, 1),
-(22, 11, 'Saya seorang yang ambisius ', 4, 2),
-(23, 9, 'crottttttttttttttttttttt', 2, 1);
+(1, 9, 'saya lord yogi', 2, 1),
+(2, 16, 'saya semangattt', 4, 5),
+(3, 9, 'saya lordd', 2, 3);
 
 -- --------------------------------------------------------
 
@@ -331,30 +285,9 @@ CREATE TABLE `tb_tr_result` (
 --
 
 INSERT INTO `tb_tr_result` (`id`, `grade`, `note`, `is_passed`) VALUES
-(1, 80, 'Good', 1),
-(2, 80, 'Good', 1),
-(3, 80, 'Nice', 1),
-(4, 85, 'Nice', 1),
-(5, 85, 'Nice', 1),
-(6, 85, 'Nice', 1),
-(7, 85, 'Nice', 1),
-(8, 50, 'Kurang ', 0),
-(9, 50, 'Kurang ', 0),
-(10, 50, 'Kurang ', 0),
-(11, 50, 'Kurang ', 0),
-(12, 80, 'Good', 1),
-(13, 80, 'Good', 1),
-(14, 90, 'Nice', 1),
-(15, 90, 'Nice', 1),
-(16, 0, '', 0),
-(17, 0, '', 0),
-(18, 0, '', 0),
-(19, 0, '', 0),
-(20, 0, '', 0),
-(21, 0, '', 0),
-(22, 0, '', 0),
-(30, 0, '0', 0),
-(32, 0, 'belum di isi', 0);
+(1, 80, 'mantab', 1),
+(2, 0, 'belum di isi', 0),
+(3, 95, 'jago', 1);
 
 -- --------------------------------------------------------
 
@@ -365,8 +298,8 @@ INSERT INTO `tb_tr_result` (`id`, `grade`, `note`, `is_passed`) VALUES
 CREATE TABLE `tb_tr_schedule_test` (
   `id` int(4) NOT NULL,
   `date` date NOT NULL,
-  `start_time` time NOT NULL,
-  `end_time` time NOT NULL,
+  `start_time` time DEFAULT NULL,
+  `end_time` time DEFAULT NULL,
   `location` varchar(100) NOT NULL,
   `test` int(4) NOT NULL,
   `apply` int(4) NOT NULL,
@@ -378,31 +311,9 @@ CREATE TABLE `tb_tr_schedule_test` (
 --
 
 INSERT INTO `tb_tr_schedule_test` (`id`, `date`, `start_time`, `end_time`, `location`, `test`, `apply`, `pic`) VALUES
-(1, '2019-10-20', '08:00:00', '08:30:00', 'https://meet.google.com/vdz-vveg-thq', 1, 1, 2),
-(2, '2019-10-20', '08:30:00', '09:00:00', 'https://meet.google.com/vdz-vveg-thq', 1, 2, 2),
-(3, '2019-10-20', '09:00:00', '09:30:00', 'https://meet.google.com/vdz-vveg-thq', 1, 3, 3),
-(4, '2019-10-20', '10:00:00', '10:30:00', 'https://meet.google.com/vdz-vveg-thq', 1, 4, 3),
-(5, '2019-10-20', '10:30:00', '11:00:00', 'https://meet.google.com/vdz-vveg-thq', 1, 5, 4),
-(6, '2020-10-20', '11:00:00', '11:30:00', 'https://meet.google.com/vdz-vveg-thq', 1, 6, 4),
-(7, '2020-10-20', '11:30:00', '12:00:00', 'https://meet.google.com/vdz-vveg-thq', 1, 7, 4),
-(8, '2020-10-20', '13:00:00', '13:30:00', 'https://meet.google.com/vdz-vveg-thq', 2, 8, 2),
-(9, '2020-10-20', '13:30:00', '14:00:00', 'https://meet.google.com/vdz-vveg-thq', 2, 9, 2),
-(10, '2020-10-20', '14:00:00', '14:30:00', 'https://meet.google.com/vdz-vveg-thq', 2, 10, 3),
-(11, '2021-10-20', '14:30:00', '15:00:00', 'https://meet.google.com/vdz-vveg-thq', 2, 11, 3),
-(12, '2021-10-20', '15:00:00', '15:30:00', 'https://meet.google.com/vdz-vveg-thq', 2, 12, 3),
-(13, '2021-10-20', '15:30:00', '16:00:00', 'https://meet.google.com/vdz-vveg-thq', 2, 13, 4),
-(14, '2021-10-20', '16:00:00', '16:30:00', 'https://meet.google.com/vdz-vveg-thq', 2, 14, 4),
-(15, '2021-10-20', '08:00:00', '08:30:00', 'https://meet.google.com/vdz-vveg-thq', 3, 15, 5),
-(16, '2022-10-20', '08:30:00', '09:00:00', 'https://meet.google.com/vdz-vveg-thq', 3, 16, 5),
-(17, '2022-10-20', '09:00:00', '09:30:00', 'https://meet.google.com/vdz-vveg-thq', 3, 17, 5),
-(18, '2022-10-20', '10:00:00', '10:30:00', 'https://meet.google.com/vdz-vveg-thq', 3, 18, 6),
-(19, '2022-10-20', '10:30:00', '11:00:00', 'https://meet.google.com/vdz-vveg-thq', 3, 19, 6),
-(20, '2022-10-20', '11:00:00', '11:30:00', 'https://meet.google.com/vdz-vveg-thq', 3, 20, 7),
-(21, '2023-10-20', '11:30:00', '12:00:00', 'https://meet.google.com/vdz-vveg-thq', 3, 21, 7),
-(22, '2023-10-20', '13:00:00', '13:30:00', 'https://meet.google.com/vdz-vveg-thq', 3, 22, 7),
-(30, '2020-10-15', '13:29:00', '14:29:00', 'aa', 1, 1, 2),
-(31, '2020-10-14', '13:43:00', '16:43:00', 'neraka', 1, 2, 2),
-(32, '2020-10-19', '14:55:00', '15:55:00', 'gmeet', 2, 9, 1);
+(1, '2020-10-20', '17:15:25', '21:15:25', 'rumah', 1, 1, 2),
+(2, '2020-10-20', '15:18:00', '16:17:00', 'neraka', 1, 2, 4),
+(3, '2020-10-27', '16:19:00', '16:25:00', 'mantab', 1, 3, 2);
 
 --
 -- Indexes for dumped tables
@@ -497,13 +408,13 @@ ALTER TABLE `tb_m_university`
 -- AUTO_INCREMENT for table `tb_tr_program_apply`
 --
 ALTER TABLE `tb_tr_program_apply`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_tr_schedule_test`
 --
 ALTER TABLE `tb_tr_schedule_test`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -541,7 +452,7 @@ ALTER TABLE `tb_tr_program_apply`
 -- Constraints for table `tb_tr_result`
 --
 ALTER TABLE `tb_tr_result`
-  ADD CONSTRAINT `tb_tr_result_ibfk_1` FOREIGN KEY (`id`) REFERENCES `tb_tr_schedule_test` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `tb_tr_result_ibfk_1` FOREIGN KEY (`id`) REFERENCES `tb_tr_schedule_test` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `tb_tr_schedule_test`
