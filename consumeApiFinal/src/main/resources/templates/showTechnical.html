@@ -66,7 +66,9 @@
                         <!--<td th:text = "${as.scheduleTestList.name}"></td>-->
                         <!--                        <td th:text = "${as.program.name}"></td>
                                                 <td th:text = "${as.program.hr.fullName}"></td>-->
-                        <td>     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#personModal" onclick=""> 
+                        <td>     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#personModal" onclick=""
+                                         th:test='${as.test.id}' th:apply="${as.apply.id}" th:pic='${as.pic.id}' th:candidate='${as.apply.candidate.id}' 
+                                         th:onclick="createSchedule(this.getAttribute('test'),this.getAttribute('apply'),this.getAttribute('pic'),this.getAttribute('candidate'))">
                                 Create
                             </button></td>
 
@@ -96,14 +98,16 @@
                     </button>
                 </div>
                 <!--<form id="insertForm" th:action="@{save}" th:object="${person}" method="POST">-->
-                <form id="insertForm" th:action="@{/saveSchedule}"  th:object="${scheduleTest}" method="POST">
-
+                <form id="insertForm" th:action="@{/saveSchedule}"  th:object="${scheduleInput}" method="POST">
                     <div class="modal-body">
-
+                        <!--<input class="form-control" type="hidden"  th:field="*{id}" id="id" value="" >-->
+                        <input class="form-control" type="hidden"  th:field="*{test}" id="test" value="" >
+                        <input class="form-control" type="hidden"  th:field="*{pic}" id="pic" value="">
+                        <input class="form-control" type="hidden"  th:field="*{apply}" id="apply" value="" >
                         <div class="form-group row">
                             <label for="example-date-input" class="col-2 col-form-label">Date</label>
                             <div class="col-10">
-                                <input class="form-control" type="date"  th:field="*{date}" th:value="*{date}" id="date" >
+                                <input class="form-control" type="date" th:field="*{date}" th:value="*{date}" id="date" >
                             </div>
                         </div>
                         <div class="form-group row">
@@ -124,34 +128,11 @@
                                 <input class="form-control" type="text"  th:field="*{location}" th:value="*{location}" id="location" >
                             </div>
                         </div>
-                        <!--                        <div class="form-group row">
-                                                    <label for="example-text-input" class="col-2 col-form-label">Test</label>
-                                                    <select class="form-control" id="test" th:field="*{test}"  >
-                                                        <option th:each = "as : ${test}"  th:text="${as.name}"  id="test" th:value="${as.id}"></option>
-                        
-                                                    </select>
-                                                </div>-->
-                        <!--                        <div class="form-group row">
-                                                    <label for="example-text-input" class="col-2 col-form-label">Apply</label>
-                                                    <select class="form-control" id="apply"  th:field="*{apply}">
-                                                        <option th:each = "as : ${user}"  th:text="${as.name}"  id="apply" th:value="${as.id}"></option>
-                        
-                                                    </select>
-                                                </div>-->
-                        <!--                        <div class="form-group row">
-                                                    <label for="example-text-input" class="col-2 col-form-label">PIC</label>
-                                                    <select class="form-control" id="test"  th:field="*{pic}">
-                                                        <option th:each = "as : ${hr}" th:text="${as.name}"  id="pic" th:value="${as.id}" ></option>
-                        
-                                                    </select>
-                                                </div>-->
-
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <input type="submit" class="btn btn-primary" value="Create" name="Create" >
-
                     </div>
                 </form>
             </div>
@@ -175,6 +156,15 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+    <script>
+        function createSchedule(test, apply, pic, candidate) {
+            console.log(test, apply, pic, candidate);
+//            $('.modal-body #id').val(id);
+            $('.modal-body #test').val(3); //3 interview
+            $('.modal-body #pic').val(pic);
+            $('.modal-body #apply').val(apply);
+        }
+    </script>
     <!-- <div th:replace="fragments/header :: header"></div>
       <div th:replace="fragments/footer :: footer"></div>-->
 </body>

@@ -60,17 +60,7 @@ public class ScheduleTestService {
         User pic = us.getById(scheduleTest.getPic());
 //        ProgramApply apply = programApplyService.getById(scheduleTest.getApply());
         Test test = ts.getById(scheduleTest.getTest());
-//        System.out.println("ini apply : "+apply);
-//        System.out.println(test+"ini test");
-//        try {
-//            int idtemp = scheduleTestRepository.getMaxId();
-//            if (idtemp <= 0) {
-//                idtemp = 1;
-//                ScheduleTest test1 = new ScheduleTest(idtemp, dutyDay, timeStart, timeEnd, scheduleTest.getLocation(), programApply, pic, test);
-//            }
-//
-//        } catch (Exception e) {
-//        }
+
         ScheduleTest test1 = new ScheduleTest(scheduleTestRepository.getMaxId()+1, dutyDay, timeStart, timeEnd, scheduleTest.getLocation(), programApply, pic, test);
 
         Result result = new Result();
