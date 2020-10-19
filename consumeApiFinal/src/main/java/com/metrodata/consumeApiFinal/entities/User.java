@@ -136,8 +136,10 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return  id + "";
+        return "User{" + "programApplyList=" + programApplyList + ", programApplyList1=" + programApplyList1 + ", scheduleTestList=" + scheduleTestList + ", programList=" + programList + ", id=" + id + ", fullName=" + fullName + ", email=" + email + ", gender=" + gender + ", birthDate=" + birthDate + '}';
     }
+
+    
 
     public List<ProgramApply> getProgramApplyList() {
         return programApplyList;

@@ -138,7 +138,9 @@ public class ProgramApply implements Serializable {
 
     @Override
     public String toString() {
-        return  id + "";
+        return "ProgramApply{" + "id=" + id + ", note=" + note + ", candidate=" + candidate + ", hr=" + hr + ", program=" + program + ", scheduleTestList=" + scheduleTestList + '}';
     }
+
+    
     
 }
