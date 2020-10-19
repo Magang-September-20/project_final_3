@@ -34,7 +34,7 @@ public class ProgramApplyService {
     public ProgramApply save(ProgramApply programApply) {
         ProgramApply newProgramApply = programApplyRepository.save(programApply);
         try {
-            enp.sendEmail(newProgramApply);
+            enp.sendEmailP(programApply);
         } catch (MessagingException ex) {
              Logger.getLogger(ProgramApplyService.class.getName()).log(Level.SEVERE, null, ex);
         }
