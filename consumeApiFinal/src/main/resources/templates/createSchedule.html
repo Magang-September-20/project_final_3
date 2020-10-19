@@ -39,7 +39,7 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-            <div align="center"><h1>Schedule</h1></div>
+            <div align="center"><h1>Create Schedule</h1></div>
 
             
 
@@ -49,40 +49,31 @@
                     <tr>
                         <th> Id</th>
                         <th> Name</th>
-                        <th> Date</th>
-                        <th> Start </th>
-                        <th> End  </th>
-                        <th> Test  </th>
-                        <th> Location</th>
-                        <th> PIC</th>
-                        <th> Update</th>
+                        <th> Note</th>
+                        <th> Program </th>
+                        <th> PIC  </th>
+                       
+                        <th> Create</th>
 
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each = "as : ${schedules}">
 <!--
-                        <td th:text = "${as.id}"></td>
+-->                        <td th:text = "${as.id}"></td>
                         <td th:text = "${as.candidate.fullName}"></td>
                         <td th:text = "${as.note}"></td>
                         <td th:text = "${as.program.name}"></td>
-                        <td th:text = "${as.program.hr.fullName}"></td>-->
-                        <td th:text = "${as.id}"></td>
-                        <td th:text = "${as.apply.candidate.fullName}"></td>
-                        <td th:text = "${as.date}"></td>
-                        <td th:text = "${as.startTime}"></td>
-                        <td th:text = "${as.endTime}"></td>
-                        <td th:text = "${as.test.name}"></td>
-                        <td th:text = "${as.location}"></td>
-                        <td th:text = "${as.pic.fullName}"></td>
+                        <td th:text = "${as.program.hr.fullName}"></td>
+                   
 <!--                        <td th:text = "${as.note}"></td>
                         <td th:text = "${as.program.name}"></td>
                         <td th:text = "${as.program.hr.fullName}"></td>-->
-                        <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#personModal" >
-<!--                                    th:programname='${as.program.id}' th:id='${as.id}' th:pic='${as.program.hr.id}' th:candidate='${as.candidate.id}' 
-                                    th:onclick="createSchedule(this.id,this.getAttribute('programname'),this.getAttribute('pic'),this.getAttribute('candidate'))"-->
+                        <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#personModal" 
+                                    th:programname='${as.program.id}' th:id='${as.id}' th:pic='${as.program.hr.id}' th:candidate='${as.candidate.id}' 
+                                    th:onclick="createSchedule(this.id,this.getAttribute('programname'),this.getAttribute('pic'),this.getAttribute('candidate'))">
                                      
-                                Update
+                                Create
                             </button></td>
 
                     </tr>

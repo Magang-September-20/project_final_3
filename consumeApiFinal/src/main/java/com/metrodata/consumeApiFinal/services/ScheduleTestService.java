@@ -39,42 +39,49 @@ public class ScheduleTestService {
     @Autowired
     ResultService rs;
 
-    public void save(ScheduleTestInput scheduleTestInput) throws ParseException {
-        DateFormat df = new SimpleDateFormat("hh:mm");
-        DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public void save(ScheduleTest scheduleTest) throws ParseException {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm");
+        String strDate = dateFormatter.format(scheduleTest.getDate());
+        String startTime = timeFormatter.format(scheduleTest.getStartTime());
+        String endTime = timeFormatter.format(scheduleTest.getEndTime());
 
-        ProgramApply programApply = new ProgramApply(scheduleTestInput.getApply());
-        User pic = us.getById(scheduleTestInput.getPic());
-        Test test = ts.getById(scheduleTestInput.getTest());
-        java.util.Date dutyDay = (java.util.Date) simpleDateFormat.parse(scheduleTestInput.getDate());
-        java.util.Date timeStart = (java.util.Date) df.parse(scheduleTestInput.getStartTime());
-        java.util.Date timeEnd = (java.util.Date) df.parse(scheduleTestInput.getEndTime());
-        ScheduleTest test1 = new ScheduleTest(Integer.SIZE, dutyDay, timeStart, timeEnd, scheduleTestInput.getLocation(), programApply, pic, test);
-        
+        java.util.Date dutyDay = (java.util.Date) dateFormatter.parse(strDate);
+        java.util.Date timeStart = (java.util.Date) timeFormatter.parse(startTime);
+        java.util.Date timeEnd = (java.util.Date) timeFormatter.parse(endTime);
+//        ProgramApply programApply = new ProgramApply(scheduleTest.getApply());
+//        User pic = us.getById(scheduleTest.getPic());
+//        Test test = ts.getById(scheduleTestInput.getTest());
+        ScheduleTest test1 = new ScheduleTest(Integer.SIZE, dutyDay, timeStart, timeEnd, scheduleTest.getLocation(), scheduleTest.getApply(), scheduleTest.getPic(), scheduleTest.getTest());
         Result result = new Result();
-        result.setId(scheduleTestRepository.getMaxId());
+        result.setId(scheduleTest.getId());
         result.setGrade(0);
         result.setIsPassed(false);
         result.setNote("belum di isi");
-        
+//        
         result.setScheduleTest(test1);
         test1.setResult(result);
-        
-//        rs.saveResult(result);
+//        
+////        rs.saveResult(result);
         scheduleTestRepository.save(test1);
     }
-    
-    public ScheduleTest getById(int id){
+
+    public ScheduleTest getById(int id) {
         return scheduleTestRepository.findById(id).get();
     }
-    
-           public List<ScheduleTest>ShowPsikotes(){
-        return scheduleTestRepository.ShowPsikotes();  
+
+    public List<ScheduleTest> ShowPsikotes() {
+        return scheduleTestRepository.ShowPsikotes();
     }
-       public List<ScheduleTest>ShowTechnical(){
-        return scheduleTestRepository.ShowTechnical();  
+
+    public List<ScheduleTest> ShowTechnical() {
+        return scheduleTestRepository.ShowTechnical();
     }
-       public List<ScheduleTest>ShowInterview(){
-        return scheduleTestRepository.ShowInterview();  
+
+    public List<ScheduleTest> ShowInterview() {
+        return scheduleTestRepository.ShowInterview();
+    }
+    public List<ScheduleTest> getAll() {
+        return scheduleTestRepository.findAll();
     }
 }
