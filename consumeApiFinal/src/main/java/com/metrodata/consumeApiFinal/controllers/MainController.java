@@ -290,9 +290,7 @@ public class MainController {
             model.addAttribute("scheduleInput", new ScheduleTest());
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("schedules", programApplyService.showSchedule());
-////            model.addAttribute("hr", userService.getHr());
-//            model.addAttribute("hr", userService.getEmployee());
-//            model.addAttribute("user", userService.getUser());
+
             model.addAttribute("test", test.getAll());
             return "createSchedule";
         } else {
@@ -306,7 +304,7 @@ public class MainController {
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
 //            model.addAttribute("schedules", programApplyService.showSchedule());
-            model.addAttribute("scheduleInput", new ScheduleTest());
+            model.addAttribute("scheduleInput", new ScheduleTestInput());
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("schedules", scheduleTestService.getAll());
 ////            model.addAttribute("hr", userService.getHr());
@@ -320,7 +318,7 @@ public class MainController {
     }
 
     @PostMapping("/saveSchedule")
-    public String save(@Validated ScheduleTest input) throws ParseException {
+    public String save(@Validated ScheduleTestInput input) throws ParseException {
 //        DateFormat df = new SimpleDateFormat("hh:mm");
 //        DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -334,12 +332,15 @@ public class MainController {
 //        System.out.println(strDate);
 //        System.out.println(startTime);
 //        System.out.println(endTime);
+//        System.out.println(input.getDate());
+//        System.out.println(input.getStartTime());
+//        System.out.println(input.getEndTime());
         System.out.println(input.getLocation());
         System.out.println(input.getTest());
         System.out.println(input.getApply());
         System.out.println(input.getPic());
         scheduleTestService.save(input);
-        return "redirect:/showAllSchedule";
+        return "redirect:/createSchedule";
     }
 
     @GetMapping("showPsikotes")

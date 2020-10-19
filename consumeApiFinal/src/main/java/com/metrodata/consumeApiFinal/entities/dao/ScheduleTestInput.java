@@ -26,6 +26,9 @@ public class ScheduleTestInput {
         this.pic = pic;
     }
 
+    public ScheduleTestInput() {
+    }
+
   
 
 }

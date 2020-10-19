@@ -29,12 +29,16 @@ public class ProgramApplyService {
     public ProgramApply save(ProgramApply programApply) {
         return programApplyRepository.save(programApply);
     }
-    
-       public List<ProgramApply>showSchedule(){
-        return programApplyRepository.Showschedule();  
+
+    public List<ProgramApply> showSchedule() {
+        return programApplyRepository.Showschedule();
     }
 
-    public Integer countApply(){
-    return programApplyRepository.countApply();}
+    public Integer countApply() {
+        return programApplyRepository.countApply();
+    }
     
+    public ProgramApply getById(int id){
+        return programApplyRepository.findById(id).get();
+    }
 }
