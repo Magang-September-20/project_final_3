@@ -156,6 +156,8 @@ public class MainController {
             model.addAttribute("countApply", programApplyService.countApply());
             model.addAttribute("examDone", resultService.examDone());
             model.addAttribute("countCV", fileService.countCV());
+            model.addAttribute("countPassed", resultService.passedUser());
+            model.addAttribute("countFailed", resultService.failedUser());
 
             return "admin";
         } else {

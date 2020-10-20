@@ -20,4 +20,8 @@ public interface ResultRepository extends JpaRepository<Result, Integer>{
     @Query (value ="SELECT COUNT(id) FROM tb_tr_result where tb_tr_result.grade >= 0", nativeQuery=true)
     public int examDone();
     
+    @Query(value = "SELECT COUNT(a.id) from tb_tr_result as a JOIN tb_tr_schedule_test as b on a.id = b.id WHERE b.test=3 AND a.is_passed=TRUE",nativeQuery = true)
+    public int passedUser();
+    @Query(value = "SELECT COUNT(a.id) from tb_tr_result as a JOIN tb_tr_schedule_test as b on a.id = b.id WHERE a.is_passed=false;",nativeQuery = true)
+    public int failedUser();
 }
