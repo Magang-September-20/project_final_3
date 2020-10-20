@@ -14,20 +14,23 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 public class EducationInput {
     String degree, status;
-    int ipk, major, university;
-    MultipartFile cv, photo;
+    int major, university;
+    float ipk;
+//    MultipartFile cv, photo;
 
     public EducationInput() {
     }
-    
-    
-    public EducationInput(String degree, String status, int ipk, int major, int university) {
+
+    public EducationInput(String degree, String status, int major, int university, float ipk) {
         this.degree = degree;
         this.status = status;
-        this.ipk = ipk;
         this.major = major;
         this.university = university;
+        this.ipk = ipk;
     }
+    
+    
+   
     
 
     

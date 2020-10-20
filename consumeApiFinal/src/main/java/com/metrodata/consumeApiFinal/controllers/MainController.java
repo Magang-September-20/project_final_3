@@ -134,15 +134,15 @@ public class MainController {
         }
     }
 
-    @GetMapping("/educationForm")
-    public String educationForm(EducationInput input) {
+    @PostMapping("/educationForm")
+    public String educationForm(@Validated EducationInput input) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         int idTemp = Integer.parseInt(auth.getName());
         System.out.println(input.getMajor());
         System.out.println(input.getIpk());
         System.out.println(input.getStatus());
         es.save(input, idTemp);
-        return "redirect:/user";
+        return "redirect:/profile";
     }
 
     @GetMapping("/admin")

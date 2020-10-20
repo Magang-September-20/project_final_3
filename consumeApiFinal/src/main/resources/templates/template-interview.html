@@ -31,42 +31,38 @@
                 <td bgcolor="#eaeaea" style="padding: 40px 30px 40px 30px;">
 
                     <p>Dear <b><span th:text="${candidatename}"></span></b>,</p>
-                    <p>Selamat Anda Dinyatakan Lolos Tahap Selanjutnya!</p>
-                    <p>Dan ini adalah jadawal Test Anda Selanjutnya : <b>
+                    <p>Congratulations! You have been choosen and selected to the Next Stage!!</p>
+                    <p>Here some of the details you might be need : <b>
                             <table  border="0" >
-                                <thead>
+                                <thead style="text-align:left;">
                                     <tr>
                                         <th> Date </th>
+                                        <th> :</th>
                                         <td th:text = "${Date}"></td>
                                     </tr>
                                     <tr>
-                                        <th> Satart Time </th>
+                                        <th> Start Time </th>
+                                        <th> :</th>
                                         <td th:text = "${startTime}"></td>
                                     </tr>
                                     <tr>
                                         <th> End Time</th>
+                                        <th> :</th>
                                         <td th:text = "${endTime}"></td>
-                                        <tr>
-                                            <th>Test</th>
-                                            <td th:text = "${test}"></td>
-                                        </tr>
+                                    </tr>
+                                    <tr>
+                                        <th>Test</th>
+                                        <th> :</th>
+                                        <td th:text = "${test}"></td>
+                                    </tr>
+                                    <tr>
                                         <th>Location</th>
-                                        <td >  <a href="${Location}" th:text = "${Location}"></a></td>
+                                        <th> :</th>
+                                        <td>  <a href="${Location}">Link here</a></td>
                                     </tr>
                                 </thead>
-                                <tbody>
-
-                                </tbody>
                             </table>     
-
-                            <!--                            <span th:text="${username}"></span></b></p>
-                                                <p>Please complete all the neccesary files to apply a job in our company,</p>
-                                                <p style="font-size:16px;"><b><a href="http://localhost:8083/login">Click Here!</a></b></p>
-                                                                <p>These are some are the details we get from your form :</span></p>
-                                                                <p>Name     : <b><span th:text="${name}"></span></b></p>
-                                                                <p>Email    : <b><span th:text="${name}"></span></b></p>
-                                                                <p>Gender   : <b><span th:text="${name}"></span></b></p>
-                                                                <p>Birthdate: <b><span th:text="${name}"></span></b></p>-->
+                            <p><b>Please be ready 10 minutes before the specified time </b></p>
                             <p>Thanks and Best Regards. !! - <span th:text="${picname}"></span> -</p>
                             </td>
                             </tr>

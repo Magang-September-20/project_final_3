@@ -42,7 +42,7 @@ public class EducationService {
         Major major = ms.findbyid(input.getMajor());
         University univ = us.findbyid(input.getUniversity());
         
-        Education edu = new Education(Integer.SIZE, input.getDegree(), input.getStatus(), input.getIpk(),major,univ);
+        Education edu = new Education(idTemp, input.getDegree(), input.getStatus(), input.getIpk(),major,univ);
         User user = userService.getById(idTemp);
         edu.setUser(user);
         

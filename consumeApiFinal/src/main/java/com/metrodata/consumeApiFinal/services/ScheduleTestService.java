@@ -16,6 +16,7 @@ import com.metrodata.consumeApiFinal.repositories.ScheduleTestRepository;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
@@ -48,7 +49,8 @@ public class ScheduleTestService {
 //        String strDate = dateFormatter.format(scheduleTest.getDate());
 //        String startTime = timeFormatter.format(scheduleTest.getStartTime());
 //        String endTime = timeFormatter.format(scheduleTest.getEndTime());
-
+        dateFormatter.setTimeZone(TimeZone.getTimeZone("Asia/Jakarta"));
+        timeFormatter.setTimeZone(TimeZone.getTimeZone("Asia/Jakarta"));
         System.out.println(scheduleTest.getDate());
         System.out.println(scheduleTest.getStartTime());
         System.out.println(scheduleTest.getEndTime());
@@ -71,8 +73,8 @@ public class ScheduleTestService {
         ProgramApply programApplyEmail = programApplyService.getById(programApply.getId());
         User candidate = us.getById(programApplyEmail.getCandidate().getId());
 
-        System.out.println("pic fullname: " + pic.getFullName());
-        System.out.println("candidate fullname: " + candidate.getFullName());
+//        System.out.println("pic fullname: " + pic.getFullName());
+//        System.out.println("candidate fullname: " + candidate.getFullName());
 
         Result result = new Result();
         result.setId(test1.getId());
@@ -86,8 +88,8 @@ public class ScheduleTestService {
 //        scheduleTestRepository.save(test1);
 //        ======= kirim email ========
         try {
-            emailNotificationService.sendSchedule(candidate, pic, test1);
-            emailNotificationService.sendSchedulePic(candidate,pic,test1);
+            emailNotificationService.sendSchedule(candidate, pic,test1, scheduleTest);
+            emailNotificationService.sendSchedulePic(candidate,pic,test1,scheduleTest);
         } catch (MessagingException ex) {
             Logger.getLogger(ProgramApplyService.class.getName()).log(Level.SEVERE, null, ex);
         }

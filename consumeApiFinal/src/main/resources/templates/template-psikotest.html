@@ -15,7 +15,7 @@
                     /*font-size: 48px;*/
                 }
                 p{
-                    font-size: 14px;
+                    font-size: 16px;
                 }
             </style>
     </head>
@@ -30,31 +30,39 @@
             <td bgcolor="#eaeaea" style="padding: 40px 30px 40px 30px;">
 
                 <p>Dear <b><span th:text="${picname}"></span></b>,</p>
-                <p>Ada pekerjaan baru nih!</p>
-                <p>Dan ini adalah jadawal Test Anda Selanjutnya : <b>
+                <p>You Got a New Job!</p>
+                <p>Here some of the details about it : <b>
                         <table  border="0" >
-                            <thead>
+                            <thead style="text-align:left;">
                                 <tr>
                                     <th> Candidate </th>
+                                    <th> :</th>
                                     <td th:text = "${candidatename}"></td>
                                 </tr>
                                 <tr>
                                     <th> Date </th>
+                                    <th> :</th>
                                     <td th:text = "${Date}"></td>
                                 </tr>
                                 <tr>
-                                    <th> Satart Time </th>
+                                    <th> Start Time </th>
+                                    <th> :</th>
                                     <td th:text = "${startTime}"></td>
                                 </tr>
                                 <tr>
                                     <th> End Time</th>
+                                    <th> :</th>
                                     <td th:text = "${endTime}"></td>
-                                    <tr>
-                                        <th>Test</th>
-                                        <td th:text = "${test}"></td>
-                                    </tr>
+                                </tr>
+                                <tr>
+                                    <th>Test</th>
+                                    <th> :</th>
+                                    <td th:text = "${test}"></td>
+                                </tr>
+                                <tr>
                                     <th>Location</th>
-                                    <td >  <a href="${Location}" th:text = "${Location}"></a></td>
+                                    <th> :</th>
+                                    <td>  <a href="${Location}">Link here</a></td>
                                 </tr>
                             </thead>
                             <tbody>
