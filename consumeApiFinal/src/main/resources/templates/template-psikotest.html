@@ -10,12 +10,12 @@
 
             <!-- use the font -->
             <style>
+                *{
+                    font-size: 16px;
+                }
                 body {
                     font-family: 'Roboto', sans-serif;
                     /*font-size: 48px;*/
-                }
-                p{
-                    font-size: 16px;
                 }
             </style>
     </head>
@@ -62,7 +62,7 @@
                                 <tr>
                                     <th>Location</th>
                                     <th> :</th>
-                                    <td>  <a href="${Location}">Link here</a></td>
+                                    <td>  <a th:href="@{${Location}}">Link here</a></td>
                                 </tr>
                             </thead>
                             <tbody>

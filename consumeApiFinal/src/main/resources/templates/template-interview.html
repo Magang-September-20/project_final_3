@@ -10,12 +10,12 @@
 
             <!-- use the font -->
             <style>
+                *{
+                    font-size: 16px;
+                }
                 body {
                     font-family: 'Roboto', sans-serif;
                     /*font-size: 48px;*/
-                }
-                p{
-                    font-size: 14px;
                 }
             </style>
     </head>
@@ -31,7 +31,7 @@
                 <td bgcolor="#eaeaea" style="padding: 40px 30px 40px 30px;">
 
                     <p>Dear <b><span th:text="${candidatename}"></span></b>,</p>
-                    <p>Congratulations! You have been choosen and selected to the Next Stage!!</p>
+                    <p>Congratulations! You have been chosen and selected to the Next Stage!!</p>
                     <p>Here some of the details you might be need : <b>
                             <table  border="0" >
                                 <thead style="text-align:left;">
@@ -58,7 +58,7 @@
                                     <tr>
                                         <th>Location</th>
                                         <th> :</th>
-                                        <td>  <a href="${Location}">Link here</a></td>
+                                        <td>  <a th:href="@{${Location}}">Link here</a></td>
                                     </tr>
                                 </thead>
                             </table>     
