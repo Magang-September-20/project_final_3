@@ -1,54 +1,83 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Sending Email with Thymeleaf HTML Template Example</title>
+    <head>
+        <title>Sending Email with Thymeleaf HTML Template Example</title>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
-    <!-- use the font -->
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            /*font-size: 48px;*/
-        }
-        p{
-            font-size: 14px;
-        }
-    </style>
-</head>
-<body style="margin: 0; padding: 0;">
+            <!-- use the font -->
+            <style>
+                body {
+                    font-family: 'Roboto', sans-serif;
+                    /*font-size: 48px;*/
+                }
+                p{
+                    font-size: 14px;
+                }
+            </style>
+    </head>
+    <body style="margin: 0; padding: 0;">
 
-    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
-        <tr>
-            <td align="center" bgcolor="#d3d3d3" style="padding: 40px 0 30px 0;">
-                <img width="100px" src="https://cdc.unpar.ac.id/wp-content/uploads/2020/02/METRODATA-eps-format.png?x16186" style="display: block;" />
-            </td>
-        </tr>
-        <tr>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
+            <tr>
+                <td align="center" bgcolor="#d3d3d3" style="padding: 40px 0 30px 0;">
+                    <img width="100px" src="https://www.mii.co.id/-/media/project/corporate/identity/mii-logo.png?h=122&w=160&hash=D515F726DFD3CC44804F9C2553047AA807C75DFE" style="display: block;" />
+                </td>
+            </tr>
             <td bgcolor="#eaeaea" style="padding: 40px 30px 40px 30px;">
-                <h2>Register Successfully</h2>
-                <p>Dear <b><span th:text="${name}"></span></b>,</p>
-                <p>You have been successfully registering into our Database!</p>
-                <p>And now you can login into our website with your Username = <b><span th:text="${username}"></span></b></p>
-                <p>Please complete all the neccesary files to apply a job in our company,</p>
-                <p style="font-size:16px;"><b><a href="http://localhost:8083/login">Click Here!</a></b></p>
-<!--                <p>These are some are the details we get from your form :</span></p>
-                <p>Name     : <b><span th:text="${name}"></span></b></p>
-                <p>Email    : <b><span th:text="${name}"></span></b></p>
-                <p>Gender   : <b><span th:text="${name}"></span></b></p>
-                <p>Birthdate: <b><span th:text="${name}"></span></b></p>-->
-                <p>Thanks !! - <span th:text="${email}"></span> -</p>
-            </td>
-        </tr>
-        <tr>
-            <td bgcolor="#777777" style="padding: 30px 30px 30px 30px;">
-                <p style="color:white;font-size: 13px;display: block;">&copy; Copyright By Group3-Final Projek ™</p>
-            </td>
-        </tr>
-    </table>
 
-</body>
-</html>
+                <p>Dear <b><span th:text="${picname}"></span></b>,</p>
+                <p>Ada pekerjaan baru nih!</p>
+                <p>Dan ini adalah jadawal Test Anda Selanjutnya : <b>
+                        <table  border="0" >
+                            <thead>
+                                <tr>
+                                    <th> Candidate </th>
+                                    <td th:text = "${candidatename}"></td>
+                                </tr>
+                                <tr>
+                                    <th> Date </th>
+                                    <td th:text = "${Date}"></td>
+                                </tr>
+                                <tr>
+                                    <th> Satart Time </th>
+                                    <td th:text = "${startTime}"></td>
+                                </tr>
+                                <tr>
+                                    <th> End Time</th>
+                                    <td th:text = "${endTime}"></td>
+                                    <tr>
+                                        <th>Test</th>
+                                        <td th:text = "${test}"></td>
+                                    </tr>
+                                    <th>Location</th>
+                                    <td >  <a href="${Location}" th:text = "${Location}"></a></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>     
+
+                        <!--                            <span th:text="${username}"></span></b></p>
+                                            <p>Please complete all the neccesary files to apply a job in our company,</p>
+                                            <p style="font-size:16px;"><b><a href="http://localhost:8083/login">Click Here!</a></b></p>
+                                                            <p>These are some are the details we get from your form :</span></p>
+                                                            <p>Name     : <b><span th:text="${name}"></span></b></p>
+                                                            <p>Email    : <b><span th:text="${name}"></span></b></p>
+                                                            <p>Gender   : <b><span th:text="${name}"></span></b></p>
+                                                            <p>Birthdate: <b><span th:text="${name}"></span></b></p>-->
+                        <p>Thanks and Best Regards. !! </p>
+                        </td>
+                        <tr>
+                            <td bgcolor="#777777" style="padding: 30px 30px 30px 30px;">
+                                <p style="color:white;font-size: 13px;display: block;">&copy; Copyright By Group3-Final Projek ™</p>
+                            </td>
+                        </tr>
+                        </table>
+
+                        </body>
+                        </html>
