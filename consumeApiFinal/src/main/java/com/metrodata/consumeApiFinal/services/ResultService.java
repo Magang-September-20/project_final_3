@@ -33,4 +33,13 @@ public class ResultService {
     public int failedUser(){
         return resultRepository.failedUser();
     }
+    
+     public int passedPsikotes(){
+        return resultRepository.passedPsikotes();
+    }
+    
+     public int passedTechnical(){
+        return resultRepository.passedTechnical();
+    }
+    
 }

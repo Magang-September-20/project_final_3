@@ -154,10 +154,18 @@ public class MainController {
             System.out.println(userService.countUser() + "jumlah user");
             model.addAttribute("countUser", userService.countUser());
             model.addAttribute("countApply", programApplyService.countApply());
+            model.addAttribute("countIntern", programApplyService.countInter());
+            model.addAttribute("countJunior", programApplyService.countJunior());
+            model.addAttribute("countSenior", programApplyService.countSenior());
+            model.addAttribute("countFront", programApplyService.countFront());
+            model.addAttribute("countBack", programApplyService.countback());
+            model.addAttribute("countApply", programApplyService.countApply());
             model.addAttribute("examDone", resultService.examDone());
             model.addAttribute("countCV", fileService.countCV());
             model.addAttribute("countPassed", resultService.passedUser());
             model.addAttribute("countFailed", resultService.failedUser());
+            model.addAttribute("countPsikotes", resultService.passedPsikotes());
+            model.addAttribute("countTechnical", resultService.passedTechnical());
 
             return "admin";
         } else {

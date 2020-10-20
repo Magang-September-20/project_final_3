@@ -30,5 +30,19 @@ public interface ProgramApplyRepository extends JpaRepository<ProgramApply, Inte
     @Query(value = "select * FROM tb_tr_program_apply LEFT join tb_tr_schedule_test on tb_tr_program_apply.id = tb_tr_schedule_test.apply where tb_tr_schedule_test.id is NULL", nativeQuery = true)
     public List<ProgramApply> Showschedule();
    
+    @Query(value = "select count(id) from tb_tr_program_apply WHERE tb_tr_program_apply.program=1", nativeQuery = true)
+    public Integer applyIntern();
+    @Query(value = "select count(id) from tb_tr_program_apply WHERE tb_tr_program_apply.program=2", nativeQuery = true)
+    public Integer applyJunior();
+   
+    @Query(value = "select count(id) from tb_tr_program_apply WHERE tb_tr_program_apply.program=3", nativeQuery = true)
+    public Integer applySenior();
+   
+    @Query(value = "select count(id) from tb_tr_program_apply WHERE tb_tr_program_apply.program=4", nativeQuery = true)
+    public Integer applyFront();
+   
+    @Query(value = "select count(id) from tb_tr_program_apply WHERE tb_tr_program_apply.program=5", nativeQuery = true)
+    public Integer applyBack();
+   
  
 }

@@ -63,6 +63,24 @@ public class ProgramApplyService {
         return programApplyRepository.countApply();
     }
     
+    public Integer countInter() {
+        return programApplyRepository.applyIntern();
+    }
+    
+    public Integer countJunior() {
+        return programApplyRepository.applyJunior();
+    }
+    
+    public Integer countSenior() {
+        return programApplyRepository.applySenior();
+    }
+    public Integer countFront() {
+        return programApplyRepository.applyFront();
+    }
+    public Integer countback() {
+        return programApplyRepository.applyBack();
+    }
+    
     public ProgramApply getById(int id){
         return programApplyRepository.findById(id).get();
     }
