@@ -16,12 +16,21 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ResultService {
-    @Autowired ResultRepository resultRepository;
-    public Result saveResult(Result result){
+
+    @Autowired
+    ResultRepository resultRepository;
+
+    public Result saveResult(Result result) {
         return resultRepository.save(result);
     }
-    
-    public int examDone(){
-    return resultRepository.examDone();
+
+    public int examDone() {
+        return resultRepository.examDone();
+    }
+    public int passedUser(){
+        return resultRepository.passedUser();
+    }
+    public int failedUser(){
+        return resultRepository.failedUser();
     }
 }

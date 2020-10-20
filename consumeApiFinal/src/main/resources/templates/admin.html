@@ -133,7 +133,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">Passed Candidate</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${countCV}"></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="CountPassed" th:passed="${countPassed}" th:text="${countPassed}"></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -148,7 +148,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">Failed Candidate</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${countCV}"></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="CountFailed" th:failed="${countFailed}" th:text="${countFailed}"></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -157,6 +157,15 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="card-body">
+                            <div class="container mb-4" style="width:50%;">
+                                <div class="chart-pie pt-2 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                    <canvas id="myPieChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -184,8 +193,27 @@
         <script src="vendor/chart.js/Chart.min.js"></script>
 
         <!-- Page level custom scripts -->
-        <script src="js/demo/chart-area-demo.js"></script>
-        <script src="js/demo/chart-pie-demo.js"></script>
+        <!--<script src="js/demo/chart-area-demo.js"></script>-->
+        <!--<script src="js/demo/chart-pie-demo.js"></script>-->
+        <script>
+            var ctx = document.getElementById("myPieChart");
+            var failed = document.getElementById("CountFailed").getAttribute("failed");
+            var passed = document.getElementById("CountPassed").getAttribute("passed")
+            console.log(failed,passed);
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ["Failed","Passed"],
+                    datasets: [{
+                            backgroundColor: [
+                                "#DC143C",
+                                "#2ecc71"
+                            ],
+                            data: [failed, passed]
+                        }]
+                }
+            });
+        </script>
         <!-- <div th:replace="fragments/header :: header"></div>
           <div th:replace="fragments/footer :: footer"></div>-->
 </body>
