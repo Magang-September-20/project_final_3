@@ -38,7 +38,7 @@ public class ProgramApplyService {
     }
 
     public void save(ProgramApply programApply) {
-//        ProgramApply newProgramApply = programApplyRepository.save(programApply);
+        ProgramApply newProgramApply = programApplyRepository.save(programApply);
         System.out.println("candidate id = "+programApply.getCandidate().getId());
         System.out.println("hr id = "+programApply.getHr().getId());
         User candidate = userService.getById(programApply.getCandidate().getId());

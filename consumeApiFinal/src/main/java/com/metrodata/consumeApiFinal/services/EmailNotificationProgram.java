@@ -53,7 +53,8 @@ public class EmailNotificationProgram {
 //        System.out.println(pa.getHr().getFullName());
         helper.setTo(candidate.getEmail()); //ini di isi pa.getCandidate().getEmail()
         helper.setText(html, true);
-        helper.setSubject("Register Program Success - Metrodata Recruitment");
+        helper.setSubject("Register Program Success - Metrodata Recruitment "+pa.getProgram().getName());
+        System.out.println(pa.getProgram().getName());
         helper.setFrom("metrodata.recruitment3@gmail.com");
         javaMailSender.send(message);
     }
