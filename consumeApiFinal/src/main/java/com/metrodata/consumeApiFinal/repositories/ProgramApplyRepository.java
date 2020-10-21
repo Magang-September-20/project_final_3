@@ -43,6 +43,9 @@ public interface ProgramApplyRepository extends JpaRepository<ProgramApply, Inte
    
     @Query(value = "select count(id) from tb_tr_program_apply WHERE tb_tr_program_apply.program=5", nativeQuery = true)
     public Integer applyBack();
+  
+    @Query(value = "SELECT count(id) from tb_tr_program_apply  WHERE tb_tr_program_apply.candidate = ?1 and tb_tr_program_apply.program = ?2", nativeQuery = true)
+    public int compare(int candidateId, int program);
    
  
 }
