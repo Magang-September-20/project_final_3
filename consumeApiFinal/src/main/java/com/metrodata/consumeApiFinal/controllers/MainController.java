@@ -532,15 +532,20 @@ public class MainController {
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
 
-            boolean compare = programApplyService.compare(Integer.parseInt(auth.getName()), programApply.getProgram().getId()) > 0;
+            int compare = programApplyService.compare(Integer.parseInt(auth.getName()), programApply.getProgram().getId());
 //            int as = ((Integer)programApply.getProgram().;
 //            com.metrodata.consumeApiFinal.entities.User hr = userService.getById(pr.getHR(programApply.getProgram().getId()));
 //            com.metrodata.consumeApiFinal.entities.User candidate = userService.getById(programApply.getCandidate().getId());
-            if (!compare) {
-                programApply.setHr(new com.metrodata.consumeApiFinal.entities.User(pr.getHR(programApply.getProgram().getId())));
-                programApply.setCandidate(new com.metrodata.consumeApiFinal.entities.User(Integer.parseInt(auth.getName())));
-                programApplyService.save(programApply);
-                return "redirect:/programApply";
+            if (compare == 0) {
+                try {
+                    programApply.setHr(new com.metrodata.consumeApiFinal.entities.User(pr.getHR(programApply.getProgram().getId())));
+                    programApply.setCandidate(new com.metrodata.consumeApiFinal.entities.User(Integer.parseInt(auth.getName())));
+                    programApplyService.save(programApply);
+                } catch (Exception e) {
+                        return "redirect:/programApply";
+                }
+
+//            
             }
             return "redirect:/programApply";
         } else {
