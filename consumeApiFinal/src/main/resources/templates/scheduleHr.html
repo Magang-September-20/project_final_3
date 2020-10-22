@@ -52,6 +52,7 @@
                 <thead>
                     <tr>
                         <th> Date</th>
+                        <th> Name</th>
                         <th> Start_time</th>
                         <th> End_time</th>
                         <th> Location</th>
@@ -63,6 +64,7 @@
                 <tbody>
                     <tr th:each = "as : ${scheduleTestHr}">
                         <td th:text = "${as.date}"></td>
+                        <td th:text = "${as.apply.candidate.fullName}"></td>
                         <td th:text = "${as.startTime}"></td>
                         <td th:text = "${as.endTime}"></td>
                         <td><a th:href="${as.location}" >Link</a></td>
@@ -180,9 +182,9 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
-        $(document).ready(function(){
-        $('#PersonTabel').DataTable();
-        } );
+        $(document).ready(function () {
+            $('#PersonTabel').DataTable();
+        });
     </script>
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>

@@ -128,6 +128,7 @@ public class MainController {
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("major", ms.getAllMajor());
             model.addAttribute("univ", us.getAll());
+            model.addAttribute("file", test.getAll());
             model.addAttribute("EducationInput", new EducationInput());
             return "user";
         } else {
