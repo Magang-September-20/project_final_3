@@ -5,6 +5,7 @@
  */
 package com.metrodata.consumeApiFinal.controllers;
 
+import com.metrodata.consumeApiFinal.entities.File;
 import com.metrodata.consumeApiFinal.entities.LoginInput;
 import com.metrodata.consumeApiFinal.entities.ProgramApply;
 import com.metrodata.consumeApiFinal.entities.Result;
@@ -284,7 +285,7 @@ public class MainController {
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("profile1", es.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
-
+            model.addAttribute("file",fileService.getById(Integer.parseInt(auth.getName())));
             return "profile";
         } else {
             return "redirect:/login";
@@ -542,7 +543,6 @@ public class MainController {
 //            System.out.println("ini note "+programApply.getNote());
 //            System.out.println("ini hr "+programApply.getHr());
 //            System.out.println("ini candidate "+programApply.getCandidate());
-
             programApplyService.save(programApply);
             return "redirect:/programApply";
         } else {
@@ -557,26 +557,21 @@ public class MainController {
         }
         return authorities;
     }
-    
-    
-     @PostMapping("/saveFile")
-    public String handleFormSubmit(com.metrodata.consumeApiFinal.entities.File file,
-            @RequestParam("cv") MultipartFile multipartFile1,
-            @RequestParam("photo") MultipartFile multipartFile2) throws IOException {
+
+    @PostMapping("/saveFile")
+    public String handleFormSubmit(@RequestParam("cv") MultipartFile cv,
+            @RequestParam("photo") MultipartFile photo) throws IOException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String ProfileFoto = StringUtils.cleanPath(multipartFile1.getOriginalFilename());
-        String cv = StringUtils.cleanPath(multipartFile2.getOriginalFilename());
 
-        file.setId(Integer.parseInt(auth.getName()));
-        file.setPhoto(ProfileFoto);
-        file.setCv(cv);
-
-        com.metrodata.consumeApiFinal.entities.File savedFile = fileService.save(file);
-        String uploadDir = "uploads/" + savedFile.getId();
-
-        FileUploadUtil.saveFile(uploadDir, ProfileFoto, multipartFile1);
-        FileUploadUtil.saveFile(uploadDir, cv, multipartFile2);
-  
+        File file = fileService.getById(Integer.parseInt(auth.getName()));
+        try {
+            String CV = fileService.UploadFileName(cv, file, "cv");
+            String PHOTO = fileService.UploadFileName(photo, file, "photo");
+            file.setCv(CV);
+            file.setPhoto(PHOTO);
+            fileService.save(file);
+        } catch (Exception e) {
+        }
 
         return "redirect:/user";
     }
