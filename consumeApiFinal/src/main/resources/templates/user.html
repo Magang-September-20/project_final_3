@@ -52,7 +52,6 @@
                 <div class="container-fluid" style="margin-bottom: 60px;">
                     <h2>Education</h2>
                     <!--conten di sini-->
-
                     <div class="container">
                         <form id="eduForm" method="POST" th:object="${EducationInput}" th:action="@{/educationForm}">
                             <div class="form-group">
@@ -87,15 +86,10 @@
                                     <option th:each = "as : ${univ}" th:value="${as.id}" th:text="${as.name}"></option>
                                 </select>
                             </div>
-                            <!--                                <div class="form-group">
-                                                                <label for="uploadcv">Upload CV</label>
-                                                                <input type="file" class="form-control-file" id="cv" th:field="*{cv}">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="exampleFormControlFile1">Upload Photo</label>
-                                                                <input type="file" class="form-control-file" id="photo" th:field="*{photo}">
-                                                            </div>-->
                             <input type="submit" class="btn btn-primary mt-3" value="Submit" name="Create">
+                            <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#personModal">
+                                Upload File
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -103,7 +97,39 @@
 
             </div>
             <!-- End of Page Wrapper -->
+            <div th:fragment="modal" class="modal fade" id="personModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add People</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="insertForm" th:action="@{/saveFile}"  th:object="${file}" method="POST" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label for="example-time-input" class="col-2 col-form-label">CV</label>
+                                    <div class="col-10">
+                                        <input class="form-control" type="file"  id="cv" name="cv" accept="image/png, image/jpeg" >
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">Photo</label>
+                                    <div class="col-10">
+                                        <input class="form-control" type="file" id="photo" name="photo"  accept="image/png, image/jpeg" >
+                                    </div>
+                                </div>
 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Create" name="Create" >
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <!--Modal fragments-->
             <!--<div th:replace="fragments/header :: modals"></div>-->
 
