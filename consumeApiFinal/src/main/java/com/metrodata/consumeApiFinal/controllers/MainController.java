@@ -5,6 +5,7 @@
  */
 package com.metrodata.consumeApiFinal.controllers;
 
+import com.metrodata.consumeApiFinal.entities.File;
 import com.metrodata.consumeApiFinal.entities.LoginInput;
 import com.metrodata.consumeApiFinal.entities.ProgramApply;
 import com.metrodata.consumeApiFinal.entities.Result;
@@ -13,7 +14,6 @@ import com.metrodata.consumeApiFinal.entities.dao.EducationInput;
 import com.metrodata.consumeApiFinal.entities.dao.RegisterInput;
 import com.metrodata.consumeApiFinal.entities.dao.ScheduleTestInput;
 import com.metrodata.consumeApiFinal.entities.rest.LoginOutput;
-import com.metrodata.consumeApiFinal.repositories.ResultRepository;
 import com.metrodata.consumeApiFinal.services.EducationService;
 import com.metrodata.consumeApiFinal.services.FileService;
 import com.metrodata.consumeApiFinal.services.LoginService;
@@ -27,11 +27,8 @@ import com.metrodata.consumeApiFinal.services.ScheduleTestService;
 import com.metrodata.consumeApiFinal.services.TestService;
 import com.metrodata.consumeApiFinal.services.UniversityService;
 import com.metrodata.consumeApiFinal.services.UserService;
-import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,12 +41,14 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -132,6 +131,7 @@ public class MainController {
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("major", ms.getAllMajor());
             model.addAttribute("univ", us.getAll());
+            model.addAttribute("file", test.getAll());
             model.addAttribute("EducationInput", new EducationInput());
             return "user";
         } else {
@@ -280,7 +280,7 @@ public class MainController {
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("profile1", es.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
-
+            model.addAttribute("file",fileService.getById(Integer.parseInt(auth.getName())));
             return "profile";
         } else {
             return "redirect:/login";
@@ -595,5 +595,23 @@ public class MainController {
             authorities.add(new SimpleGrantedAuthority(role));
         }
         return authorities;
+    }
+
+    @PostMapping("/saveFile")
+    public String handleFormSubmit(@RequestParam("cv") MultipartFile cv,
+            @RequestParam("photo") MultipartFile photo) throws IOException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        File file = fileService.getById(Integer.parseInt(auth.getName()));
+        try {
+            String CV = fileService.UploadFileName(cv, file, "cv");
+            String PHOTO = fileService.UploadFileName(photo, file, "photo");
+            file.setCv(CV);
+            file.setPhoto(PHOTO);
+            fileService.save(file);
+        } catch (Exception e) {
+        }
+
+        return "redirect:/user";
     }
 }
