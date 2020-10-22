@@ -46,8 +46,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -259,11 +261,6 @@ public class MainController {
     @GetMapping("/schedule")
     public String schedule(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        System.out.println(auth.getName());
-        System.out.println(auth.getAuthorities());
-//        ScheduleTest scheduleTest = new ScheduleTest();
-//        scheduleTest = ss.getByEmail(auth.getName());
-
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
 //            model.addAttribute("schedules", ss.getByEmail(auth.getName()));
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
@@ -279,7 +276,6 @@ public class MainController {
     @GetMapping("/profile")
     public String profil(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("profile1", es.getById(Integer.parseInt(auth.getName())));
@@ -332,7 +328,7 @@ public class MainController {
     @PostMapping("/saveSchedule")
     public String save(@Validated ScheduleTestInput input) throws ParseException {
         System.out.println(input.getLocation());
-        input.setTest(1);
+//        input.setTest(1);
         System.out.println(input.getApply());
         System.out.println(input.getTest());
         System.out.println(input.getPic());
@@ -509,8 +505,8 @@ public class MainController {
     @GetMapping("programApply")
     public String ProgramApply(Model model, @Validated ProgramApply programApply) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(auth.getName());
-        System.out.println(auth.getAuthorities());
+//        System.out.println(auth.getName());
+//        System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("apply", programApplyService.getApply(Integer.parseInt(auth.getName())));
             model.addAttribute("iduser", Integer.parseInt(auth.getName()));
@@ -524,6 +520,46 @@ public class MainController {
         } else {
             return "redirect:/login";
         }
+    }
+    
+    @ResponseBody
+    @GetMapping("isScheduled/{id}")
+    public boolean getDetailProgress(@PathVariable("id") int id){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(id);
+        if(programApplyService.getDetailProgress(Integer.parseInt(auth.getName()), 1, id) != null){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    @ResponseBody
+    @GetMapping("isPassedTest/{id}")
+    public boolean isPassedTest(@PathVariable("id") int programId){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(programId);
+        if(programApplyService.isPassedTest(Integer.parseInt(auth.getName()), 1, programId) != null) return true;
+        else return false;
+    }
+    
+    @ResponseBody
+    @GetMapping("isPassedTeknikal/{id}")
+    public boolean isPassedTeknikal(@PathVariable("id") int programId){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(programId);
+        if(programApplyService.isPassedTest(Integer.parseInt(auth.getName()), 2, programId) != null) return true;
+        else return false;
+    }
+    
+    @ResponseBody
+    @GetMapping("isPassedInterview/{id}")
+    public boolean isPassedInterview(@PathVariable("id") int programId){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(programId);
+        if(programApplyService.isPassedTest(Integer.parseInt(auth.getName()), 3, programId) != null) return true;
+        else return false;
     }
 
     @PostMapping("/saveApply")
@@ -545,8 +581,6 @@ public class MainController {
                 } catch (Exception e) {
                     return "redirect:/programApply";
                 }
-
-//            
             }
             return "redirect:/programApply";
         } else {
@@ -561,12 +595,5 @@ public class MainController {
             authorities.add(new SimpleGrantedAuthority(role));
         }
         return authorities;
-    }
-
-    @PostMapping("/upload")
-    public String Upload(MultipartFile file) throws IOException {
-        String basefile = "D:\\FileGithub\\project_final_3\\consumeApiFinal\\src\\main\\resources\\static\\uploads";
-        file.transferTo(new File(basefile + "myfile.jpg"));
-        return "";
     }
 }

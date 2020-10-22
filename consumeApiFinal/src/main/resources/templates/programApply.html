@@ -70,8 +70,9 @@
                                 <td th:text = "${as.candidate.fullName}"></td>
                                 <td th:text = "${as.note}"></td>
                                 <td th:text = "${as.program.name}"></td>
-                                <td><button type="button" class="btn btn-secondary" th:programId="${as.program.id}" th:programName="${as.program.name}"
-                                            th:onclick="ProgramName(this.getAttribute('programId'),this.getAttribute('programName'))" data-toggle="modal" data-target="#detailProgress">Detail</button> </td>
+                                <td>
+                                    <button type="button" class="btn btn-secondary" th:programId="${as.program.id}" th:programName="${as.program.name}" th:id="${as.id}"
+                                            th:onclick="ProgramName(this.getAttribute('programId'),this.getAttribute('programName'),this.id)" data-toggle="modal" data-target="#detailProgress">Detail</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -131,12 +132,12 @@
                                     <header class="card-header">My Progress</header>
                                     <div class="card-body mb-3">
                                         <div class="track">
-                                            <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Apply Confirmed</span> </div>
-                                            <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">Scheduled For Test</span> </div>
-                                            <div class="step "> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Passed Psikotest</span> </div>
-                                            <div class="step "> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Passed Teknikal</span> </div>
-                                            <div class="step "> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Passed Interview</span> </div>
-                                            <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text"></span>Congratulation!</div>
+                                            <div id ="confirmed" class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Apply Confirmed</span> </div>
+                                            <div id ="scheduled" class="step"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">Scheduled For Test</span> </div>
+                                            <div id ="passedPsikotest" class="step"> <span class="icon"> <i class="psikotestIcon fa fa-check"></i> </span> <span class="text">Passed Psikotest</span> </div>
+                                            <div id ="passedTeknikal" class="step "> <span class="icon"> <i class="teknikalIcon fa fa-check"></i> </span> <span class="text">Passed Teknikal</span> </div>
+                                            <div id ="passedInterview" class="step "> <span class="icon"> <i class="interviewIcon fa fa-check"></i> </span> <span class="text">Passed Interview</span> </div>
+                                            <div id ="congratulation" class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text"></span>Congratulation!</div>
                                         </div>
                                     </div>
                                 </article>
@@ -163,10 +164,107 @@
                     $('#PersonTabel').DataTable();
                 });
 
-                function ProgramName(id,name) {
+                function ProgramName(id, name, applyId) {
                     console.log(id);
                     $("#TitleModal").text(name);
+                    $.ajax({
+                        url: "isScheduled/" + applyId,
+                        type: "GET",
+                        data: "",
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (result) {
+                            console.log(result);
+                            if (result) {
+                                $("#confirmed").removeClass("failed").addClass("active");
+                                $("#scheduled").removeClass("failed").addClass("active");
+                                $("#passedPsikotest").removeClass("failed");
+                                $("#passedTeknikal").removeClass("failed");
+                                $("#passedInterview").removeClass("failed");
+                                $("#congratulation").removeClass("failed");
+                            } else {
+//                                $("#confirmed").removeClass("active");
+                                $("#scheduled").removeClass("active");
+                                $("#passedPsikotest").removeClass("active");
+                                $("#passedTeknikal").removeClass("active");
+                                $("#passedInterview").removeClass("active");
+                                $("#congratulation").removeClass("active");
+                            }
+                        }
+                    });
+
+                    $.ajax({
+                        url: "isPassedTest/" + applyId,
+                        type: "GET",
+                        data: "",
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (result) {
+                            console.log(result);
+                            if (result) {
+                                $("#confirmed").removeClass("failed").addClass("active");
+                                $("#scheduled").removeClass("failed").addClass("active");
+                                $("#passedPsikotest").removeClass("failed").addClass("active");
+                                $("#passedTeknikal").removeClass("failed");
+                                $("#passedInterview").removeClass("failed");
+                                $("#congratulation").removeClass("failed");
+                            } else {
+//                                $("#confirmed").removeClass("active");
+//                                $("#scheduled").removeClass("active");
+//                                $("#passedPsikotest").removeClass("active");
+//                                $("#passedTeknikal").removeClass("active");
+//                                $("#passedInterview").removeClass("active");
+//                                $("#congratulation").removeClass("active");
+                            }
+                        }
+                    });
+                    $.ajax({
+                        url: "isPassedTeknikal/" + applyId,
+                        type: "GET",
+                        data: "",
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (result) {
+//                            console.log(result);
+                            if (result) {
+                                $("#confirmed").removeClass("failed").addClass("active");
+                                $("#scheduled").removeClass("failed").addClass("active");
+                                $("#passedPsikotest").removeClass("failed").addClass("active");
+                                $("#passedTeknikal").removeClass("failed").addClass("active");
+                                $("#passedInterview").removeClass("failed");
+                                $("#congratulation").removeClass("failed");
+                            } else {
+//                                $("#confirmed").removeClass("active");
+//                                $("#scheduled").removeClass("active");
+//                                $("#passedPsikotest").removeClass("active");
+//                                $("#passedTeknikal").removeClass("active");
+//                                $("#passedInterview").removeClass("active");
+//                                $("#congratulation").removeClass("active");
+                            }
+                        }
+                    });
+                    $.ajax({
+                        url: "isPassedInterview/" + applyId,
+                        type: "GET",
+                        data: "",
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (result) {
+//                            console.log(result);
+                            if (result) {
+                                $("#confirmed").removeClass("failed");
+                                $("#scheduled").removeClass("failed");
+                                $("#passedPsikotest").removeClass("failed");
+                                $("#passedTeknikal").removeClass("failed");
+                                $("#passedInterview").removeClass("failed");
+                                $("#congratulation").removeClass("failed");
+                                $("#passedInterview").addClass("active");
+                                $("#congratulation").addClass("active");
+                            } else {
+                                $("#passedInterview").removeClass("active");
+                                $("#congratulation").removeClass("active");
+                            }
+                        }
+                    });
                 }
+
+
             </script>
             <!-- Core plugin JavaScript-->
             <script src="vendor/jquery-easing/jquery.easing.min.js"></script>

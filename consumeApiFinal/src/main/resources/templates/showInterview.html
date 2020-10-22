@@ -50,7 +50,7 @@
                         <th> Program</th>
                         <th> Exam</th>
                         <th> Status </th>
-                        <!--<th> Passed</th>-->
+                        <th> Passed</th>
                         <!--<th> Create Schedule</th>-->
 
                     </tr>
@@ -62,12 +62,9 @@
                         <td th:text = "${as.apply.program.name}"></td>
                         <td th:text = "${as.test.name}"></td>
                         <td th:text = "${as.result.isPassed}"></td>
-                        <!--<td th:text = "${as.scheduleTestList.name}"></td>-->
-                        <!--                        <td th:text = "${as.program.name}"></td>
-                                                <td th:text = "${as.program.hr.fullName}"></td>-->
-<!--                        <td>     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#personModal" onclick=""> 
+                        <td><button type="button" class="btn btn-success" onclick=""> 
                                 Pass
-                            </button></td>-->
+                            </button></td>
 
                     </tr>
                 </tbody>
@@ -163,9 +160,9 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
-        $(document).ready(function(){
-        $('#PersonTabel').DataTable();
-        } );
+        $(document).ready(function () {
+            $('#PersonTabel').DataTable();
+        });
     </script>
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
