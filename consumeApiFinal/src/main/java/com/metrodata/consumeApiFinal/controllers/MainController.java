@@ -162,7 +162,6 @@ public class MainController {
             model.addAttribute("countSenior", programApplyService.countSenior());
             model.addAttribute("countFront", programApplyService.countFront());
             model.addAttribute("countBack", programApplyService.countback());
-            model.addAttribute("countApply", programApplyService.countApply());
             model.addAttribute("examDone", resultService.examDone());
             model.addAttribute("countCV", fileService.countCV());
             model.addAttribute("countPassed", resultService.passedUser());

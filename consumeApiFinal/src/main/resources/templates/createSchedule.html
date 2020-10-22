@@ -46,10 +46,10 @@
 
 
 
-            <table  class="table table-bordered" id="PersonTabel" >
-                <thead>
+            <table  class="table table-bordered table-hover" id="PersonTabel" >
+                <thead class="table-dark">
                     <tr>
-                        <th> Id</th>
+                        <!--<th> Id</th>-->
                         <th> Name</th>
                         <th> Note</th>
                         <th> Program </th>
@@ -61,7 +61,7 @@
                 </thead>
                 <tbody>
                     <tr th:each = "as : ${schedules}">
-                        <td th:text = "${as.id}"></td>
+                        <!--<td th:text="${i}"></td>-->
                         <td th:text = "${as.candidate.fullName}"></td>
                         <td th:text = "${as.note}"></td>
                         <td th:text = "${as.program.name}"></td>
@@ -129,15 +129,15 @@
                                 <input class="form-control" type="text"  th:field="*{location}" th:value="*{location}" id="location" >
                             </div>
                         </div>
-<!--                        <div class="form-group row">
-                            <label for="example-text-input" class="col-2 col-form-label">Test</label>
-                            <div class="col-10">
-                                <select class="form-control" id="test" th:field="*{test}"  >
-                                    <option th:each = "as : ${test}"  th:text="${as.name}"  id="test" th:value="${as.id}"></option>
-                                </select>
-                            </div>
-
-                        </div>-->
+                        <!--                        <div class="form-group row">
+                                                    <label for="example-text-input" class="col-2 col-form-label">Test</label>
+                                                    <div class="col-10">
+                                                        <select class="form-control" id="test" th:field="*{test}"  >
+                                                            <option th:each = "as : ${test}"  th:text="${as.name}"  id="test" th:value="${as.id}"></option>
+                                                        </select>
+                                                    </div>
+                        
+                                                </div>-->
                         <!--                        <div class="form-group row">
                                                     <label for="example-text-input" class="col-2 col-form-label">Apply</label>
                                                     <select class="form-control" id="apply"  th:field="*{apply}">
@@ -171,9 +171,9 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
-        $(document).ready(function(){
-        $('#PersonTabel').DataTable();
-        } );
+        $(document).ready(function () {
+            $('#PersonTabel').DataTable();
+        });
     </script>
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -189,12 +189,26 @@
     <script src="js/demo/chart-pie-demo.js"></script>
     <script>
         function createSchedule(id, programName, pic, candidate) {
-        console.log(id, programName, pic, candidate);
-        $('.modal-body #id').val(id);
-        //            $('.modal-body #test').val(programName);
-        $('.modal-body #pic').val(pic);
-        $('.modal-body #apply').val(candidate);
+            console.log(id, programName, pic, candidate);
+            $('.modal-body #id').val(id);
+            //            $('.modal-body #test').val(programName);
+            $('.modal-body #pic').val(pic);
+            $('.modal-body #apply').val(candidate);
         }
+        $(function () {
+            var dtToday = new Date();
+
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+            if (month < 10)
+                month = '0' + month.toString();
+            if (day < 10)
+                day = '0' + day.toString();
+
+            var maxDate = year + '-' + month + '-' + day;
+            $('#date').attr('min', maxDate);
+        });
     </script>
     <!-- <div th:replace="fragments/header :: header"></div>
       <div th:replace="fragments/footer :: footer"></div>-->
