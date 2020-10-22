@@ -85,14 +85,14 @@ public class ScheduleTestService {
         result.setScheduleTest(test1);
         test1.setResult(result);
 
-//        scheduleTestRepository.save(test1);
-//        ======= kirim email ========
-        try {
-            emailNotificationService.sendSchedule(candidate, pic,test1, scheduleTest);
-            emailNotificationService.sendSchedulePic(candidate,pic,test1,scheduleTest);
-        } catch (MessagingException ex) {
-            Logger.getLogger(ProgramApplyService.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        scheduleTestRepository.save(test1);
+////        ======= kirim email ========
+//        try {
+//            emailNotificationService.sendSchedule(candidate, pic,test1, scheduleTest);
+//            emailNotificationService.sendSchedulePic(candidate,pic,test1,scheduleTest);
+//        } catch (MessagingException ex) {
+//            Logger.getLogger(ProgramApplyService.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     public ScheduleTest getById(int id) {

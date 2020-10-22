@@ -321,6 +321,7 @@ public class MainController {
             model.addAttribute("scheduleInput", new ScheduleTestInput());
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("schedules", scheduleTestService.getAll());
+           
 
             model.addAttribute("test", test.getAll());
             return "showAllSchedule";
@@ -332,8 +333,9 @@ public class MainController {
     @PostMapping("/saveSchedule")
     public String save(@Validated ScheduleTestInput input) throws ParseException {
         System.out.println(input.getLocation());
-        System.out.println(input.getTest());
+        input.setTest(1);
         System.out.println(input.getApply());
+        System.out.println(input.getTest());
         System.out.println(input.getPic());
         scheduleTestService.save(input);
         return "redirect:/showAllSchedule";
@@ -542,7 +544,7 @@ public class MainController {
                     programApply.setCandidate(new com.metrodata.consumeApiFinal.entities.User(Integer.parseInt(auth.getName())));
                     programApplyService.save(programApply);
                 } catch (Exception e) {
-                        return "redirect:/programApply";
+                    return "redirect:/programApply";
                 }
 
 //            
