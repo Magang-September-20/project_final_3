@@ -89,8 +89,8 @@ and open the template in the editor.
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each = "as : ${applicants}">
-                        <td th:text = "${as.id}"></td>
+                    <tr th:each = "as,iterator : ${applicants}">
+                         <td th:text="${iterator.index+1}"></td>
                         <td th:text = "${as.name}"></td>
                         <td th:text = "${as.email}"></td>
                         <td th:text = "${as.roles}"></td>
