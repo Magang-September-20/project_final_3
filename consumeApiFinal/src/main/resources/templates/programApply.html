@@ -21,6 +21,7 @@
 
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="css/journey.css" rel="stylesheet">
 
     </head>
 
@@ -51,8 +52,8 @@
                 <div class="container-fluid">
 
                     <div align="center"><h1>Program Apply</h1></div>
-                    <button type="button" class="btn btn-success modalBtn" data-toggle="modal" data-target="#personModal" onclick=""> 
-                        apply     
+                    <button type="button" class="btn btn-success modalBtn mb-2" data-toggle="modal" data-target="#personModal" onclick=""> 
+                        Apply     
                     </button>
 
                     <table  class="table " id="PersonTabel" >
@@ -61,6 +62,7 @@
                                 <th> Full Name</th>
                                 <th> Note</th>
                                 <th> Program Apply</th>
+                                <th> Detail Progress</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,6 +70,8 @@
                                 <td th:text = "${as.candidate.fullName}"></td>
                                 <td th:text = "${as.note}"></td>
                                 <td th:text = "${as.program.name}"></td>
+                                <td><button type="button" class="btn btn-secondary" th:programId="${as.program.id}" th:programName="${as.program.name}"
+                                            th:onclick="ProgramName(this.getAttribute('programId'),this.getAttribute('programName'))" data-toggle="modal" data-target="#detailProgress">Detail</button> </td>
                             </tr>
                         </tbody>
                     </table>
@@ -105,10 +109,42 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary" value="Apply" name="Apply" >Apply</button>>
+                                <button type="submit" class="btn btn-primary" value="Apply" name="Apply" >Apply</button>
 
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+            <div th:fragment="modal" class="modal fade" id="detailProgress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="TitleModal">My Progress</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <article class="card">
+                                    <header class="card-header">My Progress</header>
+                                    <div class="card-body mb-3">
+                                        <div class="track">
+                                            <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Apply Confirmed</span> </div>
+                                            <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">Scheduled For Test</span> </div>
+                                            <div class="step "> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Passed Psikotest</span> </div>
+                                            <div class="step "> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Passed Teknikal</span> </div>
+                                            <div class="step "> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Passed Interview</span> </div>
+                                            <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text"></span>Congratulation!</div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -126,6 +162,11 @@
                 $(document).ready(function () {
                     $('#PersonTabel').DataTable();
                 });
+
+                function ProgramName(id,name) {
+                    console.log(id);
+                    $("#TitleModal").text(name);
+                }
             </script>
             <!-- Core plugin JavaScript-->
             <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
