@@ -84,4 +84,8 @@ public class ProgramApplyService {
     public ProgramApply getById(int id){
         return programApplyRepository.findById(id).get();
     }
+    
+    public int compare(int idCandidate,int idprogram){
+        return programApplyRepository.compare(idCandidate, idprogram);
+    }
 }

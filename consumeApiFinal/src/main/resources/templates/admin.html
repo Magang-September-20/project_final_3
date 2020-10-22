@@ -19,6 +19,44 @@
 
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        <style>
+            .highcharts-figure, .highcharts-data-table table {
+                min-width: 320px; 
+                max-width: 800px;
+                margin: 1em auto;
+            }
+
+            .highcharts-data-table table {
+                font-family: Verdana, sans-serif;
+                border-collapse: collapse;
+                border: 1px solid #EBEBEB;
+                margin: 10px auto;
+                text-align: center;
+                width: 100%;
+                max-width: 500px;
+            }
+            .highcharts-data-table caption {
+                padding: 1em 0;
+                font-size: 1.2em;
+                color: #555;
+            }
+            .highcharts-data-table th {
+                font-weight: 600;
+                padding: 0.5em;
+            }
+            .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+                padding: 0.5em;
+            }
+            .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+                background: #f8f8f8;
+            }
+            .highcharts-data-table tr:hover {
+                background: #f1f7ff;
+            }
+            .highcharts-title,.highcharts-background,.highcharts-credits,.highcharts-a11y-proxy-container,.highcharts-exporting-group{
+                display:none;
+            }
+        </style>
 
     </head>
 
@@ -127,126 +165,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Apply Internship</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${countIntern}"></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-file fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Apply Junior Programmer</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${countJunior}"></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-file fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Apply Senior Programmer</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${countSenior}"></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-file fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Apply front and programmer</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${countFront}"></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-file fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Apply Back and programmer</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${countBack}"></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-file fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Passed Psikotest</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${countPsikotes}"></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-file fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Passed Technical</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${countTechnical}"></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-file fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Passed Interview</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${countPassed}"></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-file fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="col-xl-6 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
@@ -278,13 +197,54 @@
                             </div>
                         </div>
 
-                        <div class="card-body">
-                            <div class="container mb-4" style="width:50%;">
-                                <div class="chart-pie pt-2 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                    <canvas id="myPieChart"></canvas>
+                        <div class="col-xl-6 col-md-6 mb-4">
+                            <div class="card border-left-danger shadow py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">How Many User Has Passed?</div>
+                                        </div>
+                                    </div>
+                                    <div class="container">
+                                        <div class="chart-pie pt-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                            <canvas id="myPieChart"></canvas>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-xl-6 col-md-6 mb-4">
+                            <div class="card border-left-danger shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">Program Apply</div>
+                                        </div>
+                                    </div>
+                                    <figure class="highcharts-figure" style="margin-top:-80px;">
+                                        <div id="container"></div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-12 col-md-6 mb-4">
+                            <div class="card border-left-danger shadow py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">User Passed Per Test</div>
+                                        </div>
+                                    </div>
+                                    <figure class="highcharts-figure">
+                                        <div id="LineChartContainer"></div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
 
                     </div>
                 </div>
@@ -311,6 +271,10 @@
 
         <!-- Page level plugins -->
         <script src="vendor/chart.js/Chart.min.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
         <!-- Page level custom scripts -->
         <!--<script src="js/demo/chart-area-demo.js"></script>-->
@@ -319,20 +283,138 @@
             var ctx = document.getElementById("myPieChart");
             var failed = document.getElementById("CountFailed").getAttribute("failed");
             var passed = document.getElementById("CountPassed").getAttribute("passed")
-            console.log(failed,passed);
+                    console.log(failed, passed);
             var myChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ["Failed","Passed"],
-                    datasets: [{
+            type: 'doughnut',
+                    data: {
+                    labels: ["Failed", "Passed"],
+                            datasets: [{
                             backgroundColor: [
-                                "#DC143C",
-                                "#2ecc71"
+                                    "#DC143C",
+                                    "#2ecc71"
                             ],
-                            data: [failed, passed]
-                        }]
-                }
+                                    data: [failed, passed]
+                            }]
+                    }
             });
+//            ini pie chart higchart
+            Highcharts.chart('container', {
+            chart: {
+            plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+            },
+                    tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    accessibility: {
+                    point: {
+                    valueSuffix: '%'
+                    }
+                    },
+                    plotOptions: {
+                    pie: {
+                    allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                            enabled: true,
+                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                            }
+                    }
+                    },
+                    series: [{
+                    name: 'Brands',
+                            colorByPoint: true,
+                            data: [{
+                            name: 'Internship',
+                                    y: [[${countIntern}]],
+                            }, {
+                            name: 'Junior Programmer',
+                                    y: [[${countJunior}]]
+                            }, {
+                            name: 'Senior Programmer',
+                                    y: [[${countSenior}]]
+                            }, {
+                            name: 'Front End Programmer',
+                                    y: [[${countFront}]]
+                            }, {
+                            name: 'Back End Programmer',
+                                    y: [[${countBack}]]
+                            }]
+                    }]
+            });
+//            batas akhir pie chart
+//        line chart
+            var psikotes =[[${countPsikotes}]];
+            var teknikal =[[${countTechnical}]];
+            var interview =[[${countPassed}]];
+//            var data = [ [ "Psikotes", psikotes ] ,["Teknikal", teknikal] ,["Interview", interview] ];
+            var data = [psikotes  ,teknikal ,interview];
+            var labels = [ "Psikotes", "Teknikal", "Interview"];
+            var dataSum = 0;
+            for (var i = 0; i < 3; i++) {
+                dataSum += data[i];
+            }
+            console.log(dataSum);
+
+
+            var chart = new Highcharts.Chart({
+            chart: {
+            renderTo:'LineChartContainer',
+            },
+                    title:{
+                    text:'Chart Title'
+                    },
+                    credits:{enabled:false},
+                    legend:{
+                    },
+                    plotOptions: {
+                    series: {
+                    shadow:false,
+                            borderWidth:0,
+                            dataLabels:{
+                            enabled:true,
+                                    formatter:function() {
+                                    var pcnt = (this.y / dataSum) * 100;
+                                    return Highcharts.numberFormat(pcnt) + '%';
+                                    }
+                            }
+                    }
+                    },
+                    xAxis:{
+                    lineColor:'#999',
+                            lineWidth:1,
+                            tickColor:'#666',
+                            tickLength:3,
+                            title:{
+                            text:'X Axis Title'
+                            },
+                            labels: {
+                            enabled: true,
+                                    formatter: function() {
+                                    return labels[this.value];
+                                    },
+                            }
+                    },
+                    yAxis:{
+                    lineColor:'#999',
+                            lineWidth:1,
+                            tickColor:'#666',
+                            tickWidth:1,
+                            tickLength:3,
+                            gridLineColor:'#ddd',
+                            title:{
+                            text:'Y Axis Title',
+                                    rotation:0,
+                                    margin:50,
+                            }
+                    },
+                    series: [{
+                    data: data
+                    }]
+            });
+//batas line chart
         </script>
         <!-- <div th:replace="fragments/header :: header"></div>
           <div th:replace="fragments/footer :: footer"></div>-->

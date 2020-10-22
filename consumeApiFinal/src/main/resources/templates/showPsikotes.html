@@ -46,8 +46,8 @@
 
 
 
-            <table  class="table table-bordered" id="PersonTabel" >
-                <thead>
+            <table  class="table" id="PersonTabel" >
+                <thead class="table-dark">
                     <tr>
                         <th> Name</th>
                         <th> Program</th>
@@ -144,10 +144,10 @@
     <script src="vendor/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-     <script>
-        $(document).ready(function(){
-        $('#PersonTabel').DataTable();
-        } );
+    <script>
+        $(document).ready(function () {
+            $('#PersonTabel').DataTable();
+        });
     </script>
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -162,13 +162,27 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
     <script>
-        function createSchedule(test,apply, pic, candidate) {
-        console.log(test,apply, pic, candidate);
-        //            $('.modal-body #id').val(id);
-        $('.modal-body #test').val(2); //2 untuk test selanjutnya
-        $('.modal-body #pic').val(pic);
-        $('.modal-body #apply').val(apply);
-        }
+         function createSchedule(test, apply, pic, candidate) {
+             console.log(test, apply, pic, candidate);
+             //            $('.modal-body #id').val(id);
+             $('.modal-body #test').val(2); //2 untuk test selanjutnya
+             $('.modal-body #pic').val(pic);
+             $('.modal-body #apply').val(apply);
+         }
+         $(function () {
+             var dtToday = new Date();
+
+             var month = dtToday.getMonth() + 1;
+             var day = dtToday.getDate();
+             var year = dtToday.getFullYear();
+             if (month < 10)
+                 month = '0' + month.toString();
+             if (day < 10)
+                 day = '0' + day.toString();
+
+             var maxDate = year + '-' + month + '-' + day;
+             $('#date').attr('min', maxDate);
+         });
     </script>
     <!-- <div th:replace="fragments/header :: header"></div>
       <div th:replace="fragments/footer :: footer"></div>-->

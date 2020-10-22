@@ -27,6 +27,8 @@ import com.metrodata.consumeApiFinal.services.ScheduleTestService;
 import com.metrodata.consumeApiFinal.services.TestService;
 import com.metrodata.consumeApiFinal.services.UniversityService;
 import com.metrodata.consumeApiFinal.services.UserService;
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,6 +48,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -159,7 +162,6 @@ public class MainController {
             model.addAttribute("countSenior", programApplyService.countSenior());
             model.addAttribute("countFront", programApplyService.countFront());
             model.addAttribute("countBack", programApplyService.countback());
-            model.addAttribute("countApply", programApplyService.countApply());
             model.addAttribute("examDone", resultService.examDone());
             model.addAttribute("countCV", fileService.countCV());
             model.addAttribute("countPassed", resultService.passedUser());
@@ -318,6 +320,7 @@ public class MainController {
             model.addAttribute("scheduleInput", new ScheduleTestInput());
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("schedules", scheduleTestService.getAll());
+           
 
             model.addAttribute("test", test.getAll());
             return "showAllSchedule";
@@ -329,8 +332,9 @@ public class MainController {
     @PostMapping("/saveSchedule")
     public String save(@Validated ScheduleTestInput input) throws ParseException {
         System.out.println(input.getLocation());
-        System.out.println(input.getTest());
+        input.setTest(1);
         System.out.println(input.getApply());
+        System.out.println(input.getTest());
         System.out.println(input.getPic());
         scheduleTestService.save(input);
         return "redirect:/showAllSchedule";
@@ -528,24 +532,27 @@ public class MainController {
         System.out.println(auth.getName());
         System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
+
+            int compare = programApplyService.compare(Integer.parseInt(auth.getName()), programApply.getProgram().getId());
 //            int as = ((Integer)programApply.getProgram().;
 //            com.metrodata.consumeApiFinal.entities.User hr = userService.getById(pr.getHR(programApply.getProgram().getId()));
 //            com.metrodata.consumeApiFinal.entities.User candidate = userService.getById(programApply.getCandidate().getId());
-            programApply.setHr(new com.metrodata.consumeApiFinal.entities.User(pr.getHR(programApply.getProgram().getId())));
-            programApply.setCandidate(new com.metrodata.consumeApiFinal.entities.User(Integer.parseInt(auth.getName())));
-//            programApply.setHr(hr);
-//            programApply.setCandidate(candidate);
+            if (compare == 0) {
+                try {
+                    programApply.setHr(new com.metrodata.consumeApiFinal.entities.User(pr.getHR(programApply.getProgram().getId())));
+                    programApply.setCandidate(new com.metrodata.consumeApiFinal.entities.User(Integer.parseInt(auth.getName())));
+                    programApplyService.save(programApply);
+                } catch (Exception e) {
+                    return "redirect:/programApply";
+                }
 
-//            System.out.println("ini program "+programApply.getProgram());
-//            System.out.println("ini note "+programApply.getNote());
-//            System.out.println("ini hr "+programApply.getHr());
-//            System.out.println("ini candidate "+programApply.getCandidate());
-
-            programApplyService.save(programApply);
+//            
+            }
             return "redirect:/programApply";
         } else {
             return "redirect:/login";
         }
+
     }
 
     private static Collection<? extends GrantedAuthority> getAuthorities(List<String> roles) {
@@ -554,5 +561,12 @@ public class MainController {
             authorities.add(new SimpleGrantedAuthority(role));
         }
         return authorities;
+    }
+
+    @PostMapping("/upload")
+    public String Upload(MultipartFile file) throws IOException {
+        String basefile = "D:\\FileGithub\\project_final_3\\consumeApiFinal\\src\\main\\resources\\static\\uploads";
+        file.transferTo(new File(basefile + "myfile.jpg"));
+        return "";
     }
 }
