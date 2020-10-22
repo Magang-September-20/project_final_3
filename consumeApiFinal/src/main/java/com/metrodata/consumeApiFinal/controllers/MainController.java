@@ -13,7 +13,6 @@ import com.metrodata.consumeApiFinal.entities.dao.EducationInput;
 import com.metrodata.consumeApiFinal.entities.dao.RegisterInput;
 import com.metrodata.consumeApiFinal.entities.dao.ScheduleTestInput;
 import com.metrodata.consumeApiFinal.entities.rest.LoginOutput;
-import com.metrodata.consumeApiFinal.repositories.ResultRepository;
 import com.metrodata.consumeApiFinal.services.EducationService;
 import com.metrodata.consumeApiFinal.services.FileService;
 import com.metrodata.consumeApiFinal.services.LoginService;
@@ -27,9 +26,8 @@ import com.metrodata.consumeApiFinal.services.ScheduleTestService;
 import com.metrodata.consumeApiFinal.services.TestService;
 import com.metrodata.consumeApiFinal.services.UniversityService;
 import com.metrodata.consumeApiFinal.services.UserService;
-import java.text.DateFormat;
+import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,10 +40,13 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -554,5 +555,28 @@ public class MainController {
             authorities.add(new SimpleGrantedAuthority(role));
         }
         return authorities;
+    }
+    
+    
+     @PostMapping("/saveFile")
+    public String handleFormSubmit(com.metrodata.consumeApiFinal.entities.File file,
+            @RequestParam("cv") MultipartFile multipartFile1,
+            @RequestParam("photo") MultipartFile multipartFile2) throws IOException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String ProfileFoto = StringUtils.cleanPath(multipartFile1.getOriginalFilename());
+        String cv = StringUtils.cleanPath(multipartFile2.getOriginalFilename());
+
+        file.setId(Integer.parseInt(auth.getName()));
+        file.setPhoto(ProfileFoto);
+        file.setCv(cv);
+
+        com.metrodata.consumeApiFinal.entities.File savedFile = fileService.save(file);
+        String uploadDir = "uploads/" + savedFile.getId();
+
+        FileUploadUtil.saveFile(uploadDir, ProfileFoto, multipartFile1);
+        FileUploadUtil.saveFile(uploadDir, cv, multipartFile2);
+  
+
+        return "redirect:/user";
     }
 }

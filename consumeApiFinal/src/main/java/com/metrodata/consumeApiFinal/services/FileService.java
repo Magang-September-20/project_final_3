@@ -5,6 +5,7 @@
  */
 package com.metrodata.consumeApiFinal.services;
 
+import com.metrodata.consumeApiFinal.entities.File;
 import com.metrodata.consumeApiFinal.repositories.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,9 @@ public class FileService {
     
     public int countCV(){
     return fileRepository.countCV();
+    }
+    
+    public File save(File file){
+    return fileRepository.save(file);
     }
 }
