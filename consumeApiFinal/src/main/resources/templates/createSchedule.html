@@ -42,11 +42,11 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
             <div align="center"><h1>Create Schedule</h1></div>
- 
+
             <table  class="table table-bordered table-hover" id="PersonTabel" >
                 <thead class="table-dark">
                     <tr>
-                        <!--<th> Id</th>-->
+                        <th> No</th>
                         <th> Name</th>
                         <th> Note</th>
                         <th> Program </th>
@@ -57,8 +57,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each = "as : ${schedules}">
-                        <!--<td th:text="${i}"></td>-->
+                    <tr th:each = "as,iterator : ${schedules}">
+                        <td th:text="${iterator.index+1}"></td>
                         <td th:text = "${as.candidate.fullName}"></td>
                         <td th:text = "${as.note}"></td>
                         <td th:text = "${as.program.name}"></td>

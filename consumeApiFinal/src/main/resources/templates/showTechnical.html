@@ -49,6 +49,7 @@
             <table  class="table" id="PersonTabel">
                 <thead class="table-dark">
                     <tr>
+                        <th> No</th>
                         <th> Name</th>
                         <th> Program</th>
                         <th> Exam</th>
@@ -59,8 +60,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each = "as : ${technical}">
-
+                    <tr th:each = "as,iterator : ${technical}">
+                        <td th:text="${iterator.index+1}"></td>
                         <td th:text = "${as.apply.candidate.fullName}"></td>
                         <td th:text = "${as.apply.program.name}"></td>
                         <td th:text = "${as.test.name}"></td>

@@ -46,9 +46,7 @@ public class ScheduleTestService {
     public void save(ScheduleTestInput scheduleTest) throws ParseException {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm");
-//        String strDate = dateFormatter.format(scheduleTest.getDate());
-//        String startTime = timeFormatter.format(scheduleTest.getStartTime());
-//        String endTime = timeFormatter.format(scheduleTest.getEndTime());
+
         dateFormatter.setTimeZone(TimeZone.getTimeZone("Asia/Jakarta"));
         timeFormatter.setTimeZone(TimeZone.getTimeZone("Asia/Jakarta"));
         System.out.println(scheduleTest.getDate());

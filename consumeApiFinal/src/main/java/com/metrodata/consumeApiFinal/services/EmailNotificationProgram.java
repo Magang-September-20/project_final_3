@@ -66,9 +66,9 @@ public class EmailNotificationProgram {
         context.setVariable("program", pa.getProgram().getName());
         context.setVariable("email", candidate.getEmail());
         String html = templateEngine.process("template-congrats", context);
-        helper.setTo("michelleolivia68@gmail.com"); //ini di isi pa.getCandidate().getEmail()
+        helper.setTo("jonathanpurnama13@gmail.com");
         helper.setText(html, true);
-        helper.setSubject("Congratulation : You are accepted " + pa.getProgram().getName());
+        helper.setSubject("Congratulation : You are accepted on " + pa.getProgram().getName() + " !!");
         System.out.println(pa.getProgram().getName());
         helper.setFrom("metrodata.recruitment3@gmail.com");
         javaMailSender.send(message);

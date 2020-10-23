@@ -46,6 +46,7 @@
             <table  class="table" id="PersonTabel" >
                 <thead class="table-dark">
                     <tr>
+                        <th> No</th>
                         <th> Name</th>
                         <th> Program</th>
                         <th> Exam</th>
@@ -56,15 +57,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each = "as : ${interview}">
-
+                    <tr th:each = "as,iterator : ${interview}">
+                        <td th:text="${iterator.index+1}"></td>
                         <td th:text = "${as.apply.candidate.fullName}"></td>
                         <td th:text = "${as.apply.program.name}"></td>
                         <td th:text = "${as.test.name}"></td>
                         <td th:text = "${as.result.isPassed}"></td>
-                        <td><button type="button" class="btn btn-success" onclick=""> 
+                        <td>
+                            <button type="button" class="btn btn-success" th:candidateId="${as.apply.candidate.id}" th:programId="${as.apply.program.id}" th:id="${as.id}"
+                                    th:onclick="PassInterview(this.getAttribute('candidateId'),this.getAttribute('programId'),this.id)"> 
                                 Pass
-                            </button></td>
+                            </button>
+                        </td>
 
                     </tr>
                 </tbody>
@@ -163,6 +167,20 @@
         $(document).ready(function () {
             $('#PersonTabel').DataTable();
         });
+        function PassInterview(candidate, program, id) {
+            console.log(candidate, program, id);
+            $.ajax({
+                url: "passInterview/" + candidate + "/" + program,
+                type: "GET",
+                data: "",
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    console.log(result);
+                    alert("Email Berhasil Di kirim ke Kandidat");
+                    document.getElementById(id).disabled = true;
+                }
+            });
+        }
     </script>
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>

@@ -15,6 +15,7 @@ import com.metrodata.consumeApiFinal.entities.dao.RegisterInput;
 import com.metrodata.consumeApiFinal.entities.dao.ScheduleTestInput;
 import com.metrodata.consumeApiFinal.entities.rest.LoginOutput;
 import com.metrodata.consumeApiFinal.services.EducationService;
+import com.metrodata.consumeApiFinal.services.EmailNotificationProgram;
 import com.metrodata.consumeApiFinal.services.FileService;
 import com.metrodata.consumeApiFinal.services.LoginService;
 import com.metrodata.consumeApiFinal.services.MajorService;
@@ -32,6 +33,7 @@ import java.text.ParseException;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -80,6 +82,7 @@ public class MainController {
     ResultService resultService;
     @Autowired
     FileService fileService;
+    @Autowired EmailNotificationProgram emailNotificationProgram;
 
     @Autowired
     ScheduleTestService scheduleTestService;
@@ -280,7 +283,7 @@ public class MainController {
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("profile1", es.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
-            model.addAttribute("file",fileService.getById(Integer.parseInt(auth.getName())));
+            model.addAttribute("file", fileService.getById(Integer.parseInt(auth.getName())));
             return "profile";
         } else {
             return "redirect:/login";
@@ -316,7 +319,6 @@ public class MainController {
             model.addAttribute("scheduleInput", new ScheduleTestInput());
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
             model.addAttribute("schedules", scheduleTestService.getAll());
-           
 
             model.addAttribute("test", test.getAll());
             return "showAllSchedule";
@@ -386,7 +388,15 @@ public class MainController {
         } else {
             return "redirect:/login";
         }
+    }
 
+    @ResponseBody
+    @GetMapping("/passInterview/{candidate}/{program}")
+    public void passInterview(@PathVariable("candidate") int candidate, @PathVariable("program") int program) throws MessagingException {
+        System.out.println(candidate + " " + program);
+        com.metrodata.consumeApiFinal.entities.User user = userService.getById(candidate);
+        ProgramApply programApply = programApplyService.getById(program);
+        emailNotificationProgram.sendEmailCongrat(user, programApply);
     }
 
     @GetMapping("applicant")
@@ -521,45 +531,53 @@ public class MainController {
             return "redirect:/login";
         }
     }
-    
+
     @ResponseBody
     @GetMapping("isScheduled/{id}")
-    public boolean getDetailProgress(@PathVariable("id") int id){
+    public boolean getDetailProgress(@PathVariable("id") int id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(id);
-        if(programApplyService.getDetailProgress(Integer.parseInt(auth.getName()), 1, id) != null){
+        if (programApplyService.getDetailProgress(Integer.parseInt(auth.getName()), 1, id) != null) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
-    
+
     @ResponseBody
     @GetMapping("isPassedTest/{id}")
-    public boolean isPassedTest(@PathVariable("id") int programId){
+    public boolean isPassedTest(@PathVariable("id") int programId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(programId);
-        if(programApplyService.isPassedTest(Integer.parseInt(auth.getName()), 1, programId) != null) return true;
-        else return false;
+        if (programApplyService.isPassedTest(Integer.parseInt(auth.getName()), 1, programId) != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
-    
+
     @ResponseBody
     @GetMapping("isPassedTeknikal/{id}")
-    public boolean isPassedTeknikal(@PathVariable("id") int programId){
+    public boolean isPassedTeknikal(@PathVariable("id") int programId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(programId);
-        if(programApplyService.isPassedTest(Integer.parseInt(auth.getName()), 2, programId) != null) return true;
-        else return false;
+        if (programApplyService.isPassedTest(Integer.parseInt(auth.getName()), 2, programId) != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
-    
+
     @ResponseBody
     @GetMapping("isPassedInterview/{id}")
-    public boolean isPassedInterview(@PathVariable("id") int programId){
+    public boolean isPassedInterview(@PathVariable("id") int programId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(programId);
-        if(programApplyService.isPassedTest(Integer.parseInt(auth.getName()), 3, programId) != null) return true;
-        else return false;
+        if (programApplyService.isPassedTest(Integer.parseInt(auth.getName()), 3, programId) != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @PostMapping("/saveApply")

@@ -75,7 +75,7 @@ public class EmailNotificationService {
         System.out.println("ini date,start,end " + input.getDate() + input.getStartTime() + input.getEndTime());
         helper.setTo("jonathanpurnama13@gmail.com"); //ini di isi candidate.getEmail()
         helper.setText(html, true);
-        helper.setSubject("Next Exam - Metrodata Recruitment");
+        helper.setSubject("Scheduled For" + input.getTest().getName()+  "- Metrodata Recruitment");
         helper.setFrom("metrodata.recruitment3@gmail.com");
         javaMailSender.send(message); //jgn lupa di uncomment
     }
@@ -96,14 +96,9 @@ public class EmailNotificationService {
 
         String html = templateEngine.process("template-psikotest", context);
 
-//        System.out.println("ini program " + pa.getProgram().getName());
-//        System.out.println("ini note " + pa.getNote());
-//        System.out.println(pa.getCandidate().getEmail());
-//        System.out.println(pa.getCandidate().getFullName());
-//        System.out.println(pa.getHr().getFullName());
         helper.setTo("jonathanpurnama13@gmail.com"); //ini di isi pic.getEmail();
         helper.setText(html, true);
-        helper.setSubject("Next Jobs- Metrodata Recruitment");
+        helper.setSubject("Jobs For" + input.getTest().getName()+"-"+candidate.getId()+"- Metrodata Recruitment");
         helper.setFrom("metrodata.recruitment3@gmail.com");
         javaMailSender.send(message); //jgn lupa di uncomment
     }
