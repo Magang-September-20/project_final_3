@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Sending Email with Thymeleaf HTML Template Example</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+            <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+
+                    <!-- use the font -->
+                    <style>
+                        body {
+                            font-family: 'Roboto', sans-serif;
+                            /*font-size: 48px;*/
+                        }
+                        p{
+                            font-size: 14px;
+                        }
+                    </style>
+                    </head>
+                    <body style="margin: 0; padding: 0;">
+
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
+                            <tr>
+                                <td align="center" bgcolor="#d3d3d3" style="padding: 40px 0 30px 0;">
+                                    <img width="100px" src="https://www.metrodata.co.id/web/career/images/mtdl-logo.png" style="display: block;" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#eaeaea" style="padding: 40px 30px 40px 30px;">
+                                    <h2>Congratulation</h2>
+                                    <p>Hallo <b><span th:text="${name}"></span></b></p>
+                                    <p>We hereby inform you that you have passed the selection to join <b><span th:text="${program}"></span></b></p>
+                                    <button href="http://localhost:8083/login" class="btn btn-primary" role="button" aria-pressed="true">More Info</button>
+                                </td>
+                            </tr>
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <!-- Footer About -->		
+                                <div class="single-widget footer-about widget">	
+                                    <tr>
+                                        <td align="center" bgcolor="#777777" style="padding: 40px 0 30px 0;">
+                                            <img width="100px" src="https://www.mii.co.id/-/media/project/corporate/identity/mii-logo.png?h=122&w=160&hash=D515F726DFD3CC44804F9C2553047AA807C75DFE" style="display: block;" />
+                                            <a class="facebook" href="https://web.facebook.com/MitraIntegrasiInformatika/?_rdc=1&_rdr" target="_blank"><i class="fa fa-facebook"></i></a>
+                                            <p style="color:white;font-size: 13px;display: block;">MII space, APL Tower 37th Floor Suite 3</p>
+                                            <p style="color:white;font-size: 13px;display: block;">&copy; Copyright By Group3-Final Projek ™</p>
+
+                                        </td>
+                                    </tr>
+                                    <!--                                    <div class="social">
+                                                                             Social Icons 
+                                                                            <ul class="social-icons">
+                                                                                <li><a class="facebook" href="https://web.facebook.com/MitraIntegrasiInformatika/?_rdc=1&_rdr" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                                                                <li><a class="twitter" href="https://twitter.com/mii_metrodata/status/1090548423382552576?lang=en" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                                                                <li><a class="linkedin" href="https://www.linkedin.com/company/metrodataacademy/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                                                                <li><a class="pinterest" href="#" target="_blank"><i class="fa fa-pinterest-p"></i></a></li>
+                                                                                <li><a class="instagram" href="https://www.instagram.com/metrodataacademy/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>		
+                                                                    / End Footer About 		
+                                                                </div>
+                                                                <div class="col-lg-3 col-md-6 col-12">
+                                                                     Footer Links 		
+                                                                    / End Footer Links 			
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6 col-12">	
+                                                                     Footer Contact 		
+                                                                    <div class="single-widget footer_contact widget">	
+                                                                        <h3 class="widget-title">Contact</h3>
+                                                                        <ul class="address-widget-list">
+                                                                            <li class="footer-mobile-number"><i class="fa fa-phone"></i>(62-21) 29345 888</li>
+                                                                            <li class="footer-mobile-number"><i class="fa fa-envelope"></i>info.metrodata@metrodata.co.id</li>
+                                                                            <li class="footer-mobile-number"><i class="fa fa-map-marker"></i>APL Tower 37th Floor Suite 3</li>
+                                                                        </ul>
+                                                                    </div>		
+                                                                    / End Footer Contact 						
+                                                                </div>
+                                                                </div>
+                                                                </td>
+                                                                </tr>-->
+                                    </table>
+                                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+                                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+                                    </body>
+                                    </html>
