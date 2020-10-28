@@ -73,7 +73,7 @@ public class EmailNotificationService {
 
         System.out.println("ini location: " + input.getLocation());
         System.out.println("ini date,start,end " + input.getDate() + input.getStartTime() + input.getEndTime());
-        helper.setTo("jonathanpurnama13@gmail.com"); //ini di isi candidate.getEmail()
+        helper.setTo(candidate.getEmail()); //ini di isi candidate.getEmail()
         helper.setText(html, true);
         helper.setSubject("Next Exam - Metrodata Recruitment");
         helper.setFrom("metrodata.recruitment3@gmail.com");
