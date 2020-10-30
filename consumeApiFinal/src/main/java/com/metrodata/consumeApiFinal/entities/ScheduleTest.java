@@ -27,7 +27,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
- * @author pannavr
+ * @author sweje
  */
 @Entity
 @Table(name = "tb_tr_schedule_test")
@@ -59,8 +59,6 @@ public class ScheduleTest implements Serializable {
     @Basic(optional = false)
     @Column(name = "location")
     private String location;
-    @Column(name = "hastest")
-    private Boolean hastest;
     @JoinColumn(name = "apply", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ProgramApply apply;
@@ -80,9 +78,11 @@ public class ScheduleTest implements Serializable {
         this.id = id;
     }
 
-    public ScheduleTest(Integer id, Date date, String location) {
+    public ScheduleTest(Integer id, Date date, Date startTime, Date endTime, String location) {
         this.id = id;
         this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.location = location;
     }
 
@@ -96,6 +96,7 @@ public class ScheduleTest implements Serializable {
         this.pic = pic;
         this.test = test;
     }
+    
 
     public Integer getId() {
         return id;
@@ -137,14 +138,6 @@ public class ScheduleTest implements Serializable {
         this.location = location;
     }
 
-    public Boolean getHastest() {
-        return hastest;
-    }
-
-    public void setHastest(Boolean hastest) {
-        this.hastest = hastest;
-    }
-
     public ProgramApply getApply() {
         return apply;
     }
@@ -168,7 +161,7 @@ public class ScheduleTest implements Serializable {
     public void setTest(Test test) {
         this.test = test;
     }
-    
+
     public Result getResult() {
         return result;
     }
@@ -176,7 +169,6 @@ public class ScheduleTest implements Serializable {
     public void setResult(Result result) {
         this.result = result;
     }
-
 
     @Override
     public int hashCode() {
@@ -203,4 +195,6 @@ public class ScheduleTest implements Serializable {
         return "ScheduleTest{" + "id=" + id + ", date=" + date + ", startTime=" + startTime + ", endTime=" + endTime + ", location=" + location + ", apply=" + apply + ", pic=" + pic + ", test=" + test + ", result=" + result + '}';
     }
 
+    
+    
 }

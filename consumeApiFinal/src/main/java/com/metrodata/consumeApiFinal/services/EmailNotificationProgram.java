@@ -44,12 +44,12 @@ public class EmailNotificationProgram {
         context.setVariable("email", candidate.getEmail());
         String html = templateEngine.process("template-program", context);
 
-//        System.out.println("ini program " + pa.getProgram().getName());
-//        System.out.println("ini note " + pa.getNote());
-//        System.out.println(pa.getCandidate().getEmail());
-//        System.out.println(pa.getCandidate().getFullName());
-//        System.out.println(pa.getHr().getFullName());
-//        helper.setTo(candidate.getEmail()); //ini di isi pa.getCandidate().getEmail()
+        System.out.println("ini program " + pa.getProgram().getName());
+        System.out.println("ini note " + pa.getNote());
+        System.out.println(pa.getCandidate().getEmail());
+        System.out.println(pa.getCandidate().getFullName());
+        System.out.println(pa.getHr().getFullName());
+        helper.setTo(candidate.getEmail()); //ini di isi pa.getCandidate().getEmail()
         helper.setText(html, true);
         helper.setSubject("Register Program Success - Metrodata Recruitment " + pa.getProgram().getName());
         System.out.println(pa.getProgram().getName());
@@ -66,7 +66,7 @@ public class EmailNotificationProgram {
         context.setVariable("program", pa.getProgram().getName());
         context.setVariable("email", candidate.getEmail());
         String html = templateEngine.process("template-congrats", context);
-        helper.setTo("jonathanpurnama13@gmail.com");
+        helper.setTo(candidate.getEmail());
         helper.setText(html, true);
         helper.setSubject("Congratulation : You are accepted on " + pa.getProgram().getName() + " !!");
         System.out.println(pa.getProgram().getName());

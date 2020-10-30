@@ -16,6 +16,7 @@ import com.metrodata.consumeApiFinal.entities.dao.ScheduleTestInput;
 import com.metrodata.consumeApiFinal.entities.rest.LoginOutput;
 import com.metrodata.consumeApiFinal.services.EducationService;
 import com.metrodata.consumeApiFinal.services.EmailNotificationProgram;
+import com.metrodata.consumeApiFinal.services.EmailNotificationService;
 import com.metrodata.consumeApiFinal.services.FileService;
 import com.metrodata.consumeApiFinal.services.LoginService;
 import com.metrodata.consumeApiFinal.services.MajorService;
@@ -82,8 +83,10 @@ public class MainController {
     ResultService resultService;
     @Autowired
     FileService fileService;
-    @Autowired EmailNotificationProgram emailNotificationProgram;
-
+    @Autowired
+    EmailNotificationProgram emailNotificationProgram;
+    @Autowired
+    EmailNotificationService emailNotificationService;
     @Autowired
     ScheduleTestService scheduleTestService;
 
@@ -472,15 +475,9 @@ public class MainController {
     }
 
     @PostMapping("/insertResult")
-    public String insertResult(Model model, @Validated Result result) {
+    public String insertResult(@Validated Result result) throws MessagingException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(auth.getName());
-        System.out.println(auth.getAuthorities());
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
-            System.out.println(result.getId());
-            System.out.println(result.getGrade());
-            System.out.println(result.getNote());
-
             ScheduleTest schedule = scheduleTestService.getById(result.getId());
 
             result.setScheduleTest(schedule);
@@ -488,6 +485,7 @@ public class MainController {
             if (result.getGrade() >= passingGrade) {
                 result.setIsPassed(Boolean.TRUE);
             } else {
+                emailNotificationService.sendResultPass(Integer.parseInt(auth.getName()), schedule);
                 result.setIsPassed(Boolean.FALSE);
             }
 
