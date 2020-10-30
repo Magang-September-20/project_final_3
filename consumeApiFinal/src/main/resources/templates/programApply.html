@@ -161,7 +161,12 @@
             <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
             <script>
                 $(document).ready(function () {
-                    $('#PersonTabel').DataTable();
+                    $('#PersonTabel').DataTable({
+                            "columnDefs": [
+                                {"orderable": false, "targets": 0},
+                                {"orderable": false, "targets": 3}
+                            ]
+                        });
                 });
 
                 function ProgramName(id, name, applyId) {

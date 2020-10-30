@@ -165,7 +165,11 @@
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#PersonTabel').DataTable();
+            $('#PersonTabel').DataTable({
+                            "columnDefs": [
+                                {"orderable": false, "targets": 5}
+                            ]
+                        });
         });
         function PassInterview(candidate, program, id) {
             console.log(candidate, program, id);
