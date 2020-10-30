@@ -183,7 +183,12 @@
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#PersonTabel').DataTable();
+            $('#PersonTabel').DataTable({
+                            "columnDefs": [
+                                {"orderable": false, "targets": 4},
+                                {"orderable": false, "targets": 7}
+                            ]
+                        });
         });
     </script>
     <!-- Core plugin JavaScript-->
