@@ -5,6 +5,10 @@
  */
 package com.metrodata.consumeApiFinal.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -43,12 +47,15 @@ public class ProgramApply implements Serializable {
     private String note;
     @JoinColumn(name = "candidate", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JsonIgnore
     private User candidate;
     @JoinColumn(name = "hr", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JsonIgnore
     private User hr;
     @JoinColumn(name = "program", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JsonBackReference
     private Program program;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "apply", fetch = FetchType.LAZY)
     private List<ScheduleTest> scheduleTestList;

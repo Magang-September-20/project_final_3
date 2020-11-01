@@ -5,6 +5,7 @@
  */
 package com.metrodata.consumeApiFinal.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -23,6 +24,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -31,8 +33,15 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Entity
 @Table(name = "tb_tr_schedule_test")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ScheduleTest.findAll", query = "SELECT s FROM ScheduleTest s")})
+    @NamedQuery(name = "ScheduleTest.findAll", query = "SELECT s FROM ScheduleTest s")
+    , @NamedQuery(name = "ScheduleTest.findById", query = "SELECT s FROM ScheduleTest s WHERE s.id = :id")
+    , @NamedQuery(name = "ScheduleTest.findByDate", query = "SELECT s FROM ScheduleTest s WHERE s.date = :date")
+    , @NamedQuery(name = "ScheduleTest.findByStartTime", query = "SELECT s FROM ScheduleTest s WHERE s.startTime = :startTime")
+    , @NamedQuery(name = "ScheduleTest.findByEndTime", query = "SELECT s FROM ScheduleTest s WHERE s.endTime = :endTime")
+    , @NamedQuery(name = "ScheduleTest.findByLocation", query = "SELECT s FROM ScheduleTest s WHERE s.location = :location")
+    , @NamedQuery(name = "ScheduleTest.findByHastest", query = "SELECT s FROM ScheduleTest s WHERE s.hastest = :hastest")})
 public class ScheduleTest implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,14 +68,19 @@ public class ScheduleTest implements Serializable {
     @Basic(optional = false)
     @Column(name = "location")
     private String location;
+    @Column(name = "hastest")
+    private Boolean hastest;
     @JoinColumn(name = "apply", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JsonIgnore
     private ProgramApply apply;
     @JoinColumn(name = "pic", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JsonIgnore
     private User pic;
     @JoinColumn(name = "test", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Test test;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "scheduleTest", fetch = FetchType.LAZY)
     private Result result;
@@ -78,11 +92,9 @@ public class ScheduleTest implements Serializable {
         this.id = id;
     }
 
-    public ScheduleTest(Integer id, Date date, Date startTime, Date endTime, String location) {
+    public ScheduleTest(Integer id, Date date, String location) {
         this.id = id;
         this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
         this.location = location;
     }
 
@@ -96,7 +108,14 @@ public class ScheduleTest implements Serializable {
         this.pic = pic;
         this.test = test;
     }
-    
+
+    public ScheduleTest(Integer id, Date date, Date startTime, Date endTime, String location) {
+        this.id = id;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.location = location;
+    }
 
     public Integer getId() {
         return id;
@@ -136,6 +155,14 @@ public class ScheduleTest implements Serializable {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Boolean getHastest() {
+        return hastest;
+    }
+
+    public void setHastest(Boolean hastest) {
+        this.hastest = hastest;
     }
 
     public ProgramApply getApply() {
@@ -192,9 +219,7 @@ public class ScheduleTest implements Serializable {
 
     @Override
     public String toString() {
-        return "ScheduleTest{" + "id=" + id + ", date=" + date + ", startTime=" + startTime + ", endTime=" + endTime + ", location=" + location + ", apply=" + apply + ", pic=" + pic + ", test=" + test + ", result=" + result + '}';
+        return "com.metrodata.consumeApiFinal.entities.ScheduleTest[ id=" + id + " ]";
     }
 
-    
-    
 }

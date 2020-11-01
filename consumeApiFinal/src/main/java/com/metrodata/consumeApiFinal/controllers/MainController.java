@@ -495,6 +495,8 @@ public class MainController {
             return "redirect:/login";
         }
     }
+    
+    
 
     @GetMapping("profileHr")
     public String ProfileHr(Model model) {
@@ -515,11 +517,12 @@ public class MainController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //        System.out.println(auth.getName());
 //        System.out.println(auth.getAuthorities());
+        String userName = userService.getById(Integer.parseInt(auth.getName())).getFullName();
         if (!auth.getName().equalsIgnoreCase("anonymousUser")) {
             model.addAttribute("apply", programApplyService.getApply(Integer.parseInt(auth.getName())));
             model.addAttribute("iduser", Integer.parseInt(auth.getName()));
             model.addAttribute("profile", userService.getById(Integer.parseInt(auth.getName())));
-
+            model.addAttribute("name",userName);
             model.addAttribute("applys", new ProgramApply());
             model.addAttribute("program", pr.getAll());
 
@@ -528,6 +531,13 @@ public class MainController {
         } else {
             return "redirect:/login";
         }
+    }
+    
+    @ResponseBody
+    @GetMapping("getApplyTable")
+    public List<ProgramApply> getApplyTable(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return programApplyService.getApply(Integer.parseInt(auth.getName()));
     }
 
     @ResponseBody

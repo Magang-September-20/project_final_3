@@ -5,6 +5,10 @@
  */
 package com.metrodata.consumeApiFinal.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -34,10 +38,12 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "candidate", fetch = FetchType.LAZY)
     private List<ProgramApply> programApplyList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hr", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<ProgramApply> programApplyList1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pic", fetch = FetchType.LAZY)
     private List<ScheduleTest> scheduleTestList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hr", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Program> programList;
 
     private static final long serialVersionUID = 1L;

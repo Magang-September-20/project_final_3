@@ -5,6 +5,7 @@
  */
 package com.metrodata.consumeApiFinal.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -40,6 +41,7 @@ public class Result implements Serializable {
     private Boolean isPassed;
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false, fetch = FetchType.LAZY)
+    @JsonIgnore
     private ScheduleTest scheduleTest;
 
     public Result() {
