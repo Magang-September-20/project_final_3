@@ -119,7 +119,7 @@ public class EmailNotificationService {
 
         String html = templateEngine.process("PassedTest", context);
 
-        helper.setTo("michelleolivia68@gmail.com"); 
+        helper.setTo(candidate.getEmail()); 
         helper.setText(html, true);
         helper.setSubject("Result Test " + input.getTest().getName() + "[" + input.getApply().getProgram().getName() + "]");
         helper.setFrom("metrodata.recruitment3@gmail.com");
