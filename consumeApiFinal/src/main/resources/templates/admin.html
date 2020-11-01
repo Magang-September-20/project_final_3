@@ -1,78 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
+<head>
 
 
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-        <!-- Title Tag  -->
-        <title>Mitra Integrasi Informatika</title>
+    <title> Admin</title>
 
-        <!-- Favicon -->
-        <link rel="icon" type="image/favicon.png" href="img/logomii.png">
+    <!-- Custom fonts for this template-->
+    <!--<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+        crossorigin="anonymous" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
-        <!-- Custom fonts for this template-->
-        <!--<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .highcharts-figure,
+        .highcharts-data-table table {
+            min-width: 320px;
+            max-width: 800px;
+            margin: 1em auto;
+        }
 
-        <!-- Custom styles for this template-->
-        <link href="css/sb-admin-2.min.css" rel="stylesheet">
-        <style>
-            .highcharts-figure, .highcharts-data-table table {
-                min-width: 320px; 
-                max-width: 800px;
-                margin: 1em auto;
-            }
+        .highcharts-data-table table {
+            font-family: Verdana, sans-serif;
+            border-collapse: collapse;
+            border: 1px solid #EBEBEB;
+            margin: 10px auto;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
 
-            .highcharts-data-table table {
-                font-family: Verdana, sans-serif;
-                border-collapse: collapse;
-                border: 1px solid #EBEBEB;
-                margin: 10px auto;
-                text-align: center;
-                width: 100%;
-                max-width: 500px;
-            }
-            .highcharts-data-table caption {
-                padding: 1em 0;
-                font-size: 1.2em;
-                color: #555;
-            }
-            .highcharts-data-table th {
-                font-weight: 600;
-                padding: 0.5em;
-            }
-            .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
-                padding: 0.5em;
-            }
-            .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-                background: #f8f8f8;
-            }
-            .highcharts-data-table tr:hover {
-                background: #f1f7ff;
-            }
-            .highcharts-title,.highcharts-background,.highcharts-credits,.highcharts-a11y-proxy-container,.highcharts-exporting-group{
-                display:none;
-            }
-        </style>
+        .highcharts-data-table caption {
+            padding: 1em 0;
+            font-size: 1.2em;
+            color: #555;
+        }
 
-    </head>
+        .highcharts-data-table th {
+            font-weight: 600;
+            padding: 0.5em;
+        }
 
-    <body id="page-top">
+        .highcharts-data-table td,
+        .highcharts-data-table th,
+        .highcharts-data-table caption {
+            padding: 0.5em;
+        }
 
-        <!-- Page Wrapper -->
-        <div id="wrapper">
+        .highcharts-data-table thead tr,
+        .highcharts-data-table tr:nth-child(even) {
+            background: #f8f8f8;
+        }
 
-            <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-                <div th:replace="fragments/sideBarAdmin :: sideBarAdmin"></div>
-            </ul>
+        .highcharts-data-table tr:hover {
+            background: #f1f7ff;
+        }
+
+        .highcharts-title,
+        .highcharts-background,
+        .highcharts-credits,
+        .highcharts-a11y-proxy-container,
+        .highcharts-exporting-group {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <div th:replace="fragments/sideBarAdmin :: sideBarAdmin"></div>
+        </ul>
 
         </nav>
         <!-- End of Sidebar -->
@@ -103,8 +117,10 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Candidates</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${countUser}" ></div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total
+                                                Candidates</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${countUser}">
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -120,8 +136,10 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Apply</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${countApply}" ></div>
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total
+                                                Apply</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${countApply}">
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -137,10 +155,12 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Exam Done</div>
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Exam
+                                                Done</div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" th:text="${examDone}" ></div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
+                                                        th:text="${examDone}"></div>
                                                 </div>
 
                                             </div>
@@ -159,8 +179,10 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Applicant CV</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${countCV}"></div>
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Applicant CV</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${countCV}">
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-file fa-2x text-gray-300"></i>
@@ -175,8 +197,10 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">Passed Candidate</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="CountPassed" th:passed="${countPassed}" th:text="${countPassed}"></div>
+                                            <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">
+                                                Passed Candidate</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="CountPassed"
+                                                th:passed="${countPassed}" th:text="${countPassed}"></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -190,8 +214,10 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">Failed Candidate</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="CountFailed" th:failed="${countFailed}" th:text="${countFailed}"></div>
+                                            <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">
+                                                Failed Candidate</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="CountFailed"
+                                                th:failed="${countFailed}" th:text="${countFailed}"></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -201,12 +227,13 @@
                             </div>
                         </div>
 
-                              <div class="col-xl-12 col-md-6 mb-4">
+                        <div class="col-xl-12 col-md-6 mb-4">
                             <div class="card border-left-danger shadow py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">User Passed Per Test</div>
+                                            <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">User
+                                                Passed Per Test</div>
                                         </div>
                                     </div>
                                     <figure class="highcharts-figure">
@@ -220,11 +247,20 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">How Many User Has Passed?</div>
+                                            <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">How
+                                                Many User Has Passed?</div>
                                         </div>
                                     </div>
                                     <div class="container">
-                                        <div class="chart-pie pt-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                        <div class="chart-pie pt-2">
+                                            <div class="chartjs-size-monitor">
+                                                <div class="chartjs-size-monitor-expand">
+                                                    <div class=""></div>
+                                                </div>
+                                                <div class="chartjs-size-monitor-shrink">
+                                                    <div class=""></div>
+                                                </div>
+                                            </div>
                                             <canvas id="myPieChart"></canvas>
                                         </div>
                                     </div>
@@ -236,7 +272,8 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">Program Apply</div>
+                                            <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">
+                                                Program Apply</div>
                                         </div>
                                     </div>
                                     <figure class="highcharts-figure" style="margin-top:-80px;">
@@ -245,7 +282,7 @@
                                 </div>
                             </div>
                         </div>
-                  
+
 
 
 
@@ -290,193 +327,139 @@
             var passed = document.getElementById("CountPassed").getAttribute("passed")
             console.log(failed, passed);
             var myChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-            labels: ["Failed", "Passed"],
-            datasets: [{
-            backgroundColor: [
-            "#DC143C",
-            "#2ecc71"
-            ],
-            data: [failed, passed]
-            }]
-            }
+                type: 'doughnut',
+                data: {
+                    labels: ["Failed", "Passed"],
+                    datasets: [{
+                        backgroundColor: [
+                            "#DC143C",
+                            "#2ecc71"
+                        ],
+                        data: [failed, passed]
+                    }]
+                }
             });
             //            ini pie chart higchart
             Highcharts.chart('container', {
-            chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-            },
-            tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            accessibility: {
-            point: {
-            valueSuffix: '%'
-            }
-            },
-            plotOptions: {
-            pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-            enabled: true,
-            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-            }
-            }
-            },
-            series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: [{
-            name: 'Internship',
-            y: [[${countIntern}]],
-            }, {
-            name: 'Junior Programmer',
-            y: [[${countJunior}]]
-            }, {
-            name: 'Senior Programmer',
-            y: [[${countSenior}]]
-            }, {
-            name: 'Front End Programmer',
-            y: [[${countFront}]]
-            }, {
-            name: 'Back End Programmer',
-            y: [[${countBack}]]
-            }]
-            }]
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Brands',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Internship',
+                        y: [[${ countIntern }]],
+                    }, {
+                        name: 'Junior Programmer',
+                        y: [[${ countJunior }]]
+                    }, {
+                        name: 'Senior Programmer',
+                        y: [[${ countSenior }]]
+                    }, {
+                        name: 'Front End Programmer',
+                        y: [[${ countFront }]]
+                    }, {
+                        name: 'Back End Programmer',
+                        y: [[${ countBack }]]
+                    }]
+                }]
             });
             //            batas akhir pie chart
             //        line chart
-            var psikotes =[[${countPsikotes}]];
-            var teknikal =[[${countTechnical}]];
-            var interview =[[${countPassed}]];
+            var psikotes = [[${ countPsikotes }]];
+            var teknikal = [[${ countTechnical }]];
+            var interview = [[${ countPassed }]];
             //            var data = [ [ "Psikotes", psikotes ] ,["Teknikal", teknikal] ,["Interview", interview] ];
-            var data = [psikotes  ,teknikal ,interview];
-            var labels = [ "Psikotes", "Teknikal", "Interview"];
+            var data = [psikotes, teknikal, interview];
+            var labels = ["Psikotes", "Teknikal", "Interview"];
             var dataSum = 0;
             for (var i = 0; i < 3; i++) {
-            dataSum += data[i];
+                dataSum += data[i];
             }
             console.log(dataSum);
 
 
             var chart = new Highcharts.Chart({
-            chart: {
-            renderTo:'LineChartContainer',
-            },
-<<<<<<< Updated upstream
-                    title:{
-                    text:'Chart Title'
-                    },
-                    credits:{enabled:false},
-                    legend:{
-                    },
-                    plotOptions: {
+                chart: {
+                    renderTo: 'LineChartContainer',
+                },
+                title: {
+                    text: 'Chart Title'
+                },
+                credits: { enabled: false },
+                legend: {
+                },
+                plotOptions: {
                     series: {
-                    shadow:false,
-                            borderWidth:0,
-                            dataLabels:{
-                            enabled:true,
-                                    formatter:function() {
-                                    var pcnt = (this.y / dataSum) * 100;
-                                    return Highcharts.numberFormat(pcnt) + '%';
-                                    }
-                            }
-                    }
-                    },
-                    xAxis:{
-                    lineColor:'#999',
-                            lineWidth:1,
-                            tickColor:'#666',
-                            tickLength:3,
-                            title:{
-                            text:'Test'
-                            },
-                            labels: {
+                        shadow: false,
+                        borderWidth: 0,
+                        dataLabels: {
                             enabled: true,
-                                    formatter: function() {
-                                    return labels[this.value];
-                                    },
+                            formatter: function () {
+                                var pcnt = (this.y / dataSum) * 100;
+                                return Highcharts.numberFormat(pcnt) + '%';
                             }
+                        }
+                    }
+                },
+                xAxis: {
+                    lineColor: '#999',
+                    lineWidth: 1,
+                    tickColor: '#666',
+                    tickLength: 3,
+                    title: {
+                        text: 'Test'
                     },
-                    yAxis:{
-                    lineColor:'#999',
-                            lineWidth:1,
-                            tickColor:'#666',
-                            tickWidth:1,
-                            tickLength:3,
-                            gridLineColor:'#ddd',
-                            title:{
-                            text:'Total',
-                                    rotation:0,
-                                    margin:50,
-                            }
-                    },
-                    series: [{
+                    labels: {
+                        enabled: true,
+                        formatter: function () {
+                            return labels[this.value];
+                        },
+                    }
+                },
+                yAxis: {
+                    lineColor: '#999',
+                    lineWidth: 1,
+                    tickColor: '#666',
+                    tickWidth: 1,
+                    tickLength: 3,
+                    gridLineColor: '#ddd',
+                    title: {
+                        text: 'Total',
+                        rotation: 0,
+                        margin: 50,
+                    }
+                },
+                series: [{
                     data: data
-                    }]
-=======
-            title:{
-            text:'Chart Title'
-            },
-            credits:{enabled:false},
-            legend:{
-            },
-            plotOptions: {
-            series: {
-            shadow:false,
-            borderWidth:0,
-            dataLabels:{
-            enabled:true,
-            formatter:function() {
-            var pcnt = (this.y / dataSum) * 100;
-            return Highcharts.numberFormat(pcnt) + '%';
-            }
-            }
-            }
-            },
-            xAxis:{
-            lineColor:'#999',
-            lineWidth:1,
-            tickColor:'#666',
-            tickLength:3,
-            title:{
-            text:'X Axis Title'
-            },
-            labels: {
-            enabled: true,
-            formatter: function() {
-            return labels[this.value];
-            },
-            }
-            },
-            yAxis:{
-            lineColor:'#999',
-            lineWidth:1,
-            tickColor:'#666',
-            tickWidth:1,
-            tickLength:3,
-            gridLineColor:'#ddd',
-            title:{
-            text:'Y Axis Title',
-            rotation:0,
-            margin:50,
-            }
-            },
-            series: [{
-            data: data
-            }]
->>>>>>> Stashed changes
+                }]
             });
-            //batas line chart
+//batas line chart
         </script>
         <!-- <div th:replace="fragments/header :: header"></div>
           <div th:replace="fragments/footer :: footer"></div>-->
 </body>
 
 </html>
-

@@ -10,11 +10,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <!-- Title Tag  -->
-        <title>Mitra Integrasi Informatika</title>
-
-        <!-- Favicon -->
-        <link rel="icon" type="image/favicon.png" href="img/logomii.png">
+        <title>SB Admin 2 - Admin</title>
 
         <!-- Custom fonts for this template-->
         <!--<link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">-->
@@ -67,21 +63,12 @@
                         <td th:text = "${as.apply.program.name}"></td>
                         <td th:text = "${as.test.name}"></td>
                         <td th:text = "${as.result.isPassed}"></td>
-<<<<<<< Updated upstream
                         <td>
                             <button type="button" class="btn btn-success" th:candidateId="${as.apply.candidate.id}" th:programId="${as.apply.program.id}" th:id="${as.id}"
                                     th:onclick="PassInterview(this.getAttribute('candidateId'),this.getAttribute('programId'),this.id)"> 
                                 Pass
                             </button>
                         </td>
-=======
-                        <!--<td th:text = "${as.scheduleTestList.name}"></td>-->
-                        <!--                        <td th:text = "${as.program.name}"></td>
-                                                <td th:text = "${as.program.hr.fullName}"></td>-->
-                        <!--                        <td>     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#personModal" onclick=""> 
-                                                        Pass
-                                                    </button></td>-->
->>>>>>> Stashed changes
 
                     </tr>
                 </tbody>
