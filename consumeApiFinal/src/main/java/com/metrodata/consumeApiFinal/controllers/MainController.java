@@ -399,7 +399,7 @@ public class MainController {
         System.out.println(candidate + " " + program);
         com.metrodata.consumeApiFinal.entities.User user = userService.getById(candidate);
         ProgramApply programApply = programApplyService.getById(program);
-        emailNotificationProgram.sendEmailCongrat(user, programApply);
+//        emailNotificationProgram.sendEmailCongrat(user, programApply);
     }
 
     @GetMapping("applicant")
@@ -485,13 +485,13 @@ public class MainController {
             if (result.getGrade() >= passingGrade) {
                 result.setIsPassed(Boolean.TRUE);
             } else {
-                emailNotificationService.sendResultPass(result.getId(), schedule);
-                result.setIsPassed(Boolean.FALSE); 
+//                emailNotificationService.sendResultPass(result.getId(), schedule);
+                result.setIsPassed(Boolean.FALSE);
             }
             System.out.println(result.getId());
             resultService.saveResult(result);
             scheduleTestService.saveHastest(result.getId());
-            
+
             return "redirect:/inputExam";
         } else {
             return "redirect:/login";
@@ -536,8 +536,8 @@ public class MainController {
     @GetMapping("isScheduled/{id}")
     public boolean getDetailProgress(@PathVariable("id") int id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(id);
-        if (programApplyService.getDetailProgress(Integer.parseInt(auth.getName()), 1, id) != null) {
+        System.out.println("program id = " + id + "id user : " + Integer.parseInt(auth.getName()));
+        if (scheduleTestService.getDetailProgress(id) != null) {
             return true;
         } else {
             return false;
@@ -546,38 +546,53 @@ public class MainController {
 
     @ResponseBody
     @GetMapping("isPassedTest/{id}")
-    public boolean isPassedTest(@PathVariable("id") int programId) {
+    public String isPassedTest(@PathVariable("id") int programId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(programId);
-        if (programApplyService.isPassedTest(Integer.parseInt(auth.getName()), 1, programId) != null) {
-            return true;
+        if (scheduleTestService.isHastest(programId,1) != null) {
+            if (scheduleTestService.isPassedTest(programId,1) != null) {
+                return "Passed";
+            } else {
+                return "Failed";
+            }
         } else {
-            return false;
+            return "Untested";
         }
+//        
     }
 
     @ResponseBody
     @GetMapping("isPassedTeknikal/{id}")
-    public boolean isPassedTeknikal(@PathVariable("id") int programId) {
+    public String isPassedTeknikal(@PathVariable("id") int programId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(programId);
-        if (programApplyService.isPassedTest(Integer.parseInt(auth.getName()), 2, programId) != null) {
-            return true;
+        if (scheduleTestService.isHastest(programId,2) != null) {
+            if (scheduleTestService.isPassedTest(programId,2) != null) {
+                return "Passed";
+            } else {
+                return "Failed";
+            }
         } else {
-            return false;
+            return "Untested";
         }
+//        return "";
     }
 
     @ResponseBody
     @GetMapping("isPassedInterview/{id}")
-    public boolean isPassedInterview(@PathVariable("id") int programId) {
+    public String isPassedInterview(@PathVariable("id") int programId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(programId);
-        if (programApplyService.isPassedTest(Integer.parseInt(auth.getName()), 3, programId) != null) {
-            return true;
+        if (scheduleTestService.isHastest(programId,3) != null) {
+            if (scheduleTestService.isPassedTest(programId,3) != null) {
+                return "Passed";
+            } else {
+                return "Failed";
+            }
         } else {
-            return false;
+            return "Untested";
         }
+//        return "";
     }
 
     @PostMapping("/saveApply")

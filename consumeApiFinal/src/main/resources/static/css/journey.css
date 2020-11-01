@@ -58,11 +58,11 @@ and open the template in the editor.
  }
 
  .track .step.failed:before {
-    background: #FF5722
+    background: #FF5722 !important;
 }
 .track .step.failed .icon {
-    background: #ee5435;
-    color: #fff
+    background: #ee5435 !important;
+    color: #fff !important;
 }
 
 

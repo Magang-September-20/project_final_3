@@ -73,7 +73,6 @@ public class ScheduleTestService {
 
 //        System.out.println("pic fullname: " + pic.getFullName());
 //        System.out.println("candidate fullname: " + candidate.getFullName());
-
         Result result = new Result();
         result.setId(test1.getId());
         result.setGrade(0);
@@ -85,12 +84,12 @@ public class ScheduleTestService {
 
         scheduleTestRepository.save(test1);
 //        ======= kirim email ========
-        try {
-            emailNotificationService.sendSchedule(candidate, pic,test1, scheduleTest);
-            emailNotificationService.sendSchedulePic(candidate,pic,test1,scheduleTest);
-        } catch (MessagingException ex) {
-            Logger.getLogger(ProgramApplyService.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            emailNotificationService.sendSchedule(candidate, pic, test1, scheduleTest);
+//            emailNotificationService.sendSchedulePic(candidate, pic, test1, scheduleTest);
+//        } catch (MessagingException ex) {
+//            Logger.getLogger(ProgramApplyService.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     public ScheduleTest getById(int id) {
@@ -112,8 +111,20 @@ public class ScheduleTestService {
     public List<ScheduleTest> getAll() {
         return scheduleTestRepository.findAll();
     }
-    
-    public Integer saveHastest(int idUser){
-    return scheduleTestRepository.InsertHastest(idUser);
+
+    public Integer saveHastest(int idUser) {
+        return scheduleTestRepository.InsertHastest(idUser);
+    }
+
+    public ScheduleTest isHastest(int programId,int test) {
+        return scheduleTestRepository.isHastest(programId,test);
+    }
+
+    public ScheduleTest getDetailProgress(int program) {
+        return scheduleTestRepository.getDetailProgress(program);
+    }
+
+    public ScheduleTest isPassedTest(int program, int test) {
+        return scheduleTestRepository.isPassedTest(program, test);
     }
 }

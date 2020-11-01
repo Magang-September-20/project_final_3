@@ -46,20 +46,13 @@ public class ProgramApplyService {
         ProgramApply programApplyGet = getById(programApply.getProgram().getId());
 //        System.out.println("candidate full name :) = "+candidate.getFullName());
 //        System.out.println("candidate fullname = "+programApply.getCandidate().getFullName());
-        try {
-            enp.sendEmailCandidate(candidate,hr,programApplyGet);
-        } catch (MessagingException ex) {
-             Logger.getLogger(ProgramApplyService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    public ProgramApply getDetailProgress(int candidate, int test, int program){
-        return programApplyRepository.getDetailProgress(candidate, test, program);
+//        try {
+//            enp.sendEmailCandidate(candidate,hr,programApplyGet);
+//        } catch (MessagingException ex) {
+//             Logger.getLogger(ProgramApplyService.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
     
-    public ProgramApply isPassedTest(int candidate, int test, int program){
-        return programApplyRepository.isPassedTest(candidate, test, program);
-    }
-
     public List<ProgramApply> showSchedule() {
         return programApplyRepository.Showschedule();
     }

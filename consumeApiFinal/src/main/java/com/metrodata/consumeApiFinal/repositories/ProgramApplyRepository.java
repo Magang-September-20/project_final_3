@@ -47,9 +47,4 @@ public interface ProgramApplyRepository extends JpaRepository<ProgramApply, Inte
     @Query(value = "SELECT count(id) from tb_tr_program_apply  WHERE tb_tr_program_apply.candidate = ?1 and tb_tr_program_apply.program = ?2", nativeQuery = true)
     public int compare(int candidateId, int program);
    
-    @Query(value="SELECT * from tb_tr_program_apply join tb_tr_schedule_test on tb_tr_schedule_test.apply = tb_tr_program_apply.id WHERE tb_tr_program_apply.candidate = ?1 and tb_tr_schedule_test.test = ?2 and tb_tr_program_apply.program = ?3",nativeQuery = true)
-    public ProgramApply getDetailProgress(int candidate, int test, int program);
-    
-    @Query(value="SELECT * from tb_tr_program_apply join tb_tr_schedule_test on tb_tr_schedule_test.apply = tb_tr_program_apply.id join tb_tr_result on tb_tr_schedule_test.id = tb_tr_result.id WHERE tb_tr_program_apply.candidate = ?1 and tb_tr_schedule_test.test = ?2 and tb_tr_program_apply.program = ?3 and tb_tr_result.is_passed = true",nativeQuery = true)
-    public ProgramApply isPassedTest(int candidate, int test, int program);
 }

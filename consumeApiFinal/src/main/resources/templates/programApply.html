@@ -170,7 +170,7 @@
                 });
 
                 function ProgramName(id, name, applyId) {
-                    console.log(id);
+//                    console.log(id);
                     $("#TitleModal").text(name);
                     $.ajax({
                         url: "isScheduled/" + applyId,
@@ -178,17 +178,13 @@
                         data: "",
                         contentType: 'application/json; charset=utf-8',
                         success: function (result) {
-                            console.log(result);
+                            console.log("scheduled"+result+" apply id = "+applyId);
                             if (result) {
-                                $("#confirmed").removeClass("failed").addClass("active");
-                                $("#scheduled").removeClass("failed").addClass("active");
-                                $("#passedPsikotest").removeClass("failed");
-                                $("#passedTeknikal").removeClass("failed");
-                                $("#passedInterview").removeClass("failed");
-                                $("#congratulation").removeClass("failed");
+                                $("#confirmed").addClass("active");
+                                $("#scheduled").addClass("active");
                             } else {
 //                                $("#confirmed").removeClass("active");
-                                $("#scheduled").removeClass("active");
+//                                $("#scheduled").removeClass("active");
                                 $("#passedPsikotest").removeClass("active");
                                 $("#passedTeknikal").removeClass("active");
                                 $("#passedInterview").removeClass("active");
@@ -203,21 +199,21 @@
                         data: "",
                         contentType: 'application/json; charset=utf-8',
                         success: function (result) {
-                            console.log(result);
-                            if (result) {
-                                $("#confirmed").removeClass("failed").addClass("active");
-                                $("#scheduled").removeClass("failed").addClass("active");
-                                $("#passedPsikotest").removeClass("failed").addClass("active");
-                                $("#passedTeknikal").removeClass("failed");
-                                $("#passedInterview").removeClass("failed");
-                                $("#congratulation").removeClass("failed");
-                            } else {
-//                                $("#confirmed").removeClass("active");
-//                                $("#scheduled").removeClass("active");
-//                                $("#passedPsikotest").removeClass("active");
-//                                $("#passedTeknikal").removeClass("active");
-//                                $("#passedInterview").removeClass("active");
-//                                $("#congratulation").removeClass("active");
+                            console.log("hasiltest "+result);
+                            if (result == "Passed") {
+                                $("#confirmed").addClass("active");
+                                $("#scheduled").addClass("active");
+                                $("#passedPsikotest").addClass("active");
+                            } else if(result == "Failed"){
+                                $("#confirmed").removeClass("active").addClass("failed");
+                                $("#scheduled").removeClass("active").addClass("failed");
+                                $("#passedPsikotest").removeClass("active").addClass("failed");
+                            }
+                            else{
+                                $("#passedPsikotest").removeClass("active failed");
+                                $("#passedTeknikal").removeClass("active failed");
+                                $("#passedInterview").removeClass("active failed");
+                                $("#congratulation").removeClass("active failed");
                             }
                         }
                     });
@@ -227,21 +223,25 @@
                         data: "",
                         contentType: 'application/json; charset=utf-8',
                         success: function (result) {
-//                            console.log(result);
-                            if (result) {
-                                $("#confirmed").removeClass("failed").addClass("active");
-                                $("#scheduled").removeClass("failed").addClass("active");
-                                $("#passedPsikotest").removeClass("failed").addClass("active");
-                                $("#passedTeknikal").removeClass("failed").addClass("active");
-                                $("#passedInterview").removeClass("failed");
-                                $("#congratulation").removeClass("failed");
-                            } else {
-//                                $("#confirmed").removeClass("active");
-//                                $("#scheduled").removeClass("active");
-//                                $("#passedPsikotest").removeClass("active");
-//                                $("#passedTeknikal").removeClass("active");
-//                                $("#passedInterview").removeClass("active");
-//                                $("#congratulation").removeClass("active");
+                            console.log("teknikal "+result+" apply id = "+applyId);
+                            if (result == "Passed") {
+                                $("#confirmed").addClass("active");
+                                $("#scheduled").addClass("active");
+                                $("#passedPsikotest").addClass("active");
+                                $("#passedTeknikal").addClass("active");
+                            } else if(result == "Failed"){
+                                $("#confirmed").removeClass("active").addClass("failed");
+                                $("#scheduled").removeClass("active").addClass("failed");
+                                $("#passedPsikotest").removeClass("active").addClass("failed");
+                                $("#passedTeknikal").removeClass("active").addClass("failed");
+                            }
+                            else{
+                                $("#confirmed").removeClass("active failed");
+                                $("#scheduled").removeClass("active failed");
+                                $("#passedPsikotest").removeClass("active failed");
+                                $("#passedTeknikal").removeClass("active failed");
+                                $("#passedInterview").removeClass("active failed");
+                                $("#congratulation").removeClass("active failed");
                             }
                         }
                     });
@@ -251,19 +251,28 @@
                         data: "",
                         contentType: 'application/json; charset=utf-8',
                         success: function (result) {
-//                            console.log(result);
-                            if (result) {
-                                $("#confirmed").removeClass("failed");
-                                $("#scheduled").removeClass("failed");
-                                $("#passedPsikotest").removeClass("failed");
-                                $("#passedTeknikal").removeClass("failed");
-                                $("#passedInterview").removeClass("failed");
-                                $("#congratulation").removeClass("failed");
+                           console.log("interview "+result);
+                            if (result == "Passed") {
+                                $("#confirmed").addClass("active");
+                                $("#scheduled").addClass("active");
+                                $("#passedPsikotest").addClass("active");
+                                $("#passedTeknikal").addClass("active");
                                 $("#passedInterview").addClass("active");
                                 $("#congratulation").addClass("active");
-                            } else {
-                                $("#passedInterview").removeClass("active");
-                                $("#congratulation").removeClass("active");
+                            } else if(result == "Failed"){
+                                $("#confirmed").removeClass("active").addClass("failed");
+                                $("#scheduled").removeClass("active").addClass("failed");
+                                $("#passedPsikotest").removeClass("active").addClass("failed");
+                                $("#passedTeknikal").removeClass("active").addClass("failed");
+                                $("#passedInterview").removeClass("active").addClass("failed");
+                            }
+                            else{
+                                $("#confirmed").removeClass("active failed");
+                                $("#scheduled").removeClass("active failed");
+                                $("#passedPsikotest").removeClass("active failed");
+                                $("#passedTeknikal").removeClass("active failed");
+                                $("#passedInterview").removeClass("active failed");
+                                $("#congratulation").removeClass("active failed");
                             }
                         }
                     });
