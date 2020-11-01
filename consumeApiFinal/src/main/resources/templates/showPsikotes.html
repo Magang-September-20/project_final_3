@@ -10,7 +10,11 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>SB Admin 2 - Admin</title>
+        <!-- Title Tag  -->
+        <title>Mitra Integrasi Informatika</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/favicon.png" href="img/logomii.png">
 
         <!-- Custom fonts for this template-->
         <!--<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">-->
@@ -147,11 +151,15 @@
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function () {
+<<<<<<< Updated upstream
             $('#PersonTabel').DataTable(  {
                             "columnDefs": [
                                 {"orderable": false, "targets": 5}
                             ]
                         });
+=======
+        $('#PersonTabel').DataTable();
+>>>>>>> Stashed changes
         });
     </script>
     <!-- Core plugin JavaScript-->
@@ -168,6 +176,7 @@
     <script src="js/demo/chart-pie-demo.js"></script>
     <script>
         function createSchedule(test, apply, pic, candidate) {
+<<<<<<< Updated upstream
             console.log(test, apply, pic, candidate);
             //            $('.modal-body #id').val(id);
             $('.modal-body #test').val(2); //2 untuk test selanjutnya
@@ -187,6 +196,27 @@
 
             var maxDate = year + '-' + month + '-' + day;
             $('#date').attr('min', maxDate);
+=======
+        console.log(test, apply, pic, candidate);
+        //            $('.modal-body #id').val(id);
+        $('.modal-body #test').val(2); //2 untuk test selanjutnya
+        $('.modal-body #pic').val(pic);
+        $('.modal-body #apply').val(apply);
+        }
+        $(function () {
+        var dtToday = new Date();
+
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+        month = '0' + month.toString();
+        if (day < 10)
+        day = '0' + day.toString();
+
+        var maxDate = year + '-' + month + '-' + day;
+        $('#date').attr('min', maxDate);
+>>>>>>> Stashed changes
         });
     </script>
     <!-- <div th:replace="fragments/header :: header"></div>

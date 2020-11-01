@@ -44,7 +44,11 @@ and open the template in the editor.
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>SB Admin 2 - Admin</title>
+        <!-- Title Tag  -->
+        <title>Mitra Integrasi Informatika</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/favicon.png" href="img/logomii.png">
 
         <!-- Custom fonts for this template-->
         <!--<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">-->
@@ -78,7 +82,7 @@ and open the template in the editor.
 
 
 
-            <table  class="table" id="PersonTabel" width="90%" cellspacing="0">
+            <table  class="table" id="PersonTabel" cellspacing="0">
                 <thead class="table-dark">
                     <tr>
                         <th> Id</th>
@@ -89,8 +93,9 @@ and open the template in the editor.
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each = "as : ${applicants}">
-                        <td th:text = "${as.id}"></td>
+  
+                    <tr th:each = "as,iterator : ${applicants}">
+                        <td th:text="${iterator.index+1}"></td>
                         <td th:text = "${as.name}"></td>
                         <td th:text = "${as.email}"></td>
                         <td th:text = "${as.roles}"></td>
