@@ -112,4 +112,8 @@ public class ScheduleTestService {
     public List<ScheduleTest> getAll() {
         return scheduleTestRepository.findAll();
     }
+    
+    public Integer saveHastest(int idUser){
+    return scheduleTestRepository.InsertHastest(idUser);
+    }
 }

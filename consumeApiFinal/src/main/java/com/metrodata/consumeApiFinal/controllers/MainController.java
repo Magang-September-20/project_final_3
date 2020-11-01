@@ -485,11 +485,13 @@ public class MainController {
             if (result.getGrade() >= passingGrade) {
                 result.setIsPassed(Boolean.TRUE);
             } else {
-                emailNotificationService.sendResultPass(Integer.parseInt(auth.getName()), schedule);
-                result.setIsPassed(Boolean.FALSE);
+//                emailNotificationService.sendResultPass(Integer.parseInt(auth.getName()), schedule);
+                result.setIsPassed(Boolean.FALSE); 
             }
-
+            System.out.println(result.getId());
             resultService.saveResult(result);
+            scheduleTestService.saveHastest(result.getId());
+            
             return "redirect:/inputExam";
         } else {
             return "redirect:/login";
