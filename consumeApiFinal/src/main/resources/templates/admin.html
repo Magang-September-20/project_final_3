@@ -10,7 +10,11 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title> Admin</title>
+        <!-- Title Tag  -->
+        <title>Mitra Integrasi Informatika</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/favicon.png" href="img/logomii.png">
 
         <!-- Custom fonts for this template-->
         <!--<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">-->
@@ -284,78 +288,78 @@
             var ctx = document.getElementById("myPieChart");
             var failed = document.getElementById("CountFailed").getAttribute("failed");
             var passed = document.getElementById("CountPassed").getAttribute("passed")
-                    console.log(failed, passed);
+            console.log(failed, passed);
             var myChart = new Chart(ctx, {
             type: 'doughnut',
-                    data: {
-                    labels: ["Failed", "Passed"],
-                            datasets: [{
-                            backgroundColor: [
-                                    "#DC143C",
-                                    "#2ecc71"
-                            ],
-                                    data: [failed, passed]
-                            }]
-                    }
+            data: {
+            labels: ["Failed", "Passed"],
+            datasets: [{
+            backgroundColor: [
+            "#DC143C",
+            "#2ecc71"
+            ],
+            data: [failed, passed]
+            }]
+            }
             });
-//            ini pie chart higchart
+            //            ini pie chart higchart
             Highcharts.chart('container', {
             chart: {
             plotBackgroundColor: null,
-                    plotBorderWidth: null,
-                    plotShadow: false,
-                    type: 'pie'
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
             },
-                    tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                    },
-                    accessibility: {
-                    point: {
-                    valueSuffix: '%'
-                    }
-                    },
-                    plotOptions: {
-                    pie: {
-                    allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
-                            enabled: true,
-                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                            }
-                    }
-                    },
-                    series: [{
-                    name: 'Brands',
-                            colorByPoint: true,
-                            data: [{
-                            name: 'Internship',
-                                    y: [[${countIntern}]],
-                            }, {
-                            name: 'Junior Programmer',
-                                    y: [[${countJunior}]]
-                            }, {
-                            name: 'Senior Programmer',
-                                    y: [[${countSenior}]]
-                            }, {
-                            name: 'Front End Programmer',
-                                    y: [[${countFront}]]
-                            }, {
-                            name: 'Back End Programmer',
-                                    y: [[${countBack}]]
-                            }]
-                    }]
+            tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+            point: {
+            valueSuffix: '%'
+            }
+            },
+            plotOptions: {
+            pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            }
+            }
+            },
+            series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+            name: 'Internship',
+            y: [[${countIntern}]],
+            }, {
+            name: 'Junior Programmer',
+            y: [[${countJunior}]]
+            }, {
+            name: 'Senior Programmer',
+            y: [[${countSenior}]]
+            }, {
+            name: 'Front End Programmer',
+            y: [[${countFront}]]
+            }, {
+            name: 'Back End Programmer',
+            y: [[${countBack}]]
+            }]
+            }]
             });
-//            batas akhir pie chart
-//        line chart
+            //            batas akhir pie chart
+            //        line chart
             var psikotes =[[${countPsikotes}]];
             var teknikal =[[${countTechnical}]];
             var interview =[[${countPassed}]];
-//            var data = [ [ "Psikotes", psikotes ] ,["Teknikal", teknikal] ,["Interview", interview] ];
+            //            var data = [ [ "Psikotes", psikotes ] ,["Teknikal", teknikal] ,["Interview", interview] ];
             var data = [psikotes  ,teknikal ,interview];
             var labels = [ "Psikotes", "Teknikal", "Interview"];
             var dataSum = 0;
             for (var i = 0; i < 3; i++) {
-                dataSum += data[i];
+            dataSum += data[i];
             }
             console.log(dataSum);
 
@@ -364,6 +368,7 @@
             chart: {
             renderTo:'LineChartContainer',
             },
+<<<<<<< Updated upstream
                     title:{
                     text:'Chart Title'
                     },
@@ -414,8 +419,60 @@
                     series: [{
                     data: data
                     }]
+=======
+            title:{
+            text:'Chart Title'
+            },
+            credits:{enabled:false},
+            legend:{
+            },
+            plotOptions: {
+            series: {
+            shadow:false,
+            borderWidth:0,
+            dataLabels:{
+            enabled:true,
+            formatter:function() {
+            var pcnt = (this.y / dataSum) * 100;
+            return Highcharts.numberFormat(pcnt) + '%';
+            }
+            }
+            }
+            },
+            xAxis:{
+            lineColor:'#999',
+            lineWidth:1,
+            tickColor:'#666',
+            tickLength:3,
+            title:{
+            text:'X Axis Title'
+            },
+            labels: {
+            enabled: true,
+            formatter: function() {
+            return labels[this.value];
+            },
+            }
+            },
+            yAxis:{
+            lineColor:'#999',
+            lineWidth:1,
+            tickColor:'#666',
+            tickWidth:1,
+            tickLength:3,
+            gridLineColor:'#ddd',
+            title:{
+            text:'Y Axis Title',
+            rotation:0,
+            margin:50,
+            }
+            },
+            series: [{
+            data: data
+            }]
+>>>>>>> Stashed changes
             });
-//batas line chart
+            //batas line chart
         </script>
         <!-- <div th:replace="fragments/header :: header"></div>
           <div th:replace="fragments/footer :: footer"></div>-->
