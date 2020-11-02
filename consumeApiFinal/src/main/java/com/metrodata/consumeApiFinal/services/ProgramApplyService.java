@@ -44,13 +44,13 @@ public class ProgramApplyService {
         User candidate = userService.getById(programApply.getCandidate().getId());
         User hr = userService.getById(programApply.getHr().getId());
         ProgramApply programApplyGet = getById(programApply.getProgram().getId());
-//        System.out.println("candidate full name :) = "+candidate.getFullName());
-//        System.out.println("candidate fullname = "+programApply.getCandidate().getFullName());
-//        try {
-//            enp.sendEmailCandidate(candidate,hr,programApplyGet);
-//        } catch (MessagingException ex) {
-//             Logger.getLogger(ProgramApplyService.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        System.out.println("candidate full name :) = "+candidate.getFullName());
+        System.out.println("candidate fullname = "+programApply.getCandidate().getFullName());
+        try {
+            enp.sendEmailCandidate(candidate,hr,programApplyGet);
+        } catch (MessagingException ex) {
+             Logger.getLogger(ProgramApplyService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public List<ProgramApply> showSchedule() {

@@ -485,7 +485,7 @@ public class MainController {
             if (result.getGrade() >= passingGrade) {
                 result.setIsPassed(Boolean.TRUE);
             } else {
-//                emailNotificationService.sendResultPass(result.getId(), schedule);
+                emailNotificationService.sendResultPass(Integer.parseInt(auth.getName()), schedule);
                 result.setIsPassed(Boolean.FALSE);
             }
             System.out.println(result.getId());
